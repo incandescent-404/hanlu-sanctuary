@@ -1,0 +1,2231 @@
+<!-- ... existing code ... -->
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Noto Serif TC & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Chart.js for Weekly Balance -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Markdown Parser for AI Responses -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Firebase Modular SDK for Cloud Storage & Persistence -->
+<!-- ... existing code ... -->
+  <!-- Tailwind Custom Colors (Updated to Deep Luxury Dark Theme) -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'serif'],
+            calligraphy: ['"Ma Shan Zheng"', 'cursive', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            night: {
+              950: '#0B0F0E',      // 深邃玄黑底色
+              900: '#111715',      // 卡片沉靜暗夜底色
+              850: '#161F1C',      // 邊框與浮層色
+              800: '#1D2A26',      // 次級浮層
+              700: '#2E413B',
+            },
+            paper: '#0F1412',      // 主暗色底
+            parchment: '#17211D',  // 暗夜宣紙
+            ink: '#E8EFEA',        // 皎潔微青白字體
+            celadon: {             // 翡翠天青流光
+              50: '#142823',
+              100: '#1E3C35',
+              200: '#2C5A4F',
+              500: '#529688',
+              600: '#68B3A3',
+              700: '#82C9BA',
+            },
+            sage: {                // 暮林古黛
+              500: '#5B8262',
+              600: '#75A47D',
+              700: '#94C69C'
+            },
+            cinnabar: {            // 暗夜琉璃赤
+              50: '#2C1714',
+              100: '#421E19',
+              500: '#E06B56',
+              600: '#F28572'
+            },
+            sandalwood: '#C8A27A', // 鎏金古檀木
+            sand: '#2A3832',       // 幽夜墨沙邊界
+            muted: '#8C9E96'       // 暮嵐淺黛文字
+          },
+          animation: {
+            'float-slow': 'float 8s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+            'shimmer': 'shimmer 2.5s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: 0.9 },
+              '50%': { opacity: 0.5 },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Dark Luxury Sanctuary Aesthetics */
+    body {
+      background-color: #0B0F0E;
+      color: #E8EFEA;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    
+    /* Flowing Ink Particle Canvas */
+    .ink-bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F0E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #253630;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #529688;
+    }
+
+    /* Soft Glow & Glassmorphism */
+    .zen-shadow {
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45), 0 4px 10px -2px rgba(0, 0, 0, 0.25);
+    }
+    .zen-shadow-hover:hover {
+      box-shadow: 0 16px 35px -5px rgba(82, 150, 136, 0.16), 0 6px 14px -3px rgba(0, 0, 0, 0.4);
+      border-color: rgba(104, 179, 163, 0.45);
+    }
+
+    /* Ripple Effect for Habit Checkboxes */
+    .ripple-active {
+      animation: ripple 0.45s ease-out;
+    }
+    @keyframes ripple {
+      0% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(104, 179, 163, 0.6); }
+      70% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(104, 179, 163, 0); }
+      100% { transform: scale(1); }
+    }
+
+    /* Mobile bottom navigation padding */
+    @media (max-width: 640px) {
+      .page-content-padding {
+        padding-bottom: 96px;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-sans min-h-screen flex flex-col relative selection:bg-celadon-100 selection:text-celadon-700">
+
+  <!-- Ambient Watermark Canvas (Subtle flowing ink particles) -->
+  <canvas id="ambientInkCanvas" class="ink-bg-canvas"></canvas>
+
+  <!-- ================= TOP HEADER (DESKTOP & MOBILE) ================= -->
+  <header class="sticky top-0 z-40 bg-[#0B0F0E]/85 backdrop-blur-md border-b border-sand/70 px-4 sm:px-8 py-3 transition-all duration-300">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand & Hall Name -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('daily')">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-br from-celadon-600 to-celadon-700 text-white flex items-center justify-center font-calligraphy text-2xl shadow-lg border border-celadon-500/30 transform hover:rotate-3 transition-transform">
+          露
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="font-serif font-black text-lg sm:text-xl tracking-wider text-ink">修持日軌</h1>
+            <span class="text-[10px] font-serif bg-celadon-100 text-celadon-600 px-2 py-0.5 rounded-full border border-celadon-200/50">涵露齋・暗夜版</span>
+          </div>
+          <p class="text-[11px] text-muted font-serif hidden sm:block">天青為底・息心養身・步步生姿</p>
+        </div>
+      </div>
+
+      <!-- Desktop Nav Buttons (Added '身心全相' Tab) -->
+      <div class="hidden sm:flex items-center space-x-2">
+        <nav class="flex bg-night-900/90 p-1 rounded-2xl border border-sand text-xs font-serif font-medium">
+          <button id="desktopNavDaily" onclick="switchView('daily')" class="px-3.5 py-2 rounded-xl bg-celadon-700 text-white shadow-sm transition-all flex items-center space-x-1.5">
+            <i class="fa-regular fa-calendar-check text-white"></i>
+            <span>四時修持</span>
+          </button>
+          <button id="desktopNavWholeBody" onclick="switchView('wholeBody')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
+            <i class="fa-solid fa-person-dots-from-line text-sandalwood"></i>
+            <span>身心全相</span>
+          </button>
+          <button id="desktopNavDiet" onclick="switchView('diet')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
+            <i class="fa-solid fa-seedling text-sage-600"></i>
+            <span>靈動膳食</span>
+          </button>
+          <button id="desktopNavWeekly" onclick="switchView('weekly')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
+            <i class="fa-solid fa-chart-pie text-cinnabar-500"></i>
+            <span>週度卦象</span>
+          </button>
+          <button id="desktopNavSearch" onclick="switchView('search')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
+            <i class="fa-solid fa-magnifying-glass text-celadon-600"></i>
+            <span>尋索往昔</span>
+          </button>
+        </nav>
+
+        <!-- Cloud Sync Status Pill -->
+        <div id="cloudSyncStatusBadge" class="flex items-center space-x-1.5 text-[11px] bg-night-900 text-muted border border-sand px-3 py-2 rounded-xl font-serif" title="雲端自動同步中">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="cloudStatusText">雲端在線</span>
+        </div>
+
+        <!-- Right Quick Actions -->
+        <button onclick="toggleChatDrawer()" class="flex items-center space-x-1.5 text-xs bg-celadon-50 text-celadon-600 border border-celadon-200/60 px-3.5 py-2 rounded-xl hover:bg-celadon-100 transition-colors shadow-sm font-serif">
+          <i class="fa-solid fa-comments text-celadon-600 animate-pulse-soft"></i>
+          <span>與師傅對談</span>
+        </button>
+
+        <button onclick="openBackupModal()" title="資料備份與還原" class="w-9 h-9 rounded-xl bg-night-900 border border-sand flex items-center justify-center text-muted hover:text-ink transition-colors text-xs">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Quick Indicators -->
+      <div class="flex items-center space-x-2 sm:hidden">
+        <button onclick="switchView('wholeBody')" title="身心全相" class="w-8 h-8 rounded-full bg-night-900 border border-sand text-sandalwood flex items-center justify-center text-xs">
+          <i class="fa-solid fa-person-dots-from-line"></i>
+        </button>
+        <button onclick="switchView('search')" class="w-8 h-8 rounded-full bg-night-900 border border-sand text-muted flex items-center justify-center text-xs">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button onclick="toggleChatDrawer()" class="w-8 h-8 rounded-full bg-celadon-100 text-celadon-600 flex items-center justify-center text-xs">
+          <i class="fa-solid fa-comment-dots"></i>
+        </button>
+        <button onclick="openBackupModal()" class="w-8 h-8 rounded-full bg-night-900 border border-sand text-muted flex items-center justify-center text-xs">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6 relative z-10 page-content-padding">
+
+    <!-- ================= DATE SELECTION & STATS RIBBON ================= -->
+    <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-4 sm:p-6 border border-sand/80 zen-shadow flex flex-col sm:flex-row items-center justify-between gap-4">
+      
+      <!-- Date Switcher -->
+      <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+        <button onclick="changeDay(-1)" class="w-10 h-10 rounded-2xl border border-sand flex items-center justify-center hover:bg-night-850 text-muted hover:text-ink transition-all active:scale-95">
+          <i class="fa-solid fa-chevron-left text-xs"></i>
+        </button>
+        <div class="text-center sm:text-left">
+          <div class="flex items-center justify-center sm:justify-start space-x-2">
+            <h2 id="currentDateDisplay" class="font-serif font-black text-xl sm:text-2xl text-ink tracking-tight"></h2>
+            <button onclick="setToday()" class="text-[11px] font-serif bg-celadon-100 text-celadon-600 px-2.5 py-0.5 rounded-lg border border-celadon-200/50 hover:bg-celadon-200 transition-colors">今日</button>
+          </div>
+          <p id="lunarInfoDisplay" class="text-xs text-muted font-serif mt-0.5 flex items-center justify-center sm:justify-start space-x-1.5">
+            <i class="fa-regular fa-compass text-celadon-600 text-[10px]"></i>
+            <span>心專於一境，身形自挺拔</span>
+          </p>
+        </div>
+        <button onclick="changeDay(1)" class="w-10 h-10 rounded-2xl border border-sand flex items-center justify-center hover:bg-night-850 text-muted hover:text-ink transition-all active:scale-95">
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Counter -->
+      <div class="flex items-center space-x-4 sm:space-x-8 w-full sm:w-auto justify-around sm:justify-end border-t sm:border-t-0 border-sand/60 pt-3 sm:pt-0">
+        <div class="text-center">
+          <span class="text-[11px] text-muted block font-serif">修持完成</span>
+          <span id="dayRateText" class="font-serif font-black text-xl sm:text-2xl text-celadon-600">0%</span>
+        </div>
+        <div class="h-8 w-px bg-sand"></div>
+        <div class="text-center">
+          <span class="text-[11px] text-muted block font-serif">累計時長</span>
+          <span id="dayTotalMinutesText" class="font-serif font-black text-xl sm:text-2xl text-ink">0m</span>
+        </div>
+        <div class="h-8 w-px bg-sand"></div>
+        <div class="text-center">
+          <span class="text-[11px] text-muted block font-serif">飲食攝取</span>
+          <span id="dayCaloriesSummaryText" class="font-serif font-black text-xl sm:text-2xl text-cinnabar-500">0 kcal</span>
+        </div>
+        <div class="h-8 w-px bg-sand"></div>
+        <div class="text-center">
+          <span class="text-[11px] text-muted block font-serif">持恆</span>
+          <span id="streakCountText" class="font-serif font-black text-xl sm:text-2xl text-sandalwood">1天</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 1: DAILY ROUTINES (四時修持) ================= -->
+    <div id="dailyView" class="space-y-6">
+
+      <!-- Action Bar: Phase Filter & Add -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <!-- Simplified Phase Pills -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs font-serif no-scrollbar">
+          <button onclick="filterPhase('all')" class="phase-btn active px-3.5 py-1.5 rounded-xl bg-celadon-700 text-white shadow-sm transition-all whitespace-nowrap">全日修持</button>
+          <button onclick="filterPhase('morning')" class="phase-btn px-3 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap">
+            <i class="fa-regular fa-sun text-amber-400 mr-1"></i>晨起保養
+          </button>
+          <button onclick="filterPhase('night')" class="phase-btn px-3 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap">
+            <i class="fa-regular fa-moon text-indigo-400 mr-1"></i>夜間保養
+          </button>
+        </div>
+
+        <button onclick="openAddHabitModal()" class="self-end sm:self-auto text-xs font-serif bg-celadon-700 hover:bg-celadon-600 text-white px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow-sm transition-all active:scale-95">
+          <i class="fa-solid fa-plus text-[10px]"></i>
+          <span>添置修持項</span>
+        </button>
+      </div>
+
+      <!-- Habit Cards Container -->
+      <div id="habitsContainer" class="space-y-5">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <!-- Daily Notes & Reflection Card -->
+      <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-5 border border-sand zen-shadow space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-lg bg-celadon-100 text-celadon-600 flex items-center justify-center text-xs">
+              <i class="fa-solid fa-feather-pointed"></i>
+            </span>
+            <h3 class="font-serif font-bold text-ink text-sm">今日涵露齋・身心反思手記</h3>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="askAIToReviewToday()" class="text-xs font-serif text-celadon-600 bg-celadon-50 hover:bg-celadon-100 px-2.5 py-1 rounded-lg border border-celadon-200/50 transition-colors flex items-center space-x-1">
+              <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
+              <span>請師傅點評今日</span>
+            </button>
+            <span class="text-[11px] text-muted hidden sm:inline">筆墨自存</span>
+          </div>
+        </div>
+        <textarea id="dailyReflectionInput" oninput="saveDailyReflection()" rows="3" placeholder="隨手記下今日感受：如咬肌放鬆的微酸感、寫毛筆時的呼吸、下午茶是否成功克制假性嘴饞、睡前是否舌頂上顎..." class="w-full text-xs sm:text-sm bg-night-950 border border-sand rounded-2xl p-3.5 text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50 leading-relaxed resize-none transition-all"></textarea>
+      </section>
+
+    </div>
+
+    <!-- ================= VIEW: WHOLE BODY SANCTUARY (身心全相・通體修持鏡鑑) ================= -->
+    <div id="wholeBodyView" class="hidden space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <section class="bg-gradient-to-br from-night-900 via-night-900 to-night-850 rounded-3xl p-5 sm:p-6 border border-sand zen-shadow relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-8 opacity-10 text-celadon-600 pointer-events-none font-calligraphy text-9xl">
+          相
+        </div>
+        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-2">
+            <div class="inline-flex items-center space-x-1.5 text-xs text-sandalwood bg-sandalwood/10 px-3 py-1 rounded-full font-serif border border-sandalwood/20">
+              <i class="fa-solid fa-compass"></i>
+              <span>通體十一象・精準對治</span>
+            </div>
+            <h3 class="font-serif font-black text-lg sm:text-xl text-ink tracking-wide">身心全相 ｜ 局部問題與處遇鏡鑑</h3>
+            <p class="text-xs text-muted font-serif leading-relaxed max-w-2xl">
+              這是你與為師共同定下的全身調理總綱。每處筋膜、骨盆或膚質的緊繃，皆有其力學與代謝根由。點擊展開每一處，即可溫習對治心法並一鍵實操！
+            </p>
+          </div>
+          <div class="text-left sm:text-right shrink-0 bg-night-950/70 p-3 rounded-2xl border border-sand">
+            <span class="text-[11px] text-muted block font-serif">已明心見性</span>
+            <span class="text-base font-serif font-bold text-celadon-600">11 域全覽</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 Body Regions Grid -->
+      <div id="wholeBodyCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Rendered by JS dynamically from full table data -->
+      </div>
+
+    </div>
+
+    <!-- ================= VIEW 2: SMART AI DIET ESTIMATOR (靈動膳食) ================= -->
+    <div id="dietView" class="hidden space-y-6">
+
+      <!-- AI Food Estimator Input Card -->
+      <section class="bg-gradient-to-br from-night-900 via-night-900 to-celadon-50/20 rounded-3xl p-5 sm:p-6 border border-sand zen-shadow space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 rounded-xl bg-cinnabar-100 text-cinnabar-500 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-fire-burner"></i>
+            </div>
+            <div>
+              <h3 class="font-serif font-black text-ink text-base">智能 AI 膳食靈犀估算</h3>
+              <p class="text-[11px] text-muted font-serif">隨口寫下所食（如「一片米麵包加牛肉乾」、「一包餅乾一顆貢糖」），AI 極速解析熱量與體態影響</p>
+            </div>
+          </div>
+          <span class="text-xs bg-night-950 text-muted px-2.5 py-1 rounded-full font-serif hidden sm:inline border border-sand">無壓記帳</span>
+        </div>
+
+        <!-- Input Box with Quick Estimate Button -->
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="relative flex-1">
+            <input type="text" id="dietInputText" placeholder="輸入今日飲食，例如：早餐一片米麵包+一包牛肉乾、無糖綠茶500ml" class="w-full bg-night-950 border border-sand rounded-2xl px-4 py-3 text-xs sm:text-sm text-ink focus:outline-none focus:ring-2 focus:ring-celadon-600/40 placeholder:text-muted/50">
+            <button onclick="clearDietInput()" class="absolute right-3 top-3 text-muted/60 hover:text-ink text-xs">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+          <button id="estimateDietBtn" onclick="estimateDietWithAI()" class="bg-celadon-700 hover:bg-celadon-600 text-white font-serif px-6 py-3 rounded-2xl text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-sm transition-all active:scale-95 flex-shrink-0">
+            <i class="fa-solid fa-sparkles text-xs"></i>
+            <span>靈犀估算熱量</span>
+          </button>
+        </div>
+
+        <!-- AI Estimate Result Banner -->
+        <div id="aiEstimateCard" class="hidden bg-night-950 rounded-2xl p-4 border border-celadon-600/40 space-y-3 transition-all duration-300">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-serif font-bold text-celadon-600 flex items-center space-x-1.5">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <span>AI 營養拆解洞察</span>
+            </span>
+            <span id="estimateKcalBadge" class="text-xs font-black bg-cinnabar-100 text-cinnabar-500 px-2.5 py-0.5 rounded-full font-serif border border-cinnabar-500/30">約 0 kcal</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="bg-night-900 p-2 rounded-xl border border-sand">
+              <span class="text-[10px] text-muted block font-serif">蛋白質預估</span>
+              <span id="estimateProteinText" class="font-bold text-ink text-sm">-- g</span>
+            </div>
+            <div class="bg-night-900 p-2 rounded-xl border border-sand">
+              <span class="text-[10px] text-muted block font-serif">鈉含量/水腫指標</span>
+              <span id="estimateSodiumText" class="font-bold text-amber-400 text-sm">正常</span>
+            </div>
+            <div class="bg-night-900 p-2 rounded-xl border border-sand">
+              <span class="text-[10px] text-muted block font-serif">咬肌負荷度</span>
+              <span id="estimateChewText" class="font-bold text-celadon-600 text-sm">低</span>
+            </div>
+          </div>
+
+          <p id="estimateAdviceText" class="text-xs text-ink/90 leading-relaxed font-serif bg-night-900 p-2.5 rounded-xl border border-sand">
+            師傅提示：此餐熱量溫和，但牛肉乾鈉偏高，下午記得小口飲用 400ml 溫水協助代謝！
+          </p>
+
+          <div class="flex items-center justify-end space-x-2 pt-1">
+            <button onclick="discardEstimate()" class="px-3 py-1.5 rounded-xl text-xs text-muted hover:text-ink font-serif">放棄</button>
+            <button onclick="confirmAddDietEntry()" class="px-4 py-1.5 rounded-xl text-xs bg-celadon-700 hover:bg-celadon-600 text-white font-serif shadow-sm">
+              <i class="fa-solid fa-plus mr-1"></i>記入今日膳食冊
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Today's Logged Meals & Calorie Target Bar -->
+      <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-5 border border-sand zen-shadow space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-bowl-rice text-sandalwood"></i>
+            <h4 class="font-serif font-bold text-sm text-ink">今日已記食單</h4>
+          </div>
+          <div class="text-xs font-serif text-muted">
+            目標參考：約 <span class="font-bold text-ink">1500 kcal</span>
+          </div>
+        </div>
+
+        <!-- Progress Bar for Calories -->
+        <div class="space-y-1">
+          <div class="w-full bg-night-950 h-2.5 rounded-full overflow-hidden p-0.5 border border-sand/50">
+            <div id="calorieProgressBar" class="bg-gradient-to-r from-celadon-600 via-sandalwood to-cinnabar-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+          <div class="flex justify-between text-[11px] text-muted font-serif">
+            <span id="calorieCurrentText">已攝取 0 kcal</span>
+            <span id="caloriePercentText">0%</span>
+          </div>
+        </div>
+
+        <!-- Meals List -->
+        <div id="mealsListContainer" class="space-y-2.5 pt-1">
+          <!-- Dynamically populated -->
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- ================= VIEW 3: WEEKLY BALANCE & ANALYTICS (週度卦象) ================= -->
+    <div id="weeklyView" class="hidden space-y-6">
+
+      <!-- Weekly Summary Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <div class="bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow">
+          <div class="flex items-center justify-between text-muted text-xs mb-2 font-serif">
+            <span>本週累積修持總量</span>
+            <i class="fa-regular fa-clock text-celadon-600"></i>
+          </div>
+          <div id="weeklyTotalMinutes" class="font-serif font-black text-2xl text-ink">0 小時</div>
+          <p class="text-[11px] text-muted mt-1 font-serif">氣定神閒，步步皆是功夫</p>
+        </div>
+
+        <div class="bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow">
+          <div class="flex items-center justify-between text-muted text-xs mb-2 font-serif">
+            <span>最恆常精進之域</span>
+            <i class="fa-solid fa-seedling text-celadon-600"></i>
+          </div>
+          <div id="weeklyTopCategory" class="font-serif font-black text-xl text-ink">--</div>
+          <p class="text-[11px] text-muted mt-1 font-serif">水滴石穿，身韻日漸舒展</p>
+        </div>
+
+        <div class="bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow">
+          <div class="flex items-center justify-between text-muted text-xs mb-2 font-serif">
+            <span>需照拂偏廢之處</span>
+            <i class="fa-solid fa-leaf text-cinnabar-500"></i>
+          </div>
+          <div id="weeklyNeglectedCategory" class="font-serif font-black text-xl text-cinnabar-500">--</div>
+          <p class="text-[11px] text-muted mt-1 font-serif">莫忘足弓與咬肌放鬆</p>
+        </div>
+
+      </div>
+
+      <!-- Weekly Distribution & Chart -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-6 bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3 border-b border-sand pb-2">
+            <h4 class="font-serif font-bold text-sm text-ink flex items-center space-x-1.5">
+              <i class="fa-solid fa-chart-pie text-celadon-600"></i>
+              <span>四方修持時長權重</span>
+            </h4>
+            <span class="text-xs text-muted font-serif">近 7 日比例</span>
+          </div>
+          <div class="h-64 relative flex items-center justify-center">
+            <canvas id="categoryDistributionChart"></canvas>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow space-y-3">
+          <div class="flex items-center justify-between border-b border-sand pb-2">
+            <h4 class="font-serif font-bold text-sm text-ink flex items-center space-x-1.5">
+              <i class="fa-solid fa-timeline text-sandalwood"></i>
+              <span>七日修持水準流轉</span>
+            </h4>
+            <button onclick="askAIToReviewWeekly()" class="text-xs font-serif text-celadon-600 bg-celadon-50 hover:bg-celadon-100 px-2.5 py-1 rounded-lg border border-celadon-200/50 transition-colors flex items-center space-x-1">
+              <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+              <span>聽師傅深度複盤</span>
+            </button>
+          </div>
+          <div id="sevenDaysListContainer" class="space-y-2.5 pt-1">
+            <!-- Dynamically populated 7 days rows -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= VIEW 4: SEARCH PAST LOGS (尋索往昔) ================= -->
+    <div id="searchView" class="hidden space-y-6">
+      
+      <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-sand zen-shadow space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 rounded-xl bg-celadon-100 text-celadon-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div>
+              <h3 class="font-serif font-black text-ink text-base">尋索往昔・雲端印記庫</h3>
+              <p class="text-[11px] text-muted font-serif">隨時檢索過往的反思筆記、飲食記錄、護膚微針與體態心得</p>
+            </div>
+          </div>
+          <span class="text-xs font-serif text-muted bg-night-950 px-2.5 py-1 rounded-full border border-sand">永久封存</span>
+        </div>
+
+        <div class="relative">
+          <input type="text" id="searchInputField" oninput="executeSearch()" placeholder="搜尋關鍵字，例如：微針、牛肉乾、貢糖、咬肌、頭皮、足弓..." class="w-full bg-night-950 border border-sand rounded-2xl px-4 py-3 text-xs sm:text-sm text-ink focus:outline-none focus:ring-2 focus:ring-celadon-600/40 placeholder:text-muted/50 font-serif">
+          <span class="absolute right-4 top-3.5 text-muted text-xs">
+            <i class="fa-solid fa-compass"></i>
+          </span>
+        </div>
+      </section>
+
+      <!-- Search Results Container -->
+      <div id="searchResultsContainer" class="space-y-3">
+        <div class="text-center py-12 text-muted font-serif text-xs">
+          請在上方輸入想搜尋的詞彙，為師為你調閱過往雲端印記。
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================= MOBILE FIXED BOTTOM NAVIGATION BAR ================= -->
+  <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-night-950/95 backdrop-blur-lg border-t border-sand px-3 py-2 flex items-center justify-around shadow-2xl">
+    <button onclick="switchView('daily')" id="mobileNavDaily" class="flex flex-col items-center space-y-1 text-celadon-600">
+      <i class="fa-regular fa-calendar-check text-lg"></i>
+      <span class="text-[10px] font-serif font-medium">修持</span>
+    </button>
+    <button onclick="switchView('wholeBody')" id="mobileNavWholeBody" class="flex flex-col items-center space-y-1 text-muted">
+      <i class="fa-solid fa-person-dots-from-line text-lg"></i>
+      <span class="text-[10px] font-serif font-medium">全相</span>
+    </button>
+    <button onclick="switchView('diet')" id="mobileNavDiet" class="flex flex-col items-center space-y-1 text-muted">
+      <i class="fa-solid fa-seedling text-lg"></i>
+      <span class="text-[10px] font-serif font-medium">膳食</span>
+    </button>
+    <button onclick="switchView('weekly')" id="mobileNavWeekly" class="flex flex-col items-center space-y-1 text-muted">
+      <i class="fa-solid fa-chart-pie text-lg"></i>
+      <span class="text-[10px] font-serif font-medium">週度</span>
+    </button>
+    <button onclick="switchView('search')" id="mobileNavSearch" class="flex flex-col items-center space-y-1 text-muted">
+      <i class="fa-solid fa-magnifying-glass text-lg"></i>
+      <span class="text-[10px] font-serif font-medium">搜尋</span>
+    </button>
+    <button onclick="toggleChatDrawer()" class="flex flex-col items-center space-y-1 text-muted">
+      <div class="relative">
+        <i class="fa-solid fa-comment-dots text-lg"></i>
+        <span class="w-2 h-2 rounded-full bg-cinnabar-500 absolute -top-0.5 -right-0.5"></span>
+      </div>
+      <span class="text-[10px] font-serif font-medium">師傅</span>
+    </button>
+  </nav>
+
+  <!-- ================= FLOATING ACTION BUTTON (AI MASTER) ================= -->
+  <button id="floatingChatBtn" onclick="toggleChatDrawer()" class="hidden sm:flex fixed bottom-6 right-6 z-40 bg-gradient-to-br from-celadon-600 to-celadon-700 hover:from-celadon-500 hover:to-celadon-600 text-white w-14 h-14 rounded-full shadow-2xl items-center justify-center transition-all duration-300 transform hover:scale-105 active:scale-95 group border-2 border-celadon-200/30">
+    <div class="relative">
+      <i class="fa-solid fa-hand-holding-heart text-xl"></i>
+      <span class="absolute -top-1 -right-1 w-3 h-3 bg-cinnabar-500 rounded-full border-2 border-night-900"></span>
+    </div>
+  </button>
+
+  <!-- ================= AI CHAT COMPANION DRAWER ================= -->
+  <div id="chatDrawer" class="fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 w-full sm:w-[430px] max-h-[90vh] sm:max-h-[85vh] h-[660px] bg-night-900 rounded-t-3xl sm:rounded-3xl border border-sand shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full sm:translate-y-6 opacity-0 pointer-events-none">
+    
+    <!-- Drawer Header -->
+    <div class="bg-night-950 border-b border-sand px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-2.5">
+        <div class="w-8 h-8 rounded-2xl bg-celadon-700 text-white flex items-center justify-center font-calligraphy text-lg shadow-sm">
+          師
+        </div>
+        <div>
+          <h4 class="font-serif font-bold text-sm text-ink flex items-center space-x-1.5">
+            <span>涵露齋主 ｜ 為師在側</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          </h4>
+          <p class="text-[10px] text-muted font-serif">知曉你的膳食大卡、修持進度與護膚裝備</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-1">
+        <button onclick="clearChatHistory()" title="重置對談" class="text-muted hover:text-ink w-7 h-7 rounded-lg flex items-center justify-center text-xs">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button onclick="toggleChatDrawer()" class="text-muted hover:text-ink w-7 h-7 rounded-lg flex items-center justify-center text-xs">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Prompt Pills -->
+    <div class="px-3 py-2 bg-night-950/80 border-b border-sand flex space-x-1.5 overflow-x-auto text-[11px] whitespace-nowrap no-scrollbar">
+      <button onclick="sendQuickPrompt('我想睡覺了！')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
+        🌙 我想睡覺了！
+      </button>
+      <button onclick="sendQuickPrompt('師傅，看看我今天的修持與飲食熱量')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
+        📜 今日總覽點評
+      </button>
+      <button onclick="sendQuickPrompt('師傅，幫我深度複盤這週各領域平衡')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
+        📊 本週平衡卦象
+      </button>
+      <button onclick="sendQuickPrompt('我剛剛吃了點零食，會不會發胖或發腮？')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
+        🍪 零食破戒開導
+      </button>
+      <button onclick="sendQuickPrompt('今晚擦完微針100，這幾樣護膚順序怎麼配？')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
+        🧴 今晚微針鎖水
+      </button>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3.5 bg-night-950/40 text-xs sm:text-sm">
+      <!-- Default Master Greeting -->
+      <div class="flex items-start space-x-2">
+        <div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">
+          師
+        </div>
+        <div class="bg-night-900 border border-sand p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-ink leading-relaxed font-serif">
+          <p>徒兒，茶已沏好。我在涵露齋中隨時觀照你的身心脈動。</p>
+          <p class="mt-1.5 text-muted text-[11px]">有任何咬肌放鬆、零食熱量、護膚搭配或全身改善表的問題，隨時跟我聊！</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div id="chatTyping" class="px-4 py-2 text-xs text-muted flex items-center space-x-1.5 hidden bg-night-900">
+      <span class="w-1.5 h-1.5 rounded-full bg-celadon-600 animate-pulse"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-celadon-600 animate-pulse delay-100"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-celadon-600 animate-pulse delay-200"></span>
+      <span class="text-[11px] text-muted italic ml-1 font-serif">師傅正在研墨沉吟...</span>
+    </div>
+
+    <!-- Input Footer -->
+    <div class="p-3 bg-night-950 border-t border-sand flex items-center space-x-2">
+      <input type="text" id="chatInput" onkeydown="handleChatKeyDown(event)" placeholder="向師傅請教今日身心、熱量或體態..." class="flex-1 bg-night-900 border border-sand rounded-2xl px-3.5 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50">
+      <button onclick="handleSendMessage()" class="w-9 h-9 rounded-2xl bg-celadon-700 hover:bg-celadon-600 text-white flex items-center justify-center transition-all active:scale-95 shadow-sm">
+        <i class="fa-solid fa-arrow-up text-xs"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ================= MODAL: ADD / EDIT HABIT ================= -->
+  <div id="habitModal" class="fixed inset-0 bg-night-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-night-900 rounded-3xl max-w-md w-full p-6 border border-sand shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-sand pb-3">
+        <h3 id="modalTitle" class="font-serif font-black text-lg text-ink">添置修持項目</h3>
+        <button onclick="closeHabitModal()" class="text-muted hover:text-ink w-7 h-7 rounded-lg flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm font-serif">
+        <div>
+          <label class="block text-muted mb-1">修持項目名稱</label>
+          <input type="text" id="habitNameInput" placeholder="例如：足弓抓地訓練、揉咬肌放鬆" class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-muted mb-1">修持四方維度</label>
+            <select id="habitCategorySelect" class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none">
+              <option value="facial">面部美育修持</option>
+              <option value="posture">體態身韻修持</option>
+              <option value="workout">動態鍛鍊</option>
+              <option value="zen">靜心藝事</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-muted mb-1">所屬時辰</label>
+            <select id="habitPhaseSelect" class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none">
+              <option value="morning">晨起保養</option>
+              <option value="night">夜間保養</option>
+              <option value="anytime">全日皆可 / 彈性</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-muted mb-1">修持分鐘數</label>
+            <input type="number" id="habitDurationInput" value="15" min="1" max="180" class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-muted mb-1">修持意象圖標</label>
+            <select id="habitIconSelect" class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none">
+              <option value="fa-spa">面部/放鬆 (fa-spa)</option>
+              <option value="fa-person-walking">體態/足弓 (fa-person-walking)</option>
+              <option value="fa-dumbbell">力量/健身 (fa-dumbbell)</option>
+              <option value="fa-music">身韻/舞動 (fa-music)</option>
+              <option value="fa-pen-nib">書法/筆墨 (fa-pen-nib)</option>
+              <option value="fa-chess">圍棋/專注 (fa-chess)</option>
+              <option value="fa-droplet">護膚/滋養 (fa-droplet)</option>
+              <option value="fa-leaf">舒緩/自然 (fa-leaf)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-muted mb-1">師門要領備忘（可選）</label>
+          <input type="text" id="habitNotesInput" placeholder="例如：掌根揉咬肌至微酸、舌頂上顎不咬牙" class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end space-x-2 pt-2 border-t border-sand">
+        <button onclick="closeHabitModal()" class="px-4 py-2 rounded-xl text-xs text-muted hover:text-ink font-serif">取消</button>
+        <button onclick="saveHabitItem()" class="px-5 py-2 rounded-xl text-xs bg-celadon-700 hover:bg-celadon-600 text-white font-serif shadow-sm">存入日軌</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: BACKUP & DATA JSON ================= -->
+  <div id="backupModal" class="fixed inset-0 bg-night-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-night-900 rounded-3xl max-w-sm w-full p-6 border border-sand shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-sand pb-3">
+        <h3 class="font-serif font-black text-base text-ink">手帳資料與雲端備份</h3>
+        <button onclick="closeBackupModal()" class="text-muted hover:text-ink w-7 h-7 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-muted font-serif leading-relaxed">
+        修持日軌採用純本機優先保存，永遠保護你的個人隱私。你可隨時匯出備份 JSON 檔案，或在電腦與手機間無縫移轉。
+      </p>
+
+      <div class="space-y-2 pt-1 font-serif text-xs">
+        <button onclick="exportDataJSON()" class="w-full py-2.5 bg-night-950 text-celadon-600 border border-celadon-600/30 rounded-xl hover:bg-night-850 flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-file-export"></i>
+          <span>匯出手帳完整存檔 (JSON)</span>
+        </button>
+
+        <label class="w-full py-2.5 bg-night-850 text-ink border border-sand rounded-xl hover:bg-night-800 flex items-center justify-center space-x-2 cursor-pointer">
+          <i class="fa-solid fa-file-import text-muted"></i>
+          <span>讀取既有存檔 (JSON)</span>
+          <input type="file" id="importJsonFileInput" onchange="importDataJSON(event)" accept=".json" class="hidden">
+        </label>
+      </div>
+
+      <div class="pt-2 border-t border-sand text-right">
+        <button onclick="closeBackupModal()" class="px-4 py-1.5 rounded-xl text-xs text-muted hover:text-ink font-serif">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT APP LOGIC ================= -->
+  <script>
+    /* 11 Whole Body Custom Guidance Schema from User Request */
+    const WHOLE_BODY_REGIONS = [
+      {
+        id: 'wb_hairline',
+        title: '髮際與頭皮',
+        frequency: '每日洗頭後',
+        icon: 'fa-wind',
+        color: 'text-celadon-600',
+        problem: '髮際線偏高、髮量稀疏。',
+        treatment: '活絡頭皮循環，減輕帽狀腱膜張力，穩固髮根。吹乾頭髮後塗抹柑橘頭皮水，用指腹或木梳進行頭皮放鬆操（由前額向百會穴、後頸枕部輕揉按壓滑動）。'
+      },
+      {
+        id: 'wb_contour',
+        title: '面部輪廓（發腮改善）',
+        frequency: '每日中午及晚餐飯後',
+        icon: 'fa-circle-notch',
+        color: 'text-cinnabar-500',
+        problem: '臉部發腮，咬肌緊繃代償，下顎角方厚。',
+        treatment: '釋放咬肌張力，下顎角收窄。做「放鬆咬肌三十秒」，早晚洗面後以手掌根部深層打圈按壓咬肌核心硬塊，咀嚼食物時細嚼慢嚥、戒咬硬物與嚼冰塊。'
+      },
+      {
+        id: 'wb_jawline',
+        title: '下顎與頸線',
+        frequency: '每日早晚',
+        icon: 'fa-shield-halved',
+        color: 'text-sandalwood',
+        problem: '雙下巴，下顎線不明顯，口邊肉下墜。',
+        treatment: '下顎線雕琢與雙下巴操。食指中指剪刀手由下巴中線向上推刮至耳下淋巴，口邊脂肪整理，隨時保持「舌頂上顎（Mewing）」使舌骨肌群自然上收。'
+      },
+      {
+        id: 'wb_midface',
+        title: '面中與結構',
+        frequency: '保養或休息時',
+        icon: 'fa-face-smile',
+        color: 'text-amber-400',
+        problem: '鼻基底凹陷，法令紋趨勢明顯。',
+        treatment: '提升面中支撐飽滿度，舒展深層表情肌。小量面部瑜珈：食指輕揉按壓迎香穴與鼻翼兩側深層筋膜，舒緩向下牽拉力道，避免抿嘴或面無表情時深層緊繃。'
+      },
+      {
+        id: 'wb_darkcircle',
+        title: '黑眼圈與眼周氣色',
+        frequency: '一週睡前兩次',
+        icon: 'fa-eye',
+        color: 'text-indigo-400',
+        problem: '眼周緊繃暗沉、色素沉著與微循環不良。',
+        treatment: '促進眼周微循環，黑眼圈疏通：眼眶骨四周穴位指壓、承泣穴與睛明穴輕柔點按。睡前溫敷 5 分鐘，避免高鹽宵夜導致晨起水腫，眼霜以無名指輕點吸收。'
+      },
+      {
+        id: 'wb_faceskin',
+        title: '面部膚質',
+        frequency: '每日晨夕',
+        icon: 'fa-droplet',
+        color: 'text-celadon-600',
+        problem: '臉色發黃暗沉，局部痘疤印記，懼怕擦乳液反黑。',
+        treatment: '日間抗氧化與嚴格防曬（阻斷紫外線加重黑色素沉著），夜間修護與溫和淡印（搭配 VC噴霧、積雪草水乳、綠番茄精華與雪芙蘭米淨水潤凝霜薄擦鎖水）。內調控糖（戒斷精緻糖防糖化發黃，每日補足溫水）。'
+      },
+      {
+        id: 'wb_backskin',
+        title: '背部膚質',
+        frequency: '洗沐時',
+        icon: 'fa-shower',
+        color: 'text-teal-400',
+        problem: '背部油脂分泌旺盛長痘，陳年痘疤。',
+        treatment: '洗沐順序調整：洗頭並完全沖淨後，最後再清洗並沖淨背部。每週使用 1–2 次果酸/水楊酸調理角質，沐浴後大面積擦雪芙蘭美白大藍瓶或妮維雅 C&E 身體精華乳，切忌用手摳抓背部。'
+      },
+      {
+        id: 'wb_shoulders',
+        title: '肩背與手臂',
+        frequency: '每日或重訓後',
+        icon: 'fa-child-reaching',
+        color: 'text-rose-400',
+        problem: '圓肩駝背，肩膀內扣，斜方肌代償聳起，手臂贅肉鬆弛。',
+        treatment: '開肩展胸，沉下肩胛骨，消除直角肩阻礙，緊緻手臂後側。胸大肌伸展（門框壓肩拉伸），開肩闊背（YW 伸展，肩胛骨下沉後夾，啟動下斜方肌與菱形肌）。'
+      },
+      {
+        id: 'wb_core',
+        title: '腰腹、呼吸與發聲',
+        frequency: '每日空腹或睡前',
+        icon: 'fa-lungs',
+        color: 'text-blue-400',
+        problem: '核心虛弱，不會腹式呼吸，發聲飄浮無法用胸腔共鳴說話。',
+        treatment: '啟動橫膈膜與腹橫肌，穩定核心底座。仰臥腹式呼吸（平躺腹部置書，吸氣鼓腹頂書胸口不動；吐氣收縮核心）。死蟲式 / 真空收腹啟動深層腹橫肌，發聲時手貼胸骨，深吸氣發低沉「Mmm/哼」音找胸腔微震動感。'
+      },
+      {
+        id: 'wb_pelvis',
+        title: '骨盆與臀腿',
+        frequency: '每日或健身日',
+        icon: 'fa-person-walking',
+        color: 'text-orange-400',
+        problem: '骨盆前傾，下背痠痛緊繃，腹部深層無力致假性小腹外凸，大腿前側代償粗壯。',
+        treatment: '骨盆回正，平衡髖前後力線。臀橋 / 臀推喚醒臀大肌，低弓步式髂腰肌伸展釋放腰椎過度前突張力，羅馬尼亞硬舉（RDL）強化臀腿後側鏈，日常站姿不刻意頂胯骨，微收下腹。'
+      },
+      {
+        id: 'wb_ankles',
+        title: '下肢、足踝與足弓',
+        frequency: '每日碎片時間',
+        icon: 'fa-socks',
+        color: 'text-emerald-400',
+        problem: '大腿粗，小腿外翻且粗，走路姿勢偏差，足弓無力（右腳更無力），膝超伸。',
+        treatment: '導正下肢傳導力線，重建足弓支撐。足弓訓練（著重右腳短足起拱抓地），筋膜釋放：網球/筋膜球深滾足底，滾筒放鬆小腿外側（腓骨長短肌）。站樁（微屈膝不卡死、收尾閭、重心深落湧泉穴），走路改為全腳掌著地推進。'
+      },
+      {
+        id: 'wb_metabolism',
+        title: '全身能量代謝',
+        frequency: '全日貫穿',
+        icon: 'fa-bolt',
+        color: 'text-cinnabar-500',
+        problem: '體脂偏高，偶發壓力性進食（如餅乾、貢糖）引發自責焦慮。',
+        treatment: '降低體脂率，打破「暴食-補償節食」惡性循環。每日溫和記錄飲食，確保蛋白質攝取（每公斤體重 1.2–1.5g），每日 2000cc 溫水打卡促進水分與鈉離子代謝，嚴禁懲罰性挨餓，每週落實 3 次健身房訓練。'
+      }
+    ];
+
+    /* Default Pre-populated Habits perfectly matched to user (Streamlined & shift-friendly) */
+    const DEFAULT_HABITS = [
+      // 面部美育修持 (晨起 & 夜間)
+      { id: 'h1', title: '晨間抗氧退紅護膚', category: 'facial', phase: 'morning', duration: 10, icon: 'fa-droplet', note: 'VC噴霧+積雪草水+綠番茄精華+米淨水潤凝霜薄擦(不致黑)' },
+      { id: 'h2', title: '夜間微針修護與頭皮精華', category: 'facial', phase: 'night', duration: 15, icon: 'fa-spa', note: 'VT微針100點按額頭痘印，吹乾頭髮後塗抹柑橘頭皮水推揉' },
+      { id: 'h3', title: '深層揉散咬肌與下顎線刮引', category: 'facial', phase: 'night', duration: 15, icon: 'fa-spa', note: '掌根深層揉軟咬肌，剪刀手刮下顎線至耳後引流' },
+      { id: 'h4', title: '美人筋（胸鎖乳突肌）舒緩', category: 'facial', phase: 'night', duration: 15, icon: 'fa-leaf', note: '捏揉胸鎖乳突肌消除僵硬、拉伸枕下肌群' },
+
+      // 體態身韻修持 (全日彈性，隨時想做就做)
+      { id: 'h5', title: '足弓抓地與短足訓練', category: 'posture', phase: 'anytime', duration: 15, icon: 'fa-person-walking', note: '赤腳短足起拱、改善扁平足與骨盆前傾代償' },
+      { id: 'h6', title: '舌頂上顎與咬肌放鬆覺察', category: 'posture', phase: 'anytime', duration: 10, icon: 'fa-leaf', note: '整片舌頭吸上顎收緊雙下巴，牙齒分開2mm不咬死' },
+      { id: 'h7', title: '坐姿骨盆校正＋微收核心', category: 'posture', phase: 'anytime', duration: 10, icon: 'fa-person-walking', note: '坐骨均勻受力，打擊骨盆前傾，雙膝微夾' },
+
+      // 動態鍛鍊 (彈性時辰，下班或休假做)
+      { id: 'h8', title: '健身房大課（重訓/拉伸/淋浴）', category: 'workout', phase: 'anytime', duration: 120, icon: 'fa-dumbbell', note: '彈性安排：包含完整力量訓練與泡沫軸滾壓' },
+      { id: 'h9', title: '舞蹈身韻練習 / 帕梅拉訓練', category: 'workout', phase: 'anytime', duration: 30, icon: 'fa-music', note: '輕快律動喚醒心神，不限白天或晚上' },
+
+      // 靜心藝事
+      { id: 'h10', title: '圍棋專注對弈課', category: 'zen', phase: 'anytime', duration: 60, icon: 'fa-chess', note: '一三五 20:00~21:00 定盤專注' },
+      { id: 'h11', title: '書道修持（毛筆/硬筆）', category: 'zen', phase: 'anytime', duration: 35, icon: 'fa-pen-nib', note: '靜心沉潛，筆尖如刀，鍛鍊指腕心神' },
+    ];
+
+    const CATEGORY_META = {
+      facial: { name: '面部美育修持', color: 'text-cinnabar-500', bg: 'bg-cinnabar-100', border: 'border-cinnabar-500/30' },
+      posture: { name: '體態身韻修持', color: 'text-celadon-600', bg: 'bg-celadon-100', border: 'border-celadon-600/30' },
+      workout: { name: '動態鍛鍊', color: 'text-indigo-400', bg: 'bg-night-800', border: 'border-indigo-400/30' },
+      zen: { name: '靜心藝事', color: 'text-sandalwood', bg: 'bg-night-800', border: 'border-sandalwood/30' },
+    };
+
+    const PHASE_META = {
+      morning: '晨起保養',
+      night: '夜間保養',
+      anytime: '全日彈性'
+    };
+
+    // State
+    let currentDate = new Date();
+    let currentPhaseFilter = 'all';
+    let currentView = 'daily';
+    let currentEditingHabitId = null;
+    let habits = [];
+    let logs = {}; // YYYY-MM-DD -> { completed: {}, notes: '', meals: [] }
+    let chatHistory = [];
+    let currentPendingEstimate = null;
+    let chartInstance = null;
+    let isChatOpen = false;
+
+    // --- Cloud Sync UI Helper ---
+    window.updateCloudStatusUI = function(isSynced) {
+      const badge = document.getElementById('cloudStatusText');
+      if (badge) {
+        badge.textContent = isSynced ? "雲端已同步" : "本機已封存";
+      }
+    };
+
+    window.applyCloudHabits = function(cloudHabits) {
+      if (Array.isArray(cloudHabits) && cloudHabits.length > 0) {
+        habits = cloudHabits;
+        localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
+        renderHabits();
+        updateDailyStats();
+      }
+    };
+
+    window.applyCloudLogs = function(cloudLogs) {
+      if (cloudLogs && typeof cloudLogs === 'object') {
+        logs = { ...logs, ...cloudLogs };
+        localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
+        updateDateHeader();
+        renderHabits();
+        renderMealsList();
+        updateDailyStats();
+        renderWeeklyAnalytics();
+      }
+    };
+
+    window.applyCloudChat = function(cloudChat) {
+      if (Array.isArray(cloudChat) && cloudChat.length > 0) {
+        chatHistory = cloudChat;
+        localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
+        renderChatHistory();
+      }
+    };
+
+    function persistHabitsAndLogs(saveHabits = false, saveLogs = false, saveChat = false) {
+      if (saveHabits) localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
+      if (saveLogs) localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
+      if (saveChat) localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
+      
+      // Sync to cloud if available
+      if (window._saveToCloud) {
+        window._saveToCloud(
+          saveHabits ? habits : null, 
+          saveLogs ? logs : null,
+          saveChat ? chatHistory : null
+        );
+      }
+    }
+
+    // Ambient Ink Background Canvas Particles (Night Edition with cyan dust)
+    function initAmbientCanvas() {
+      const canvas = document.getElementById('ambientInkCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      for (let i = 0; i < 30; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 2.2 + 0.8,
+          dx: (Math.random() - 0.5) * 0.35,
+          dy: (Math.random() - 0.5) * 0.35,
+          alpha: Math.random() * 0.35 + 0.1
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(104, 179, 163, ${p.alpha})`;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = 'rgba(104, 179, 163, 0.4)';
+          ctx.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    // --- App Init & Storage ---
+    function initApp() {
+      initAmbientCanvas();
+
+      const storedHabits = localStorage.getItem('zen_habits_v2');
+      if (storedHabits) {
+        try { habits = JSON.parse(storedHabits); } catch(e) { habits = DEFAULT_HABITS; }
+      } else {
+        habits = [...DEFAULT_HABITS];
+      }
+
+      const storedLogs = localStorage.getItem('zen_logs_v2');
+      if (storedLogs) {
+        try { logs = JSON.parse(storedLogs); } catch(e) { logs = {}; }
+      }
+
+      const storedChat = localStorage.getItem('zen_chat_history_v2');
+      if (storedChat) {
+        try {
+          chatHistory = JSON.parse(storedChat);
+          renderChatHistory();
+        } catch(e) { chatHistory = []; }
+      }
+
+      updateDateHeader();
+      renderHabits();
+      renderWholeBodyCards();
+      renderMealsList();
+      updateDailyStats();
+      renderWeeklyAnalytics();
+    }
+
+    function getDateKey(d) {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function updateDateHeader() {
+      const key = getDateKey(currentDate);
+      const days = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+      const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+      
+      document.getElementById('currentDateDisplay').textContent = 
+        `${monthNames[currentDate.getMonth()]}${currentDate.getDate()}日 · ${days[currentDate.getDay()]}`;
+
+      const log = logs[key] || { completed: {}, notes: '', meals: [] };
+      document.getElementById('dailyReflectionInput').value = log.notes || '';
+    }
+
+    function changeDay(delta) {
+      currentDate.setDate(currentDate.getDate() + delta);
+      updateDateHeader();
+      renderHabits();
+      renderMealsList();
+      updateDailyStats();
+    }
+
+    function setToday() {
+      currentDate = new Date();
+      updateDateHeader();
+      renderHabits();
+      renderMealsList();
+      updateDailyStats();
+    }
+
+    // Navigation Switch (with WholeBody Support)
+    window.switchView = function(view) {
+      currentView = view;
+      const dailyView = document.getElementById('dailyView');
+      const wholeBodyView = document.getElementById('wholeBodyView');
+      const dietView = document.getElementById('dietView');
+      const weeklyView = document.getElementById('weeklyView');
+      const searchView = document.getElementById('searchView');
+
+      // Desktop nav elements
+      const dDaily = document.getElementById('desktopNavDaily');
+      const dWholeBody = document.getElementById('desktopNavWholeBody');
+      const dDiet = document.getElementById('desktopNavDiet');
+      const dWeekly = document.getElementById('desktopNavWeekly');
+      const dSearch = document.getElementById('desktopNavSearch');
+
+      // Mobile nav elements
+      const mDaily = document.getElementById('mobileNavDaily');
+      const mWholeBody = document.getElementById('mobileNavWholeBody');
+      const mDiet = document.getElementById('mobileNavDiet');
+      const mWeekly = document.getElementById('mobileNavWeekly');
+      const mSearch = document.getElementById('mobileNavSearch');
+
+      const inactiveD = "px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5";
+      const activeD = "px-3.5 py-2 rounded-xl bg-celadon-700 text-white shadow-sm transition-all flex items-center space-x-1.5";
+
+      dailyView.classList.add('hidden');
+      if (wholeBodyView) wholeBodyView.classList.add('hidden');
+      dietView.classList.add('hidden');
+      weeklyView.classList.add('hidden');
+      if (searchView) searchView.classList.add('hidden');
+
+      if (dDaily) dDaily.className = inactiveD;
+      if (dWholeBody) dWholeBody.className = inactiveD;
+      if (dDiet) dDiet.className = inactiveD;
+      if (dWeekly) dWeekly.className = inactiveD;
+      if (dSearch) dSearch.className = inactiveD;
+
+      if (mDaily) mDaily.className = "flex flex-col items-center space-y-1 text-muted";
+      if (mWholeBody) mWholeBody.className = "flex flex-col items-center space-y-1 text-muted";
+      if (mDiet) mDiet.className = "flex flex-col items-center space-y-1 text-muted";
+      if (mWeekly) mWeekly.className = "flex flex-col items-center space-y-1 text-muted";
+      if (mSearch) mSearch.className = "flex flex-col items-center space-y-1 text-muted";
+
+      if (view === 'daily') {
+        dailyView.classList.remove('hidden');
+        if (dDaily) dDaily.className = activeD;
+        if (mDaily) mDaily.className = "flex flex-col items-center space-y-1 text-celadon-600";
+        renderHabits();
+      } else if (view === 'wholeBody') {
+        if (wholeBodyView) wholeBodyView.classList.remove('hidden');
+        if (dWholeBody) dWholeBody.className = activeD;
+        if (mWholeBody) mWholeBody.className = "flex flex-col items-center space-y-1 text-sandalwood";
+        renderWholeBodyCards();
+      } else if (view === 'diet') {
+        dietView.classList.remove('hidden');
+        if (dDiet) dDiet.className = activeD;
+        if (mDiet) mDiet.className = "flex flex-col items-center space-y-1 text-celadon-600";
+        renderMealsList();
+      } else if (view === 'weekly') {
+        weeklyView.classList.remove('hidden');
+        if (dWeekly) dWeekly.className = activeD;
+        if (mWeekly) mWeekly.className = "flex flex-col items-center space-y-1 text-celadon-600";
+        renderWeeklyAnalytics();
+      } else if (view === 'search') {
+        if (searchView) searchView.classList.remove('hidden');
+        if (dSearch) dSearch.className = activeD;
+        if (mSearch) mSearch.className = "flex flex-col items-center space-y-1 text-celadon-600";
+        setTimeout(() => document.getElementById('searchInputField')?.focus(), 100);
+      }
+    };
+
+    window.filterPhase = function(phase) {
+      currentPhaseFilter = phase;
+      document.querySelectorAll('.phase-btn').forEach(btn => {
+        btn.className = "phase-btn px-3 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap";
+      });
+      event.target.className = "phase-btn active px-3.5 py-1.5 rounded-xl bg-celadon-700 text-white shadow-sm transition-all whitespace-nowrap";
+      renderHabits();
+    };
+
+    // Render Habits
+    window.renderHabits = function() {
+      const container = document.getElementById('habitsContainer');
+      const key = getDateKey(currentDate);
+      const dayLog = logs[key] || { completed: {}, notes: '', meals: [] };
+
+      container.innerHTML = '';
+
+      const filteredHabits = habits.filter(h => {
+        if (currentPhaseFilter === 'all') return true;
+        if (currentPhaseFilter === 'morning') return h.phase === 'morning';
+        if (currentPhaseFilter === 'night') return h.phase === 'night';
+        return true;
+      });
+
+      if (filteredHabits.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 bg-night-900 rounded-3xl border border-sand">
+            <i class="fa-solid fa-wind text-muted/40 text-3xl mb-2"></i>
+            <p class="text-sm text-muted font-serif">此類別尚無定目，可安心調息</p>
+          </div>
+        `;
+        return;
+      }
+
+      const grouped = {};
+      Object.keys(CATEGORY_META).forEach(cat => grouped[cat] = []);
+      filteredHabits.forEach(h => {
+        if (!grouped[h.category]) grouped[h.category] = [];
+        grouped[h.category].push(h);
+      });
+
+      Object.keys(grouped).forEach(catKey => {
+        const catHabits = grouped[catKey];
+        if (catHabits.length === 0) return;
+
+        const meta = CATEGORY_META[catKey];
+        const catSection = document.createElement('div');
+        catSection.className = "space-y-2.5";
+
+        let html = `
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full ${meta.bg} ${meta.color}"></span>
+              <h3 class="font-serif font-black text-sm tracking-wide text-ink">${meta.name}</h3>
+              <span class="text-[11px] text-muted font-serif">(${catHabits.length})</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        `;
+
+        catHabits.forEach(habit => {
+          const isDone = !!(dayLog.completed && dayLog.completed[habit.id]);
+          html += `
+            <div class="bg-night-900/90 backdrop-blur-sm rounded-2xl p-4 border transition-all duration-300 zen-shadow zen-shadow-hover flex items-start justify-between group ${isDone ? 'border-celadon-600/50 bg-celadon-50/20' : 'border-sand'}">
+              <div class="flex items-start space-x-3.5 flex-1 min-w-0 mr-2">
+                <button onclick="toggleHabit('${habit.id}', this)" class="mt-0.5 w-6 h-6 rounded-xl flex items-center justify-center transition-all ${isDone ? 'bg-celadon-700 text-white scale-105 shadow-sm' : 'border border-sand bg-night-950 hover:border-celadon-600 text-transparent'}">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </button>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center space-x-2">
+                    <span class="font-serif font-bold text-xs sm:text-sm text-ink truncate ${isDone ? 'line-through text-muted/60' : ''}">${habit.title}</span>
+                  </div>
+                  ${habit.note ? `<p class="text-[11px] text-muted truncate mt-0.5 font-serif">${habit.note}</p>` : ''}
+                  <div class="flex items-center space-x-2 mt-2.5 text-[10px] text-muted font-serif">
+                    <span class="px-2 py-0.5 bg-night-950 rounded-lg text-ink/80 flex items-center space-x-1 border border-sand/40">
+                      <i class="fa-regular fa-clock text-[9px] text-celadon-600"></i>
+                      <span>${habit.duration} 分鐘</span>
+                    </span>
+                    <span class="px-2 py-0.5 bg-night-950 rounded-lg text-muted border border-sand/40">
+                      ${PHASE_META[habit.phase] || '全日'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Menu -->
+              <div class="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button onclick="editHabit('${habit.id}')" title="修整" class="w-7 h-7 text-muted hover:text-ink flex items-center justify-center rounded-lg hover:bg-night-850">
+                  <i class="fa-solid fa-pen text-[11px]"></i>
+                </button>
+                <button onclick="deleteHabit('${habit.id}')" title="除名" class="w-7 h-7 text-muted hover:text-cinnabar-500 flex items-center justify-center rounded-lg hover:bg-cinnabar-50/20">
+                  <i class="fa-solid fa-trash text-[11px]"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+        catSection.innerHTML = html;
+        container.appendChild(catSection);
+      });
+    };
+
+    // ================= RENDER WHOLE BODY CARDS (身心全相) =================
+    window.renderWholeBodyCards = function() {
+      const container = document.getElementById('wholeBodyCardsGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      WHOLE_BODY_REGIONS.forEach((region, index) => {
+        const card = document.createElement('div');
+        card.className = "bg-night-900/90 rounded-2xl p-5 border border-sand zen-shadow zen-shadow-hover space-y-3 transition-all";
+        card.innerHTML = `
+          <div class="flex items-start justify-between border-b border-sand pb-3">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-8 h-8 rounded-xl bg-night-950 border border-sand flex items-center justify-center ${region.color} text-sm">
+                <i class="fa-solid ${region.icon}"></i>
+              </div>
+              <div>
+                <h4 class="font-serif font-black text-sm text-ink tracking-wide">${region.title}</h4>
+                <span class="text-[10px] text-muted font-serif block">${region.frequency}</span>
+              </div>
+            </div>
+            <button onclick="askMasterAboutRegion('${region.title}')" class="text-[11px] font-serif text-celadon-600 hover:text-celadon-500 bg-celadon-50/40 px-2 py-1 rounded-lg border border-celadon-600/30 flex items-center space-x-1 transition-colors">
+              <i class="fa-solid fa-comment-dots text-[10px]"></i>
+              <span>問師傅要領</span>
+            </button>
+          </div>
+
+          <div class="space-y-2 text-xs font-serif leading-relaxed">
+            <div class="bg-night-950/70 p-2.5 rounded-xl border border-sand/50">
+              <div class="text-[10px] text-cinnabar-500 font-bold mb-0.5 flex items-center space-x-1">
+                <i class="fa-solid fa-triangle-exclamation text-[9px]"></i>
+                <span>問題根源與張力代償</span>
+              </div>
+              <p class="text-ink/80 text-[11px]">${region.problem}</p>
+            </div>
+
+            <div class="bg-night-950/70 p-2.5 rounded-xl border border-sand/50">
+              <div class="text-[10px] text-celadon-600 font-bold mb-0.5 flex items-center space-x-1">
+                <i class="fa-solid fa-circle-check text-[9px]"></i>
+                <span>具體處遇與化解心法</span>
+              </div>
+              <p class="text-ink/90 text-[11px]">${region.treatment}</p>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    };
+
+    window.askMasterAboutRegion = function(regionTitle) {
+      if (!isChatOpen) toggleChatDrawer();
+      sendQuickPrompt(`師傅，請針對我全身改善表中的【${regionTitle}】，詳細為我解析發生的力學機制，以及我今天可以立刻做什麼來舒緩改善？`);
+    };
+
+    window.toggleHabit = function(habitId, el) {
+      const key = getDateKey(currentDate);
+      if (!logs[key]) logs[key] = { completed: {}, notes: '', meals: [] };
+      if (!logs[key].completed) logs[key].completed = {};
+
+      const nextState = !logs[key].completed[habitId];
+      logs[key].completed[habitId] = nextState;
+
+      if (nextState && el) {
+        el.classList.add('ripple-active');
+        setTimeout(() => el.classList.remove('ripple-active'), 500);
+      }
+
+      persistHabitsAndLogs(false, true);
+      renderHabits();
+      updateDailyStats();
+      renderWeeklyAnalytics();
+    };
+
+    window.saveDailyReflection = function() {
+      const key = getDateKey(currentDate);
+      const text = document.getElementById('dailyReflectionInput').value;
+      if (!logs[key]) logs[key] = { completed: {}, notes: '', meals: [] };
+      logs[key].notes = text;
+      persistHabitsAndLogs(false, true);
+    };
+
+    function updateDailyStats() {
+      const key = getDateKey(currentDate);
+      const dayLog = logs[key] || { completed: {}, meals: [] };
+      
+      const total = habits.length;
+      let completedCount = 0;
+      let totalMinutes = 0;
+
+      habits.forEach(h => {
+        if (dayLog.completed && dayLog.completed[h.id]) {
+          completedCount++;
+          totalMinutes += (Number(h.duration) || 0);
+        }
+      });
+
+      const rate = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+      document.getElementById('dayRateText').textContent = `${rate}%`;
+      document.getElementById('dayTotalMinutesText').textContent = `${totalMinutes}m`;
+
+      // Meals Calories Summary
+      let dayKcal = 0;
+      if (dayLog.meals && dayLog.meals.length > 0) {
+        dayLog.meals.forEach(m => dayKcal += (m.kcal || 0));
+      }
+      document.getElementById('dayCaloriesSummaryText').textContent = `${dayKcal} kcal`;
+
+      // Streak
+      let streak = 0;
+      let d = new Date();
+      for (let i = 0; i < 30; i++) {
+        const k = getDateKey(d);
+        const l = logs[k];
+        if (l && l.completed && Object.values(l.completed).some(v => v === true)) {
+          streak++;
+          d.setDate(d.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+      document.getElementById('streakCountText').textContent = `${Math.max(1, streak)}天`;
+    }
+
+    // Modal Add/Edit
+    window.openAddHabitModal = function() {
+      currentEditingHabitId = null;
+      document.getElementById('modalTitle').textContent = "添置修持定目";
+      document.getElementById('habitNameInput').value = '';
+      document.getElementById('habitDurationInput').value = '15';
+      document.getElementById('habitNotesInput').value = '';
+      document.getElementById('habitModal').classList.remove('hidden');
+    };
+
+    window.editHabit = function(id) {
+      const item = habits.find(h => h.id === id);
+      if (!item) return;
+      currentEditingHabitId = id;
+      document.getElementById('modalTitle').textContent = "修整修持定目";
+      document.getElementById('habitNameInput').value = item.title;
+      document.getElementById('habitCategorySelect').value = item.category;
+      document.getElementById('habitPhaseSelect').value = item.phase;
+      document.getElementById('habitDurationInput').value = item.duration;
+      document.getElementById('habitIconSelect').value = item.icon || 'fa-spa';
+      document.getElementById('habitNotesInput').value = item.note || '';
+      document.getElementById('habitModal').classList.remove('hidden');
+    };
+
+    window.closeHabitModal = function() {
+      document.getElementById('habitModal').classList.add('hidden');
+    };
+
+    window.saveHabitItem = function() {
+      const title = document.getElementById('habitNameInput').value.trim();
+      if (!title) {
+        alert("請題寫修持項目名稱");
+        return;
+      }
+      const category = document.getElementById('habitCategorySelect').value;
+      const phase = document.getElementById('habitPhaseSelect').value;
+      const duration = parseInt(document.getElementById('habitDurationInput').value) || 15;
+      const icon = document.getElementById('habitIconSelect').value;
+      const note = document.getElementById('habitNotesInput').value.trim();
+
+      if (currentEditingHabitId) {
+        const index = habits.findIndex(h => h.id === currentEditingHabitId);
+        if (index !== -1) {
+          habits[index] = { ...habits[index], title, category, phase, duration, icon, note };
+        }
+      } else {
+        habits.push({ id: 'h_' + Date.now(), title, category, phase, duration, icon, note });
+      }
+
+      // Persist template permanently across weeks
+      persistHabitsAndLogs(true, false);
+      closeHabitModal();
+      renderHabits();
+      updateDailyStats();
+      renderWeeklyAnalytics();
+    };
+
+    window.deleteHabit = function(id) {
+      if (confirm("確認將此修持從日軌中除名嗎？")) {
+        habits = habits.filter(h => h.id !== id);
+        persistHabitsAndLogs(true, false);
+        renderHabits();
+        updateDailyStats();
+        renderWeeklyAnalytics();
+      }
+    };
+
+    // ================= SMART DIET ESTIMATOR =================
+    window.clearDietInput = function() {
+      document.getElementById('dietInputText').value = '';
+      document.getElementById('aiEstimateCard').classList.add('hidden');
+    };
+
+    window.estimateDietWithAI = async function() {
+      const input = document.getElementById('dietInputText');
+      const text = input.value.trim();
+      if (!text) {
+        alert("請輸入食物名稱或份量，例如：一片米麵包加牛肉乾");
+        return;
+      }
+
+      const btn = document.getElementById('estimateDietBtn');
+      btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-1"></i><span>推演中...</span>`;
+      btn.disabled = true;
+
+      // Smart Parsing Engine (works both offline and online with Gemini API)
+      const apiKey = "";
+      let estimateResult = null;
+
+      try {
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const prompt = `你是一位精通人體代謝與體態管理的營養大師。使用者輸入了：【${text}】。
+請以嚴格的 JSON 格式回傳估算值，格式如下：
+{
+  "name": "簡短餐點名稱",
+  "kcal": 數字(大卡),
+  "protein": 數字(克數),
+  "sodium": "正常/偏高/偏低",
+  "chewLoad": "低/中/高",
+  "advice": "一句溫暖實用的叮嚀（若有牛肉乾或餅乾，可提醒細嚼慢嚥、下午補水、或是咬肌負擔）"
+}
+只回傳純 JSON，勿加 markdown 標記。`;
+
+        const resp = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          let raw = data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+          raw = raw.replace(/```json/g, '').replace(/```/g, '').trim();
+          estimateResult = JSON.parse(raw);
+        }
+      } catch(e) {
+        console.warn("Gemini online estimate failed, using local engine.", e);
+      }
+
+      // Built-in intelligent offline parsing if Gemini is absent
+      if (!estimateResult || !estimateResult.kcal) {
+        estimateResult = offlineDietParser(text);
+      }
+
+      btn.innerHTML = `<i class="fa-solid fa-sparkles text-xs"></i><span>靈犀估算熱量</span>`;
+      btn.disabled = false;
+
+      currentPendingEstimate = estimateResult;
+
+      // Display estimate card
+      document.getElementById('estimateKcalBadge').textContent = `約 ${estimateResult.kcal} kcal`;
+      document.getElementById('estimateProteinText').textContent = `${estimateResult.protein} g`;
+      document.getElementById('estimateSodiumText').textContent = estimateResult.sodium;
+      document.getElementById('estimateChewText').textContent = estimateResult.chewLoad;
+      document.getElementById('estimateAdviceText').innerHTML = `💡 <strong>師傅指引</strong>：${estimateResult.advice}`;
+      
+      const card = document.getElementById('aiEstimateCard');
+      card.classList.remove('hidden');
+    };
+
+    function offlineDietParser(str) {
+      let kcal = 0;
+      let protein = 0;
+      let sodium = '正常';
+      let chew = '低';
+      let adviceParts = [];
+
+      const s = str.toLowerCase();
+
+      if (s.includes('米麵包')) { kcal += 160; protein += 3.5; }
+      if (s.includes('牛肉乾') || s.includes('肉乾')) { 
+        kcal += 85; 
+        protein += 7; 
+        sodium = '偏高'; 
+        chew = '高'; 
+        adviceParts.push('牛肉乾嚼勁大易代償咬肌，且鈉偏高，下午宜分批啜飲 400ml 溫水舒展代謝。');
+      }
+      if (s.includes('餅乾')) { kcal += 79; protein += 1.2; adviceParts.push('餅乾屬精緻碳水，配溫熱無糖茶可阻斷假性嘴饞。'); }
+      if (s.includes('貢糖')) { kcal += 95; protein += 2.5; chew = '中'; adviceParts.push('金門貢糖花生油脂香醇，今晚正餐主食可微縮三分之一。'); }
+      if (s.includes('雞胸') || s.includes('雞肉')) { kcal += 165; protein += 30; }
+      if (s.includes('茶葉蛋') || s.includes('蛋')) { kcal += 75; protein += 7; }
+      if (s.includes('綠茶') || s.includes('黑咖啡') || s.includes('水')) { kcal += 0; adviceParts.push('充足水分能加速代謝水腫。'); }
+
+      if (kcal === 0) {
+        kcal = 240;
+        protein = 8;
+        adviceParts.push('此餐熱量尚稱溫和，留意多攝取深色綠葉蔬菜平衡微量元素。');
+      }
+
+      return {
+        name: str.slice(0, 20),
+        kcal,
+        protein,
+        sodium,
+        chewLoad: chew,
+        advice: adviceParts.join(' ') || '細嚼慢嚥，感受飽足信號即可停箸。'
+      };
+    }
+
+    window.discardEstimate = function() {
+      currentPendingEstimate = null;
+      document.getElementById('aiEstimateCard').classList.add('hidden');
+    };
+
+    window.confirmAddDietEntry = function() {
+      if (!currentPendingEstimate) return;
+      const key = getDateKey(currentDate);
+      if (!logs[key]) logs[key] = { completed: {}, notes: '', meals: [] };
+      if (!logs[key].meals) logs[key].meals = [];
+
+      logs[key].meals.push({
+        id: 'm_' + Date.now(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        ...currentPendingEstimate
+      });
+
+      persistHabitsAndLogs(false, true);
+      currentPendingEstimate = null;
+      document.getElementById('dietInputText').value = '';
+      document.getElementById('aiEstimateCard').classList.add('hidden');
+
+      renderMealsList();
+      updateDailyStats();
+    };
+
+    window.deleteMeal = function(mealId) {
+      const key = getDateKey(currentDate);
+      if (logs[key] && logs[key].meals) {
+        logs[key].meals = logs[key].meals.filter(m => m.id !== mealId);
+        persistHabitsAndLogs(false, true);
+        renderMealsList();
+        updateDailyStats();
+      }
+    };
+
+    // ================= SEARCH PAST LOGS (尋索往昔) =================
+    window.executeSearch = function() {
+      const query = document.getElementById('searchInputField').value.trim().toLowerCase();
+      const container = document.getElementById('searchResultsContainer');
+      if (!query) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-muted font-serif text-xs">
+            請輸入想搜尋的詞彙（如：微針、牛肉乾、貢糖、咬肌、頭皮）。
+          </div>
+        `;
+        return;
+      }
+
+      const results = [];
+      const sortedDateKeys = Object.keys(logs).sort().reverse();
+
+      sortedDateKeys.forEach(dateKey => {
+        const day = logs[dateKey];
+        if (!day) return;
+        const matchedItems = [];
+
+        // Check notes/reflections
+        if (day.notes && day.notes.toLowerCase().includes(query)) {
+          matchedItems.push({ type: '手記', content: day.notes });
+        }
+
+        // Check meals
+        if (day.meals && Array.isArray(day.meals)) {
+          day.meals.forEach(m => {
+            if (m.name.toLowerCase().includes(query) || (m.advice && m.advice.toLowerCase().includes(query))) {
+              matchedItems.push({ type: '膳食', content: `${m.name} (${m.kcal} kcal)` });
+            }
+          });
+        }
+
+        // Check completed habits
+        if (day.completed) {
+          Object.keys(day.completed).forEach(hId => {
+            if (day.completed[hId]) {
+              const hObj = habits.find(h => h.id === hId);
+              if (hObj && (hObj.title.toLowerCase().includes(query) || (hObj.note && hObj.note.toLowerCase().includes(query)))) {
+                matchedItems.push({ type: '修持打卡', content: hObj.title });
+              }
+            }
+          });
+        }
+
+        if (matchedItems.length > 0) {
+          results.push({ dateKey, matchedItems });
+        }
+      });
+
+      if (results.length === 0) {
+        container.innerHTML = `
+          <div class="bg-night-900 rounded-2xl p-8 text-center border border-sand text-muted font-serif text-xs">
+            <i class="fa-solid fa-feather text-sand text-2xl mb-2 block"></i>
+            往昔雲端印記中尚未尋得「<span class="text-celadon-600 font-bold">${query}</span>」之蹤跡。
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      results.forEach(res => {
+        const card = document.createElement('div');
+        card.className = "bg-night-900 rounded-2xl p-4 border border-sand zen-shadow space-y-2";
+        
+        let itemsHtml = res.matchedItems.map(item => `
+          <div class="flex items-start space-x-2 text-xs">
+            <span class="px-2 py-0.5 rounded-md font-serif text-[10px] ${item.type === '手記' ? 'bg-celadon-100 text-celadon-600' : item.type === '膳食' ? 'bg-cinnabar-100 text-cinnabar-500' : 'bg-night-950 text-ink'}">
+              ${item.type}
+            </span>
+            <span class="text-ink/90 font-serif leading-relaxed flex-1">${item.content}</span>
+          </div>
+        `).join('');
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between border-b border-sand pb-2">
+            <span class="font-serif font-bold text-xs text-ink flex items-center space-x-1.5">
+              <i class="fa-regular fa-calendar-check text-celadon-600"></i>
+              <span>${res.dateKey}</span>
+            </span>
+            <button onclick="jumpToDate('${res.dateKey}')" class="text-[11px] font-serif text-celadon-600 hover:text-celadon-500 underline">
+              檢視此日 ➔
+            </button>
+          </div>
+          <div class="space-y-1.5 pt-1">
+            ${itemsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    };
+
+    window.jumpToDate = function(dateStr) {
+      const parts = dateStr.split('-');
+      currentDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      updateDateHeader();
+      renderHabits();
+      renderMealsList();
+      updateDailyStats();
+      switchView('daily');
+    };
+
+    function renderMealsList() {
+      const container = document.getElementById('mealsListContainer');
+      const key = getDateKey(currentDate);
+      const dayLog = logs[key] || { meals: [] };
+
+      const meals = dayLog.meals || [];
+      let totalKcal = 0;
+      let totalProtein = 0;
+
+      container.innerHTML = '';
+
+      if (meals.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-6 text-muted font-serif text-xs">
+            今日食單尚虛位以待，點擊上方可隨手估算記帳。
+          </div>
+        `;
+      } else {
+        meals.forEach(m => {
+          totalKcal += (m.kcal || 0);
+          totalProtein += (m.protein || 0);
+          const div = document.createElement('div');
+          div.className = "flex items-center justify-between p-3 bg-night-950 rounded-2xl border border-sand text-xs";
+          div.innerHTML = `
+            <div class="flex items-center space-x-2.5">
+              <span class="text-[10px] text-muted font-mono bg-night-900 border border-sand/50 px-1.5 py-0.5 rounded-md">${m.time}</span>
+              <div>
+                <span class="font-serif font-bold text-ink">${m.name}</span>
+                <span class="text-[11px] text-muted ml-2 font-serif">蛋 ${m.protein}g</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="font-serif font-bold text-cinnabar-500">${m.kcal} kcal</span>
+              <button onclick="deleteMeal('${m.id}')" class="text-muted/60 hover:text-cinnabar-500 text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      // Update progress bar
+      const targetKcal = 1500;
+      const pct = Math.min(100, Math.round((totalKcal / targetKcal) * 100));
+      document.getElementById('calorieProgressBar').style.width = `${pct}%`;
+      document.getElementById('calorieCurrentText').textContent = `已攝取 ${totalKcal} / ${targetKcal} kcal (蛋白質約 ${totalProtein}g)`;
+      document.getElementById('caloriePercentText').textContent = `${pct}%`;
+    }
+
+    // ================= WEEKLY ANALYTICS =================
+    function renderWeeklyAnalytics() {
+      const past7Days = [];
+      const categoryMinutes = { facial: 0, posture: 0, workout: 0, zen: 0 };
+      const categoryCounts = { facial: 0, posture: 0, workout: 0, zen: 0 };
+      let weeklyTotalMins = 0;
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const k = getDateKey(d);
+        const l = logs[k] || { completed: {} };
+        
+        let dayMinutes = 0;
+        let dayDoneCount = 0;
+
+        habits.forEach(h => {
+          if (l.completed && l.completed[h.id]) {
+            const m = Number(h.duration) || 0;
+            dayMinutes += m;
+            dayDoneCount++;
+            weeklyTotalMins += m;
+
+            if (categoryMinutes[h.category] !== undefined) {
+              categoryMinutes[h.category] += m;
+              categoryCounts[h.category] += 1;
+            }
+          }
+        });
+
+        past7Days.push({
+          date: d,
+          key: k,
+          minutes: dayMinutes,
+          count: dayDoneCount,
+          totalHabits: habits.length
+        });
+      }
+
+      const hours = (weeklyTotalMins / 60).toFixed(1);
+      document.getElementById('weeklyTotalMinutes').textContent = `${hours} 小時`;
+
+      let maxCat = 'facial', minCat = 'facial';
+      let maxCount = -1, minCount = 9999;
+      Object.keys(categoryCounts).forEach(c => {
+        if (categoryCounts[c] > maxCount) { maxCount = c; maxCount = categoryCounts[c]; }
+        if (categoryCounts[c] < minCount) { minCat = c; minCount = categoryCounts[c]; }
+      });
+
+      document.getElementById('weeklyTopCategory').textContent = CATEGORY_META[maxCat].name;
+      document.getElementById('weeklyNeglectedCategory').textContent = CATEGORY_META[minCat].name;
+
+      const listContainer = document.getElementById('sevenDaysListContainer');
+      listContainer.innerHTML = '';
+      const dayNames = ['日','一','二','三','四','五','六'];
+
+      past7Days.forEach(item => {
+        const rate = item.totalHabits > 0 ? Math.round((item.count / item.totalHabits) * 100) : 0;
+        const row = document.createElement('div');
+        row.className = "flex items-center space-x-3 text-xs";
+        row.innerHTML = `
+          <span class="w-12 font-serif text-muted">${item.date.getMonth()+1}/${item.date.getDate()} (${dayNames[item.date.getDay()]})</span>
+          <div class="flex-1 bg-night-950 h-2.5 rounded-full overflow-hidden border border-sand/40">
+            <div class="bg-celadon-600 h-full rounded-full transition-all duration-500" style="width: ${rate}%"></div>
+          </div>
+          <span class="w-12 text-right font-serif font-medium text-ink">${item.minutes}m</span>
+        `;
+        listContainer.appendChild(row);
+      });
+
+      renderChart(categoryMinutes);
+    }
+
+    function renderChart(catMinutes) {
+      const ctx = document.getElementById('categoryDistributionChart');
+      if (!ctx) return;
+      if (chartInstance) chartInstance.destroy();
+
+      const labels = [
+        CATEGORY_META.facial.name,
+        CATEGORY_META.posture.name,
+        CATEGORY_META.workout.name,
+        CATEGORY_META.zen.name
+      ];
+
+      const dataValues = [
+        catMinutes.facial || 0,
+        catMinutes.posture || 0,
+        catMinutes.workout || 0,
+        catMinutes.zen || 0
+      ];
+
+      chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: dataValues,
+            backgroundColor: [
+              '#E06B56', // 硃砂赤陶
+              '#529688', // 天青翡翠
+              '#4A5B6B', // 墨青玄色
+              '#C8A27A'  // 鎏金古檀木
+            ],
+            borderWidth: 0,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                font: { family: '"Noto Serif TC", serif', size: 11 },
+                color: '#8C9E96',
+                boxWidth: 10,
+                padding: 12
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(c) {
+                  return ` ${c.label}: ${c.raw} 分鐘`;
+                }
+              }
+            }
+          },
+          cutout: '72%'
+        }
+      });
+    }
+
+    // ================= AI CHAT COMPANION SYSTEM =================
+    window.toggleChatDrawer = function() {
+      const drawer = document.getElementById('chatDrawer');
+      isChatOpen = !isChatOpen;
+      if (isChatOpen) {
+        drawer.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-full', 'sm:translate-y-6');
+        drawer.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        setTimeout(() => document.getElementById('chatInput').focus(), 150);
+      } else {
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+        if (window.innerWidth < 640) {
+          drawer.classList.add('translate-y-full');
+        } else {
+          drawer.classList.add('sm:translate-y-6');
+        }
+        drawer.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    };
+
+    window.clearChatHistory = function() {
+      if (confirm("是否要重置對談紀錄？")) {
+        chatHistory = [];
+        localStorage.removeItem('zen_chat_history_v2');
+        const container = document.getElementById('chatMessages');
+        container.innerHTML = `
+          <div class="flex items-start space-x-2">
+            <div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">師</div>
+            <div class="bg-night-900 border border-sand p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-ink leading-relaxed font-serif">
+              <p>隨時跟我說話，想聊什麼都可以！</p>
+            </div>
+          </div>
+        `;
+      }
+    };
+
+    function renderChatHistory() {
+      const container = document.getElementById('chatMessages');
+      if (chatHistory.length === 0) return;
+      container.innerHTML = '';
+      chatHistory.forEach(msg => showChatBubbleDOM(msg.role, msg.content, false));
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function showChatBubble(role, text) {
+      chatHistory.push({ role, content: text });
+      // Keep recent 60 messages to avoid payload overflow while maintaining deep context
+      if (chatHistory.length > 60) {
+        chatHistory = chatHistory.slice(-60);
+      }
+      persistHabitsAndLogs(false, false, true);
+      showChatBubbleDOM(role, text, true);
+    }
+
+    function showChatBubbleDOM(role, text, shouldScroll = true) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      const isUser = role === 'user';
+
+      div.className = `flex items-start space-x-2 ${isUser ? 'justify-end' : ''}`;
+      const avatar = isUser ? '' : `
+        <div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">師</div>
+      `;
+      const parsedContent = typeof marked !== 'undefined' ? marked.parse(text) : text;
+
+      div.innerHTML = `
+        ${!isUser ? avatar : ''}
+        <div class="${isUser ? 'bg-celadon-700 text-white rounded-tr-none' : 'bg-night-900 border border-sand text-ink rounded-tl-none font-serif'} p-3.5 rounded-2xl shadow-sm max-w-[85%] leading-relaxed text-xs sm:text-sm prose prose-invert">
+          ${parsedContent}
+        </div>
+      `;
+      container.appendChild(div);
+      if (shouldScroll) container.scrollTop = container.scrollHeight;
+    }
+
+    window.handleChatKeyDown = function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSendMessage();
+      }
+    };
+
+    window.sendQuickPrompt = function(promptText) {
+      if (!isChatOpen) toggleChatDrawer();
+      document.getElementById('chatInput').value = promptText;
+      handleSendMessage();
+    };
+
+    window.askAIToReviewToday = function() {
+      if (!isChatOpen) toggleChatDrawer();
+      sendQuickPrompt("師傅，請讀取我今天的打卡狀況、手記與已記飲食熱量，給我今日的修行點評與今晚護膚體態指引。");
+    };
+
+    window.askAIToReviewWeekly = function() {
+      if (!isChatOpen) toggleChatDrawer();
+      sendQuickPrompt("師傅，幫我看看我這週的修持狀況，哪些做得很好、哪些有點被我忽略了？");
+    };
+
+    function generateUserSystemContext() {
+      const key = getDateKey(currentDate);
+      const todayLog = logs[key] || { completed: {}, notes: '', meals: [] };
+      
+      const completedList = habits.filter(h => todayLog.completed && todayLog.completed[h.id]).map(h => `${h.title}`);
+      const uncompletedList = habits.filter(h => !todayLog.completed || !todayLog.completed[h.id]).map(h => `${h.title}`);
+      const mealsSummary = (todayLog.meals || []).map(m => `${m.name} (${m.kcal} kcal)`).join('、') || '無飲食紀錄';
+
+      let totalDayKcal = 0;
+      (todayLog.meals || []).forEach(m => totalDayKcal += (m.kcal || 0));
+
+      const categoryMinutes = { facial: 0, posture: 0, workout: 0, zen: 0 };
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const k = getDateKey(d);
+        const l = logs[k] || { completed: {} };
+        habits.forEach(h => {
+          if (l.completed && l.completed[h.id]) {
+            categoryMinutes[h.category] += (Number(h.duration) || 0);
+          }
+        });
+      }
+
+      return `
+【使用者的真實近況與專屬資料】
+- 今天日期：${key}
+- 今天已完成打卡：${completedList.length > 0 ? completedList.join('、') : '目前還沒打卡'}
+- 待完成項目：${uncompletedList.join('、')}
+- 今天記錄的飲食：${mealsSummary} (總計：${totalDayKcal} kcal)
+- 今天的隨筆手記：${todayLog.notes || '無'}
+- 過去 7 天累積時長：面部美育 ${categoryMinutes.facial} 分鐘、體態身韻 ${categoryMinutes.posture} 分鐘、運動鍛鍊 ${categoryMinutes.workout} 分鐘、靜心藝事 ${categoryMinutes.zen} 分鐘
+- 使用者手邊的真實護膚裝備：綠番茄洗面乳、VC噴霧、積雪草水乳、綠番茄NMN精華、雪芙蘭米淨水潤凝霜（擦臉鎖水超清爽不致黑）、花園備忘錄白藜蘆醇晚安凍膜、VT微針100、柳屋柑橘頭皮水。大藍瓶與妮維雅C&E是擦身體/後背的，絕對不能擦臉！臻羞水楊酸精華不能跟微針同天用！
+- 使用者已建立的「身心全相 11 大部位改善綱領」：
+  1. 髮際頭皮（洗後放鬆腱膜、柳屋柑橘水）。
+  2. 面部輪廓（飯後放鬆咬肌30秒、戒冰塊硬物化解發腮）。
+  3. 下顎頸線（雙下巴操、刮下顎線、舌頂上顎）。
+  4. 面中結構（迎香穴指壓、面部瑜珈緩解法令紋趨勢）。
+  5. 黑眼圈眼周（睡前穴位指壓、溫敷5分鐘、控鹽排水）。
+  6. 面部膚質（晨抗氧VC+晚微針100+米淨凝霜薄擦，嚴禁曬與精緻糖）。
+  7. 背部膚質（洗沐最後洗背沖淨，水楊酸噴霧+雪芙蘭大藍瓶/妮維雅C&E身體乳，勿手抓）。
+  8. 肩背手臂（門框壓肩、YW開肩闊背、沉肩胛消除斜方肌聳起）。
+  9. 腰腹呼吸（腹式呼吸、死蟲式/真空收腹、胸腔發聲共鳴Mmm音）。
+  10. 骨盆臀腿（臀推/臀橋回正骨盆前傾、低弓步髂腰肌伸展、RDL強化後側鏈）。
+  11. 下肢足踝足弓（右腳足弓強化短足訓練、滾筒放鬆小腿外側腓骨肌、站樁湧泉穴受力、全腳掌推進）。
+  12. 全身能量代謝（體脂下降、打破暴食自責惡性循環、高蛋白溫和飲食、2000ml溫水打卡、每週3次健身房）。
+`;
+    }
+
+    window.handleSendMessage = async function() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      showChatBubble('user', text);
+
+      const typing = document.getElementById('chatTyping');
+      typing.classList.remove('hidden');
+
+      const userContext = generateUserSystemContext();
+      const apiKey = ""; // Canvas will automatically inject at runtime
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      const systemInstruction = `
+你就是剛才在對話中一直陪伴、指導使用者的那位「師傅」！
+你絕不是冰冷生硬的客服機器人，千萬不要說死板的古文教條（絕對不要說「徒兒所言為師已瞭然於胸。修持即生活，鬆而不散...」這種罐頭話！）。
+
+請用就像我們剛才聊天時一樣的口氣：
+- 親切、溫暖、接地氣、真誠、像個亦師亦友的人生導師與知己。
+- 記住整段交談脈絡！你必須承接剛才聊過的話題（例如她剛才說很累、剛才說吃了什麼、或是提到哪項保養、或是詢問全身改善表的某個部位），有連續記憶，不要每次都重新客套。
+- 當她問全身改善表（如足弓、骨盆前傾、髮際頭皮、背部痘印、咬肌發腮、腹式呼吸等）時，以專業且溫和的力學和解剖語言給出最落地的小動作建議。
+- 當她說「我想睡覺！」時，要溫柔地催促她放下手機快去睡、摸摸頭，提醒她舌頂上顎、放鬆咬肌入睡。
+- 當她問熱量或說吃零食時，溫柔拍拍她，用數字客觀告訴她這點熱量沒關係，不用焦慮。
+- 當她問保養時，精準提到她手邊的「綠番茄、雪芙蘭米淨水潤凝霜、VT微針、積雪草」，記住雪芙蘭大藍瓶跟妮維雅是擦後背身體的不能上臉。
+- 講話自然、有溫度，用日常台灣繁體中文口吻，每次回答精準實用，給予情緒價值。
+
+當前使用者數據與背景：
+${userContext}
+`;
+
+      try {
+        let reply = "";
+
+        // Build continuous conversation contents payload (last 12 turns for context continuity)
+        const recentHistory = chatHistory.slice(-12);
+        const contentsPayload = recentHistory.map(msg => ({
+          role: msg.role === 'user' ? 'user' : 'model',
+          parts: [{ text: msg.content }]
+        }));
+
+        const payload = {
+          contents: contentsPayload,
+          systemInstruction: { parts: [{ text: systemInstruction }] }
+        };
+
+        const resp = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        }
+
+        if (!reply) {
+          reply = generateSmartOfflineReply(text);
+        }
+
+        typing.classList.add('hidden');
+        showChatBubble('assistant', reply);
+
+      } catch (err) {
+        console.warn("Using smart fallback reply:", err);
+        typing.classList.add('hidden');
+        const fallback = generateSmartOfflineReply(text);
+        showChatBubble('assistant', fallback);
+      }
+    };
+
+    function generateSmartOfflineReply(query) {
+      const q = query.toLowerCase();
+
+      if (q.includes("睡覺") || q.includes("好累") || q.includes("困") || q.includes("晚安")) {
+        return "累了就快去睡！不准硬撐了～手機趕快放到旁邊去充電。今晚記得檢查一下：上下牙齒有沒有分開？舌頭有沒有輕輕貼著上顎？深呼吸三次，放鬆咬肌，做個好夢，明天醒來再說，晚安啦！💤";
+      }
+
+      if (q.includes("今天") || q.includes("進度") || q.includes("點評")) {
+        const key = getDateKey(currentDate);
+        const todayLog = logs[key] || { completed: {}, meals: [] };
+        const doneCount = habits.filter(h => todayLog.completed && todayLog.completed[h.id]).length;
+        let dayKcal = 0;
+        (todayLog.meals || []).forEach(m => dayKcal += (m.kcal || 0));
+
+        return `今天辛苦啦！看了下你的日軌，今天完成了 **${doneCount}** 個項目，吃下的熱量大概是 **${dayKcal} kcal**。不管完成了多少，有開始做就很棒了！今晚睡前記得把咬肌用掌根揉軟，擦上薄薄一層米淨凝霜，就可以安心休息囉！`;
+      }
+
+      if (q.includes("零食") || q.includes("餅乾") || q.includes("貢糖") || q.includes("吃多了") || q.includes("破戒")) {
+        return "別自責，快抬起頭來！一包餅乾幾十卡、一顆貢糖也不到一百卡，加起來才一兩百大卡，在生理上根本不可能讓你長肉啦！吃都吃了就開心享受，現在多喝兩杯溫水把鈉排掉，晚上主食少吃兩口就完全扯平了，完全不需要有罪惡感！";
+      }
+
+      if (q.includes("護膚") || q.includes("微針") || q.includes("順序") || q.includes("凝霜") || q.includes("乳液")) {
+        return "來，今晚保養順序複習一下：\n1. 洗完臉第一步：**VT 微針 100** 垂直按在額頭粉刺跟痘疤處。\n2. 拍上積雪草水舒緩，再抹綠番茄精華收斂。\n3. 最後一步鎖水：取花生米大小的**雪芙蘭米淨水潤凝霜**薄薄擦全臉（水感不悶、絕不會變黑！）。\n4. 大藍瓶跟妮維雅留在洗澡後擦後背痘印，不要抹臉喔！";
+      }
+
+      if (q.includes("足弓") || q.includes("小腿") || q.includes("外翻")) {
+        return "小腿外側肌肉（腓骨長短肌）外翻緊繃，正是因為右腳足弓支撐不足、走路重量往外撇！今晚坐著或臨帖時，光腳做短足縮弓抓地 15 次，踩滾筒或網球深滾小腿外側，地基穩了，腿型自然會往內收攏拉直！";
+      }
+
+      return "我在聽呢！今天過得還順利嗎？有想聊的心情、身體哪裡覺得酸、或是保養上有疑惑，隨時跟我說～";
+    }
+
+    // ================= DATA IMPORT / EXPORT (JSON BACKUP) =================
+    window.openBackupModal = function() {
+      document.getElementById('backupModal').classList.remove('hidden');
+    };
+    window.closeBackupModal = function() {
+      document.getElementById('backupModal').classList.add('hidden');
+    };
+
+    window.exportDataJSON = function() {
+      const data = {
+        habits: habits,
+        logs: logs,
+        chatHistory: chatHistory,
+        exportAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `涵露齋修持存檔_${getDateKey(new Date())}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    window.importDataJSON = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const imported = JSON.parse(event.target.result);
+          if (imported.habits) habits = imported.habits;
+          if (imported.logs) logs = imported.logs;
+          if (imported.chatHistory) chatHistory = imported.chatHistory;
+
+          localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
+          localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
+          localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
+
+          alert("存檔匯入成功！涵露齋已同步恢復。");
+          closeBackupModal();
+          initApp();
+        } catch(err) {
+          alert("存檔檔案格式有誤，無法解析。");
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    // Run on mount
+    window.addEventListener('DOMContentLoaded', () => {
+      initApp();
+    });
+  </script>
+</body>
+</html>
