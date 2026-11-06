@@ -1,8 +1,14 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>涵露齋 ｜ 修持日軌・身心自律手帳</title>
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Noto Serif TC & Plus Jakarta Sans -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -10,15 +16,12 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Chart.js for Weekly Balance -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Markdown Parser for AI Responses -->
+  <!-- Markdown Parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- Firebase Modular SDK for Cloud Storage & Persistence -->
-<!-- ... existing code ... -->
-  <!-- Tailwind Custom Colors (Updated to Deep Luxury Dark Theme) -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -30,53 +33,14 @@
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
-            night: {
-              950: '#0B0F0E',      // 深邃玄黑底色
-              900: '#111715',      // 卡片沉靜暗夜底色
-              850: '#161F1C',      // 邊框與浮層色
-              800: '#1D2A26',      // 次級浮層
-              700: '#2E413B',
-            },
-            paper: '#0F1412',      // 主暗色底
-            parchment: '#17211D',  // 暗夜宣紙
-            ink: '#E8EFEA',        // 皎潔微青白字體
-            celadon: {             // 翡翠天青流光
-              50: '#142823',
-              100: '#1E3C35',
-              200: '#2C5A4F',
-              500: '#529688',
-              600: '#68B3A3',
-              700: '#82C9BA',
-            },
-            sage: {                // 暮林古黛
-              500: '#5B8262',
-              600: '#75A47D',
-              700: '#94C69C'
-            },
-            cinnabar: {            // 暗夜琉璃赤
-              50: '#2C1714',
-              100: '#421E19',
-              500: '#E06B56',
-              600: '#F28572'
-            },
-            sandalwood: '#C8A27A', // 鎏金古檀木
-            sand: '#2A3832',       // 幽夜墨沙邊界
-            muted: '#8C9E96'       // 暮嵐淺黛文字
-          },
-          animation: {
-            'float-slow': 'float 8s ease-in-out infinite',
-            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
-            'shimmer': 'shimmer 2.5s linear infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-6px)' },
-            },
-            pulseSoft: {
-              '0%, 100%': { opacity: 0.9 },
-              '50%': { opacity: 0.5 },
-            }
+            night: { 950: '#0B0F0E', 900: '#121816', 850: '#18211E', 800: '#1E2824', 700: '#2D3A35' },
+            ink: '#E2E8E0',
+            celadon: { 50: '#152520', 100: '#1E372F', 200: '#2B4F43', 500: '#4D8B7A', 600: '#64AC98', 700: '#7EC4B2' },
+            cinnabar: { 100: '#3D1C19', 500: '#DE6451', 600: '#EB7B6A' },
+            gold: '#C5A059',
+            wood: '#8B5A2B',
+            sand: '#222E29',
+            muted: '#8A9A92'
           }
         }
       }
@@ -84,106 +48,144 @@
   </script>
 
   <style>
-    /* Dark Luxury Sanctuary Aesthetics */
     body {
       background-color: #0B0F0E;
-      color: #E8EFEA;
+      color: #E2E8E0;
       -webkit-tap-highlight-color: transparent;
       overflow-x: hidden;
+      padding-bottom: env(safe-area-inset-bottom, 20px);
     }
-    
-    /* Flowing Ink Particle Canvas */
     .ink-bg-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.65;
+      opacity: 0.45;
     }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0B0F0E;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #253630;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #529688;
-    }
-
-    /* Soft Glow & Glassmorphism */
-    .zen-shadow {
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45), 0 4px 10px -2px rgba(0, 0, 0, 0.25);
-    }
-    .zen-shadow-hover:hover {
-      box-shadow: 0 16px 35px -5px rgba(82, 150, 136, 0.16), 0 6px 14px -3px rgba(0, 0, 0, 0.4);
-      border-color: rgba(104, 179, 163, 0.45);
-    }
-
-    /* Ripple Effect for Habit Checkboxes */
-    .ripple-active {
-      animation: ripple 0.45s ease-out;
-    }
-    @keyframes ripple {
-      0% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(104, 179, 163, 0.6); }
-      70% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(104, 179, 163, 0); }
-      100% { transform: scale(1); }
-    }
-
-    /* Mobile bottom navigation padding */
-    @media (max-width: 640px) {
-      .page-content-padding {
-        padding-bottom: 96px;
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #0B0F0E; }
+    ::-webkit-scrollbar-thumb { background: #222E29; border-radius: 9999px; }
+    .zen-shadow { box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 4px 10px -2px rgba(0, 0, 0, 0.4); }
+    .page-content-padding { padding-bottom: calc(85px + env(safe-area-inset-bottom, 20px)); }
+    
+    /* Real Pin Slam & Swing Animation */
+    @keyframes pinThumpDown {
+      0% {
+        opacity: 0;
+        transform: scale(1.35) translateY(-50px) rotate(-6deg);
       }
+      40% {
+        opacity: 1;
+        transform: scale(0.96) translateY(4px) rotate(1.5deg);
+      }
+      65% {
+        transform: scale(1.02) translateY(-2px) rotate(-1deg);
+      }
+      85% {
+        transform: scale(0.99) translateY(1px) rotate(0.4deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(0deg);
+      }
+    }
+
+    .pinned-card-animate {
+      animation: pinThumpDown 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards;
+      transform-origin: 50% 10px;
+    }
+
+    .sticky-note-paper {
+      background: linear-gradient(145deg, #18201C 0%, #121715 100%);
+      box-shadow: 0 25px 60px -10px rgba(0,0,0,0.85), 0 0 0 1px rgba(197, 160, 89, 0.28);
+    }
+
+    /* 3D Brass Pin */
+    .pin-head-3d {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #FFF2B2 0%, #E5A93C 45%, #8A520A 85%, #422401 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75), 0 0 0 1.5px rgba(255, 230, 140, 0.4);
+      position: relative;
+    }
+    .pin-head-3d::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      top: 4px;
+      left: 4px;
+      filter: blur(0.5px);
+    }
+
+    @keyframes fishKnock {
+      0% { transform: scale(1); }
+      40% { transform: scale(0.86) rotate(-8deg); }
+      80% { transform: scale(1.08) rotate(4deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .fish-active { animation: fishKnock 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    
+    @keyframes meritFloat {
+      0% { opacity: 1; transform: translateY(0px) scale(0.8); }
+      100% { opacity: 0; transform: translateY(-35px) scale(1.15); }
+    }
+    .merit-text {
+      position: fixed;
+      pointer-events: none;
+      animation: meritFloat 0.85s ease-out forwards;
+      color: #C5A059;
+      font-family: "Ma Shan Zheng", cursive, serif;
+      font-size: 13px;
+      font-weight: bold;
+      z-index: 9999;
+      white-space: nowrap;
     }
   </style>
 </head>
 
 <body class="font-sans min-h-screen flex flex-col relative selection:bg-celadon-100 selection:text-celadon-700">
 
-  <!-- Ambient Watermark Canvas (Subtle flowing ink particles) -->
   <canvas id="ambientInkCanvas" class="ink-bg-canvas"></canvas>
 
-  <!-- ================= TOP HEADER (DESKTOP & MOBILE) ================= -->
-  <header class="sticky top-0 z-40 bg-[#0B0F0E]/85 backdrop-blur-md border-b border-sand/70 px-4 sm:px-8 py-3 transition-all duration-300">
+  <!-- ================= TOP HEADER ================= -->
+  <header class="sticky top-0 z-40 bg-[#0B0F0E]/90 backdrop-blur-md border-b border-sand px-4 sm:px-8 py-3 transition-all duration-300">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       
-      <!-- Brand & Hall Name -->
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('daily')">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-br from-celadon-600 to-celadon-700 text-white flex items-center justify-center font-calligraphy text-2xl shadow-lg border border-celadon-500/30 transform hover:rotate-3 transition-transform">
-          露
+      <!-- Mascot: Cute Wooden Fish -->
+      <div class="flex items-center space-x-3 cursor-pointer select-none relative" onclick="knockWoodenFish(event)">
+        <div id="woodenFishBtn" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#8B5A2B] via-[#663E19] to-[#42260E] text-amber-200 flex items-center justify-center text-xl shadow-lg border border-amber-600/30 hover:brightness-110 transition-transform active:scale-90">
+          <svg class="w-6 h-6 fill-current text-amber-200 drop-shadow" viewBox="0 0 24 24">
+            <path d="M12 3C6.48 3 2 7.03 2 12c0 2.85 1.5 5.39 3.82 7.03-.12-.49-.19-1-.19-1.53 0-3.31 2.69-6 6-6s6 2.69 6 6c0 .53-.07 1.04-.19 1.53C19.95 17.39 22 14.85 22 12c0-4.97-4.48-9-10-9zm-1.5 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm1 8.5c-2.48 0-4.5-2.02-4.5-4.5s2.02-4.5 4.5-4.5 4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5zm5.5 1.5c-1.46 1.25-3.38 2-5.5 2s-4.04-.75-5.5-2c1.35-.95 3-1.5 4.8-1.5h1.4c1.8 0 3.45.55 4.8 1.5z"/>
+          </svg>
         </div>
+
         <div>
           <div class="flex items-center space-x-2">
-            <h1 class="font-serif font-black text-lg sm:text-xl tracking-wider text-ink">修持日軌</h1>
-            <span class="text-[10px] font-serif bg-celadon-100 text-celadon-600 px-2 py-0.5 rounded-full border border-celadon-200/50">涵露齋・暗夜版</span>
+            <h1 class="font-serif font-black text-base sm:text-xl tracking-wider text-ink">修持日軌</h1>
+            <span class="text-[10px] font-serif bg-night-850 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30">涵露齋</span>
           </div>
-          <p class="text-[11px] text-muted font-serif hidden sm:block">天青為底・息心養身・步步生姿</p>
+          <p class="text-[10px] sm:text-[11px] text-muted font-serif">敲木魚・息心神・守形體</p>
         </div>
       </div>
 
-      <!-- Desktop Nav Buttons (Added '身心全相' Tab) -->
-      <div class="hidden sm:flex items-center space-x-2">
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center space-x-2">
         <nav class="flex bg-night-900/90 p-1 rounded-2xl border border-sand text-xs font-serif font-medium">
           <button id="desktopNavDaily" onclick="switchView('daily')" class="px-3.5 py-2 rounded-xl bg-celadon-700 text-white shadow-sm transition-all flex items-center space-x-1.5">
             <i class="fa-regular fa-calendar-check text-white"></i>
             <span>四時修持</span>
           </button>
           <button id="desktopNavWholeBody" onclick="switchView('wholeBody')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
-            <i class="fa-solid fa-person-dots-from-line text-sandalwood"></i>
+            <i class="fa-solid fa-person-dots-from-line text-gold"></i>
             <span>身心全相</span>
           </button>
           <button id="desktopNavDiet" onclick="switchView('diet')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
-            <i class="fa-solid fa-seedling text-sage-600"></i>
+            <i class="fa-solid fa-seedling text-emerald-400"></i>
             <span>靈動膳食</span>
           </button>
           <button id="desktopNavWeekly" onclick="switchView('weekly')" class="px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5">
@@ -196,35 +198,30 @@
           </button>
         </nav>
 
-        <!-- Cloud Sync Status Pill -->
-        <div id="cloudSyncStatusBadge" class="flex items-center space-x-1.5 text-[11px] bg-night-900 text-muted border border-sand px-3 py-2 rounded-xl font-serif" title="雲端自動同步中">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="cloudStatusText">雲端在線</span>
-        </div>
-
-        <!-- Right Quick Actions -->
-        <button onclick="toggleChatDrawer()" class="flex items-center space-x-1.5 text-xs bg-celadon-50 text-celadon-600 border border-celadon-200/60 px-3.5 py-2 rounded-xl hover:bg-celadon-100 transition-colors shadow-sm font-serif">
-          <i class="fa-solid fa-comments text-celadon-600 animate-pulse-soft"></i>
-          <span>與師傅對談</span>
+        <button onclick="drawRandomStickyNote()" class="flex items-center space-x-1.5 text-xs bg-night-900 hover:bg-night-850 text-gold border border-gold/40 px-3 py-2 rounded-xl transition-all shadow-sm font-serif">
+          <i class="fa-solid fa-thumbtack text-gold animate-bounce"></i>
+          <span>百籤靈犀</span>
         </button>
 
-        <button onclick="openBackupModal()" title="資料備份與還原" class="w-9 h-9 rounded-xl bg-night-900 border border-sand flex items-center justify-center text-muted hover:text-ink transition-colors text-xs">
-          <i class="fa-solid fa-cloud-arrow-down"></i>
+        <button onclick="toggleChatDrawer()" class="flex items-center space-x-1.5 text-xs bg-celadon-50 text-celadon-600 border border-celadon-200/60 px-3.5 py-2 rounded-xl hover:bg-celadon-100 transition-colors shadow-sm font-serif">
+          <i class="fa-solid fa-comments text-celadon-600"></i>
+          <span>師傅在側</span>
+        </button>
+
+        <button onclick="openBackupModal()" title="手帳存檔與 Google API 設定" class="w-9 h-9 rounded-xl bg-night-900 border border-sand flex items-center justify-center text-muted hover:text-ink transition-colors text-xs">
+          <i class="fa-solid fa-gear"></i>
         </button>
       </div>
 
-      <!-- Mobile Quick Indicators -->
-      <div class="flex items-center space-x-2 sm:hidden">
-        <button onclick="switchView('wholeBody')" title="身心全相" class="w-8 h-8 rounded-full bg-night-900 border border-sand text-sandalwood flex items-center justify-center text-xs">
-          <i class="fa-solid fa-person-dots-from-line"></i>
+      <!-- Mobile Top Right -->
+      <div class="flex items-center space-x-2 md:hidden">
+        <button onclick="drawRandomStickyNote()" class="w-9 h-9 rounded-xl bg-night-900 border border-gold/40 text-gold flex items-center justify-center text-xs active:scale-95">
+          <i class="fa-solid fa-thumbtack text-sm"></i>
         </button>
-        <button onclick="switchView('search')" class="w-8 h-8 rounded-full bg-night-900 border border-sand text-muted flex items-center justify-center text-xs">
-          <i class="fa-solid fa-magnifying-glass"></i>
+        <button onclick="toggleChatDrawer()" class="w-9 h-9 rounded-xl bg-celadon-700 text-white flex items-center justify-center text-xs shadow-md active:scale-95">
+          <i class="fa-solid fa-comment-dots text-sm"></i>
         </button>
-        <button onclick="toggleChatDrawer()" class="w-8 h-8 rounded-full bg-celadon-100 text-celadon-600 flex items-center justify-center text-xs">
-          <i class="fa-solid fa-comment-dots"></i>
-        </button>
-        <button onclick="openBackupModal()" class="w-8 h-8 rounded-full bg-night-900 border border-sand text-muted flex items-center justify-center text-xs">
+        <button onclick="openBackupModal()" class="w-9 h-9 rounded-xl bg-night-900 border border-sand text-muted flex items-center justify-center text-xs">
           <i class="fa-solid fa-gear"></i>
         </button>
       </div>
@@ -233,381 +230,285 @@
   </header>
 
   <!-- ================= MAIN CONTAINER ================= -->
-  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6 relative z-10 page-content-padding">
+  <main class="flex-1 max-w-5xl w-full mx-auto p-3.5 sm:p-6 lg:p-8 space-y-5 relative z-10 page-content-padding">
 
-    <!-- ================= DATE SELECTION & STATS RIBBON ================= -->
-    <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-4 sm:p-6 border border-sand/80 zen-shadow flex flex-col sm:flex-row items-center justify-between gap-4">
-      
-      <!-- Date Switcher -->
-      <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
-        <button onclick="changeDay(-1)" class="w-10 h-10 rounded-2xl border border-sand flex items-center justify-center hover:bg-night-850 text-muted hover:text-ink transition-all active:scale-95">
+    <!-- DATE & STATS -->
+    <section class="bg-night-900/90 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-sand zen-shadow flex flex-col sm:flex-row items-center justify-between gap-3.5">
+      <div class="flex items-center space-x-2.5 w-full sm:w-auto justify-between sm:justify-start">
+        <button onclick="changeDay(-1)" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-sand flex items-center justify-center bg-night-950 text-muted active:scale-95">
           <i class="fa-solid fa-chevron-left text-xs"></i>
         </button>
-        <div class="text-center sm:text-left">
+        <div class="text-center sm:text-left flex-1 sm:flex-initial">
           <div class="flex items-center justify-center sm:justify-start space-x-2">
-            <h2 id="currentDateDisplay" class="font-serif font-black text-xl sm:text-2xl text-ink tracking-tight"></h2>
-            <button onclick="setToday()" class="text-[11px] font-serif bg-celadon-100 text-celadon-600 px-2.5 py-0.5 rounded-lg border border-celadon-200/50 hover:bg-celadon-200 transition-colors">今日</button>
+            <h2 id="currentDateDisplay" class="font-serif font-black text-lg sm:text-2xl text-ink tracking-tight"></h2>
+            <button onclick="setToday()" class="text-[10px] sm:text-[11px] font-serif bg-celadon-100 text-celadon-600 px-2 py-0.5 rounded-md border border-celadon-200/50">今日</button>
           </div>
-          <p id="lunarInfoDisplay" class="text-xs text-muted font-serif mt-0.5 flex items-center justify-center sm:justify-start space-x-1.5">
-            <i class="fa-regular fa-compass text-celadon-600 text-[10px]"></i>
-            <span>心專於一境，身形自挺拔</span>
-          </p>
+          <p class="text-[11px] text-muted font-serif mt-0.5">心專於一境，身形自挺拔</p>
         </div>
-        <button onclick="changeDay(1)" class="w-10 h-10 rounded-2xl border border-sand flex items-center justify-center hover:bg-night-850 text-muted hover:text-ink transition-all active:scale-95">
+        <button onclick="changeDay(1)" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-sand flex items-center justify-center bg-night-950 text-muted active:scale-95">
           <i class="fa-solid fa-chevron-right text-xs"></i>
         </button>
       </div>
 
-      <!-- Quick Metrics Counter -->
-      <div class="flex items-center space-x-4 sm:space-x-8 w-full sm:w-auto justify-around sm:justify-end border-t sm:border-t-0 border-sand/60 pt-3 sm:pt-0">
-        <div class="text-center">
-          <span class="text-[11px] text-muted block font-serif">修持完成</span>
-          <span id="dayRateText" class="font-serif font-black text-xl sm:text-2xl text-celadon-600">0%</span>
+      <div class="grid grid-cols-4 w-full sm:w-auto gap-1 border-t sm:border-t-0 border-sand/60 pt-2.5 sm:pt-0 text-center">
+        <div class="px-1">
+          <span class="text-[10px] text-muted block font-serif">修持進度</span>
+          <span id="dayRateText" class="font-serif font-black text-base sm:text-2xl text-celadon-600">0%</span>
         </div>
-        <div class="h-8 w-px bg-sand"></div>
-        <div class="text-center">
-          <span class="text-[11px] text-muted block font-serif">累計時長</span>
-          <span id="dayTotalMinutesText" class="font-serif font-black text-xl sm:text-2xl text-ink">0m</span>
+        <div class="px-1 border-l border-sand/40">
+          <span class="text-[10px] text-muted block font-serif">累計時長</span>
+          <span id="dayTotalMinutesText" class="font-serif font-black text-base sm:text-2xl text-ink">0m</span>
         </div>
-        <div class="h-8 w-px bg-sand"></div>
-        <div class="text-center">
-          <span class="text-[11px] text-muted block font-serif">飲食攝取</span>
-          <span id="dayCaloriesSummaryText" class="font-serif font-black text-xl sm:text-2xl text-cinnabar-500">0 kcal</span>
+        <div class="px-1 border-l border-sand/40">
+          <span class="text-[10px] text-muted block font-serif">飲食攝取</span>
+          <span id="dayCaloriesSummaryText" class="font-serif font-black text-base sm:text-2xl text-cinnabar-500 truncate">0 kcal</span>
         </div>
-        <div class="h-8 w-px bg-sand"></div>
-        <div class="text-center">
-          <span class="text-[11px] text-muted block font-serif">持恆</span>
-          <span id="streakCountText" class="font-serif font-black text-xl sm:text-2xl text-sandalwood">1天</span>
+        <div class="px-1 border-l border-sand/40">
+          <span class="text-[10px] text-muted block font-serif">持恆天數</span>
+          <span id="streakCountText" class="font-serif font-black text-base sm:text-2xl text-gold">1天</span>
         </div>
       </div>
-
     </section>
 
-    <!-- ================= VIEW 1: DAILY ROUTINES (四時修持) ================= -->
-    <div id="dailyView" class="space-y-6">
-
-      <!-- Action Bar: Phase Filter & Add -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <!-- Simplified Phase Pills -->
-        <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs font-serif no-scrollbar">
-          <button onclick="filterPhase('all')" class="phase-btn active px-3.5 py-1.5 rounded-xl bg-celadon-700 text-white shadow-sm transition-all whitespace-nowrap">全日修持</button>
-          <button onclick="filterPhase('morning')" class="phase-btn px-3 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap">
+    <!-- VIEW 1: DAILY ROUTINES (四時修持) -->
+    <div id="dailyView" class="space-y-4 sm:space-y-6">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center space-x-1.5 text-xs font-serif overflow-x-auto no-scrollbar py-0.5">
+          <button onclick="filterPhase('all', event)" class="phase-btn active px-3 py-1.5 rounded-xl bg-celadon-700 text-white shadow-sm transition-all whitespace-nowrap text-xs">全日修持</button>
+          <button onclick="filterPhase('morning', event)" class="phase-btn px-2.5 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap text-xs">
             <i class="fa-regular fa-sun text-amber-400 mr-1"></i>晨起保養
           </button>
-          <button onclick="filterPhase('night')" class="phase-btn px-3 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap">
+          <button onclick="filterPhase('night', event)" class="phase-btn px-2.5 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap text-xs">
             <i class="fa-regular fa-moon text-indigo-400 mr-1"></i>夜間保養
           </button>
         </div>
 
-        <button onclick="openAddHabitModal()" class="self-end sm:self-auto text-xs font-serif bg-celadon-700 hover:bg-celadon-600 text-white px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow-sm transition-all active:scale-95">
-          <i class="fa-solid fa-plus text-[10px]"></i>
-          <span>添置修持項</span>
-        </button>
+        <div class="flex items-center space-x-1.5">
+          <button onclick="drawRandomStickyNote()" class="text-xs font-serif bg-night-900 hover:bg-night-850 text-gold border border-gold/40 px-2.5 py-1.5 rounded-xl flex items-center space-x-1 transition-all active:scale-95 shrink-0">
+            <i class="fa-solid fa-thumbtack text-[10px]"></i>
+            <span class="hidden sm:inline">百籤靈犀</span>
+          </button>
+          <button onclick="openAddHabitModal()" class="text-xs font-serif bg-celadon-700 hover:bg-celadon-600 text-white px-3 py-1.5 rounded-xl flex items-center space-x-1 shadow-sm transition-all active:scale-95 shrink-0">
+            <i class="fa-solid fa-plus text-[10px]"></i>
+            <span>添置</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Habit Cards Container -->
-      <div id="habitsContainer" class="space-y-5">
-        <!-- Dynamically rendered -->
-      </div>
+      <div id="habitsContainer" class="space-y-4"></div>
 
-      <!-- Daily Notes & Reflection Card -->
-      <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-5 border border-sand zen-shadow space-y-3">
+      <!-- Reflection -->
+      <section class="bg-night-900/90 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-sand zen-shadow space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
             <span class="w-6 h-6 rounded-lg bg-celadon-100 text-celadon-600 flex items-center justify-center text-xs">
               <i class="fa-solid fa-feather-pointed"></i>
             </span>
-            <h3 class="font-serif font-bold text-ink text-sm">今日涵露齋・身心反思手記</h3>
+            <h3 class="font-serif font-bold text-ink text-xs sm:text-sm">今日身心手記</h3>
           </div>
-          <div class="flex items-center space-x-2">
-            <button onclick="askAIToReviewToday()" class="text-xs font-serif text-celadon-600 bg-celadon-50 hover:bg-celadon-100 px-2.5 py-1 rounded-lg border border-celadon-200/50 transition-colors flex items-center space-x-1">
-              <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
-              <span>請師傅點評今日</span>
-            </button>
-            <span class="text-[11px] text-muted hidden sm:inline">筆墨自存</span>
-          </div>
+          <button onclick="askAIToReviewToday()" class="text-xs font-serif text-celadon-600 bg-celadon-50/50 hover:bg-celadon-100 px-2.5 py-1 rounded-lg border border-celadon-200/50 transition-colors flex items-center space-x-1">
+            <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+            <span>師傅點評</span>
+          </button>
         </div>
-        <textarea id="dailyReflectionInput" oninput="saveDailyReflection()" rows="3" placeholder="隨手記下今日感受：如咬肌放鬆的微酸感、寫毛筆時的呼吸、下午茶是否成功克制假性嘴饞、睡前是否舌頂上顎..." class="w-full text-xs sm:text-sm bg-night-950 border border-sand rounded-2xl p-3.5 text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50 leading-relaxed resize-none transition-all"></textarea>
+        <textarea id="dailyReflectionInput" oninput="saveDailyReflection()" rows="3" placeholder="隨手記下今日感受：如咬肌放鬆的微酸感、臨帖時的呼吸、下午茶是否成功克制假性嘴饞、睡前是否舌頂上顎..." class="w-full text-xs sm:text-sm bg-night-950 border border-sand rounded-xl p-3 text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50 leading-relaxed resize-none"></textarea>
       </section>
-
     </div>
 
-    <!-- ================= VIEW: WHOLE BODY SANCTUARY (身心全相・通體修持鏡鑑) ================= -->
-    <div id="wholeBodyView" class="hidden space-y-6">
-      
-      <!-- Top Overview Banner -->
-      <section class="bg-gradient-to-br from-night-900 via-night-900 to-night-850 rounded-3xl p-5 sm:p-6 border border-sand zen-shadow relative overflow-hidden">
-        <div class="absolute -right-6 -bottom-8 opacity-10 text-celadon-600 pointer-events-none font-calligraphy text-9xl">
-          相
+    <!-- VIEW: WHOLE BODY (身心全相) -->
+    <div id="wholeBodyView" class="hidden space-y-4 sm:space-y-6">
+      <section class="bg-night-900/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-sand zen-shadow space-y-2">
+        <div class="inline-flex items-center space-x-1.5 text-xs text-gold bg-gold/10 px-2.5 py-0.5 rounded-full font-serif border border-gold/20">
+          <i class="fa-solid fa-compass"></i>
+          <span>通體十一象・精準對治</span>
         </div>
-        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div class="space-y-2">
-            <div class="inline-flex items-center space-x-1.5 text-xs text-sandalwood bg-sandalwood/10 px-3 py-1 rounded-full font-serif border border-sandalwood/20">
-              <i class="fa-solid fa-compass"></i>
-              <span>通體十一象・精準對治</span>
-            </div>
-            <h3 class="font-serif font-black text-lg sm:text-xl text-ink tracking-wide">身心全相 ｜ 局部問題與處遇鏡鑑</h3>
-            <p class="text-xs text-muted font-serif leading-relaxed max-w-2xl">
-              這是你與為師共同定下的全身調理總綱。每處筋膜、骨盆或膚質的緊繃，皆有其力學與代謝根由。點擊展開每一處，即可溫習對治心法並一鍵實操！
-            </p>
-          </div>
-          <div class="text-left sm:text-right shrink-0 bg-night-950/70 p-3 rounded-2xl border border-sand">
-            <span class="text-[11px] text-muted block font-serif">已明心見性</span>
-            <span class="text-base font-serif font-bold text-celadon-600">11 域全覽</span>
-          </div>
-        </div>
+        <h3 class="font-serif font-black text-base sm:text-xl text-ink">身心全相 ｜ 局部問題與處遇鏡鑑</h3>
+        <p class="text-xs text-muted font-serif leading-relaxed">
+          這是你與師傅定下的全身調理綱領。每處筋膜、骨盆或膚質的緊繃，皆有其力學與代謝根由。
+        </p>
       </section>
 
-      <!-- 11 Body Regions Grid -->
-      <div id="wholeBodyCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Rendered by JS dynamically from full table data -->
-      </div>
-
+      <div id="wholeBodyCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
     </div>
 
-    <!-- ================= VIEW 2: SMART AI DIET ESTIMATOR (靈動膳食) ================= -->
-    <div id="dietView" class="hidden space-y-6">
-
-      <!-- AI Food Estimator Input Card -->
-      <section class="bg-gradient-to-br from-night-900 via-night-900 to-celadon-50/20 rounded-3xl p-5 sm:p-6 border border-sand zen-shadow space-y-4">
-        
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-8 h-8 rounded-xl bg-cinnabar-100 text-cinnabar-500 flex items-center justify-center text-sm">
-              <i class="fa-solid fa-fire-burner"></i>
-            </div>
-            <div>
-              <h3 class="font-serif font-black text-ink text-base">智能 AI 膳食靈犀估算</h3>
-              <p class="text-[11px] text-muted font-serif">隨口寫下所食（如「一片米麵包加牛肉乾」、「一包餅乾一顆貢糖」），AI 極速解析熱量與體態影響</p>
-            </div>
+    <!-- VIEW 2: AI DIET ESTIMATOR (靈動膳食) -->
+    <div id="dietView" class="hidden space-y-4 sm:space-y-6">
+      <section class="bg-night-900/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-sand zen-shadow space-y-3.5">
+        <div class="flex items-center space-x-2">
+          <div class="w-7 h-7 rounded-lg bg-cinnabar-100 text-cinnabar-500 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-fire-burner"></i>
           </div>
-          <span class="text-xs bg-night-950 text-muted px-2.5 py-1 rounded-full font-serif hidden sm:inline border border-sand">無壓記帳</span>
+          <div>
+            <h3 class="font-serif font-black text-ink text-sm sm:text-base">智能 AI 膳食靈犀估算</h3>
+            <p class="text-[10px] sm:text-[11px] text-muted font-serif">隨口寫下所食（如「一片米麵包加牛肉乾」、「一包餅乾一顆貢糖」）</p>
+          </div>
         </div>
 
-        <!-- Input Box with Quick Estimate Button -->
         <div class="flex flex-col sm:flex-row gap-2">
           <div class="relative flex-1">
-            <input type="text" id="dietInputText" placeholder="輸入今日飲食，例如：早餐一片米麵包+一包牛肉乾、無糖綠茶500ml" class="w-full bg-night-950 border border-sand rounded-2xl px-4 py-3 text-xs sm:text-sm text-ink focus:outline-none focus:ring-2 focus:ring-celadon-600/40 placeholder:text-muted/50">
-            <button onclick="clearDietInput()" class="absolute right-3 top-3 text-muted/60 hover:text-ink text-xs">
+            <input type="text" id="dietInputText" placeholder="輸入今日飲食，如：一片米麵包+牛肉乾" class="w-full bg-night-950 border border-sand rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50 font-serif">
+            <button onclick="clearDietInput()" class="absolute right-3 top-2.5 text-muted/60 hover:text-ink text-xs">
               <i class="fa-solid fa-circle-xmark"></i>
             </button>
           </div>
-          <button id="estimateDietBtn" onclick="estimateDietWithAI()" class="bg-celadon-700 hover:bg-celadon-600 text-white font-serif px-6 py-3 rounded-2xl text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-sm transition-all active:scale-95 flex-shrink-0">
+          <button id="estimateDietBtn" onclick="estimateDietWithAI()" class="bg-celadon-700 hover:bg-celadon-600 text-white font-serif px-5 py-2.5 rounded-xl text-xs sm:text-sm flex items-center justify-center space-x-1.5 shadow-sm active:scale-95">
             <i class="fa-solid fa-sparkles text-xs"></i>
-            <span>靈犀估算熱量</span>
+            <span>估算熱量</span>
           </button>
         </div>
 
-        <!-- AI Estimate Result Banner -->
-        <div id="aiEstimateCard" class="hidden bg-night-950 rounded-2xl p-4 border border-celadon-600/40 space-y-3 transition-all duration-300">
+        <div id="aiEstimateCard" class="hidden bg-night-950 rounded-xl p-3.5 border border-celadon-600/40 space-y-2.5">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-serif font-bold text-celadon-600 flex items-center space-x-1.5">
-              <i class="fa-solid fa-scale-balanced"></i>
-              <span>AI 營養拆解洞察</span>
+            <span class="text-xs font-serif font-bold text-celadon-600 flex items-center space-x-1">
+              <i class="fa-solid fa-scale-balanced text-[11px]"></i>
+              <span>AI 營養拆解</span>
             </span>
-            <span id="estimateKcalBadge" class="text-xs font-black bg-cinnabar-100 text-cinnabar-500 px-2.5 py-0.5 rounded-full font-serif border border-cinnabar-500/30">約 0 kcal</span>
+            <span id="estimateKcalBadge" class="text-xs font-black bg-cinnabar-100 text-cinnabar-500 px-2 py-0.5 rounded-full font-serif border border-cinnabar-500/30">約 0 kcal</span>
           </div>
 
-          <div class="grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="bg-night-900 p-2 rounded-xl border border-sand">
-              <span class="text-[10px] text-muted block font-serif">蛋白質預估</span>
-              <span id="estimateProteinText" class="font-bold text-ink text-sm">-- g</span>
+          <div class="grid grid-cols-3 gap-1.5 text-center text-xs">
+            <div class="bg-night-900 p-1.5 rounded-lg border border-sand">
+              <span class="text-[9px] text-muted block font-serif">蛋白質預估</span>
+              <span id="estimateProteinText" class="font-bold text-ink text-xs sm:text-sm">-- g</span>
             </div>
-            <div class="bg-night-900 p-2 rounded-xl border border-sand">
-              <span class="text-[10px] text-muted block font-serif">鈉含量/水腫指標</span>
-              <span id="estimateSodiumText" class="font-bold text-amber-400 text-sm">正常</span>
+            <div class="bg-night-900 p-1.5 rounded-lg border border-sand">
+              <span class="text-[9px] text-muted block font-serif">水腫指標</span>
+              <span id="estimateSodiumText" class="font-bold text-amber-400 text-xs sm:text-sm">正常</span>
             </div>
-            <div class="bg-night-900 p-2 rounded-xl border border-sand">
-              <span class="text-[10px] text-muted block font-serif">咬肌負荷度</span>
-              <span id="estimateChewText" class="font-bold text-celadon-600 text-sm">低</span>
+            <div class="bg-night-900 p-1.5 rounded-lg border border-sand">
+              <span class="text-[9px] text-muted block font-serif">咬肌負擔</span>
+              <span id="estimateChewText" class="font-bold text-celadon-600 text-xs sm:text-sm">低</span>
             </div>
           </div>
 
-          <p id="estimateAdviceText" class="text-xs text-ink/90 leading-relaxed font-serif bg-night-900 p-2.5 rounded-xl border border-sand">
-            師傅提示：此餐熱量溫和，但牛肉乾鈉偏高，下午記得小口飲用 400ml 溫水協助代謝！
+          <p id="estimateAdviceText" class="text-[11px] text-ink/90 leading-relaxed font-serif bg-night-900 p-2.5 rounded-lg border border-sand">
+            師傅提示：此餐熱量溫和，記得補足水分！
           </p>
 
           <div class="flex items-center justify-end space-x-2 pt-1">
-            <button onclick="discardEstimate()" class="px-3 py-1.5 rounded-xl text-xs text-muted hover:text-ink font-serif">放棄</button>
-            <button onclick="confirmAddDietEntry()" class="px-4 py-1.5 rounded-xl text-xs bg-celadon-700 hover:bg-celadon-600 text-white font-serif shadow-sm">
-              <i class="fa-solid fa-plus mr-1"></i>記入今日膳食冊
+            <button onclick="discardEstimate()" class="px-3 py-1 rounded-lg text-xs text-muted hover:text-ink font-serif">放棄</button>
+            <button onclick="confirmAddDietEntry()" class="px-3.5 py-1.5 rounded-lg text-xs bg-celadon-700 hover:bg-celadon-600 text-white font-serif shadow-sm">
+              <i class="fa-solid fa-plus mr-1"></i>記入今日食單
             </button>
           </div>
         </div>
-
       </section>
 
-      <!-- Today's Logged Meals & Calorie Target Bar -->
-      <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-5 border border-sand zen-shadow space-y-4">
-        
+      <section class="bg-night-900/90 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-sand zen-shadow space-y-3.5">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
-            <i class="fa-solid fa-bowl-rice text-sandalwood"></i>
-            <h4 class="font-serif font-bold text-sm text-ink">今日已記食單</h4>
+            <i class="fa-solid fa-bowl-rice text-gold text-sm"></i>
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-ink">今日已記食單</h4>
           </div>
-          <div class="text-xs font-serif text-muted">
-            目標參考：約 <span class="font-bold text-ink">1500 kcal</span>
+          <div class="text-[11px] font-serif text-muted">
+            目標：約 <span class="font-bold text-ink">1500 kcal</span>
           </div>
         </div>
 
-        <!-- Progress Bar for Calories -->
         <div class="space-y-1">
-          <div class="w-full bg-night-950 h-2.5 rounded-full overflow-hidden p-0.5 border border-sand/50">
-            <div id="calorieProgressBar" class="bg-gradient-to-r from-celadon-600 via-sandalwood to-cinnabar-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          <div class="w-full bg-night-950 h-2 rounded-full overflow-hidden border border-sand/50">
+            <div id="calorieProgressBar" class="bg-gradient-to-r from-celadon-600 via-gold to-cinnabar-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
           </div>
-          <div class="flex justify-between text-[11px] text-muted font-serif">
+          <div class="flex justify-between text-[10px] sm:text-[11px] text-muted font-serif">
             <span id="calorieCurrentText">已攝取 0 kcal</span>
             <span id="caloriePercentText">0%</span>
           </div>
         </div>
 
-        <!-- Meals List -->
-        <div id="mealsListContainer" class="space-y-2.5 pt-1">
-          <!-- Dynamically populated -->
-        </div>
-
+        <div id="mealsListContainer" class="space-y-2 pt-1"></div>
       </section>
-
     </div>
 
-    <!-- ================= VIEW 3: WEEKLY BALANCE & ANALYTICS (週度卦象) ================= -->
-    <div id="weeklyView" class="hidden space-y-6">
-
-      <!-- Weekly Summary Stat Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        
-        <div class="bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow">
-          <div class="flex items-center justify-between text-muted text-xs mb-2 font-serif">
-            <span>本週累積修持總量</span>
-            <i class="fa-regular fa-clock text-celadon-600"></i>
-          </div>
-          <div id="weeklyTotalMinutes" class="font-serif font-black text-2xl text-ink">0 小時</div>
-          <p class="text-[11px] text-muted mt-1 font-serif">氣定神閒，步步皆是功夫</p>
+    <!-- VIEW 3: WEEKLY ANALYTICS (週度卦象) -->
+    <div id="weeklyView" class="hidden space-y-4 sm:space-y-6">
+      <div class="grid grid-cols-3 gap-2 sm:gap-4">
+        <div class="bg-night-900/90 p-3 sm:p-5 rounded-2xl sm:rounded-3xl border border-sand text-center sm:text-left">
+          <div class="text-muted text-[10px] sm:text-xs mb-1 font-serif">累積時長</div>
+          <div id="weeklyTotalMinutes" class="font-serif font-black text-base sm:text-2xl text-ink">0 小時</div>
         </div>
-
-        <div class="bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow">
-          <div class="flex items-center justify-between text-muted text-xs mb-2 font-serif">
-            <span>最恆常精進之域</span>
-            <i class="fa-solid fa-seedling text-celadon-600"></i>
-          </div>
-          <div id="weeklyTopCategory" class="font-serif font-black text-xl text-ink">--</div>
-          <p class="text-[11px] text-muted mt-1 font-serif">水滴石穿，身韻日漸舒展</p>
+        <div class="bg-night-900/90 p-3 sm:p-5 rounded-2xl sm:rounded-3xl border border-sand text-center sm:text-left">
+          <div class="text-muted text-[10px] sm:text-xs mb-1 font-serif">最恆常之域</div>
+          <div id="weeklyTopCategory" class="font-serif font-black text-xs sm:text-xl text-ink truncate">--</div>
         </div>
-
-        <div class="bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow">
-          <div class="flex items-center justify-between text-muted text-xs mb-2 font-serif">
-            <span>需照拂偏廢之處</span>
-            <i class="fa-solid fa-leaf text-cinnabar-500"></i>
-          </div>
-          <div id="weeklyNeglectedCategory" class="font-serif font-black text-xl text-cinnabar-500">--</div>
-          <p class="text-[11px] text-muted mt-1 font-serif">莫忘足弓與咬肌放鬆</p>
+        <div class="bg-night-900/90 p-3 sm:p-5 rounded-2xl sm:rounded-3xl border border-sand text-center sm:text-left">
+          <div class="text-muted text-[10px] sm:text-xs mb-1 font-serif">需多照拂</div>
+          <div id="weeklyNeglectedCategory" class="font-serif font-black text-xs sm:text-xl text-cinnabar-500 truncate">--</div>
         </div>
-
       </div>
 
-      <!-- Weekly Distribution & Chart -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        <div class="lg:col-span-6 bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-3 border-b border-sand pb-2">
-            <h4 class="font-serif font-bold text-sm text-ink flex items-center space-x-1.5">
-              <i class="fa-solid fa-chart-pie text-celadon-600"></i>
-              <span>四方修持時長權重</span>
-            </h4>
-            <span class="text-xs text-muted font-serif">近 7 日比例</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-night-900/90 p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-sand flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 border-b border-sand pb-2">
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-ink">四方時長權重</h4>
+            <span class="text-[10px] text-muted font-serif">近 7 日比例</span>
           </div>
-          <div class="h-64 relative flex items-center justify-center">
+          <div class="h-56 relative flex items-center justify-center">
             <canvas id="categoryDistributionChart"></canvas>
           </div>
         </div>
 
-        <div class="lg:col-span-6 bg-night-900/80 backdrop-blur-md p-5 rounded-3xl border border-sand zen-shadow space-y-3">
+        <div class="bg-night-900/90 p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-sand space-y-3">
           <div class="flex items-center justify-between border-b border-sand pb-2">
-            <h4 class="font-serif font-bold text-sm text-ink flex items-center space-x-1.5">
-              <i class="fa-solid fa-timeline text-sandalwood"></i>
-              <span>七日修持水準流轉</span>
-            </h4>
-            <button onclick="askAIToReviewWeekly()" class="text-xs font-serif text-celadon-600 bg-celadon-50 hover:bg-celadon-100 px-2.5 py-1 rounded-lg border border-celadon-200/50 transition-colors flex items-center space-x-1">
-              <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
-              <span>聽師傅深度複盤</span>
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-ink">七日水準流轉</h4>
+            <button onclick="askAIToReviewWeekly()" class="text-[10px] sm:text-xs font-serif text-celadon-600 bg-celadon-50/50 px-2 py-1 rounded-md border border-celadon-200/50">
+              深度複盤
             </button>
           </div>
-          <div id="sevenDaysListContainer" class="space-y-2.5 pt-1">
-            <!-- Dynamically populated 7 days rows -->
-          </div>
+          <div id="sevenDaysListContainer" class="space-y-2 pt-1"></div>
         </div>
       </div>
-
     </div>
 
-    <!-- ================= VIEW 4: SEARCH PAST LOGS (尋索往昔) ================= -->
-    <div id="searchView" class="hidden space-y-6">
-      
-      <section class="bg-night-900/80 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-sand zen-shadow space-y-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-8 h-8 rounded-xl bg-celadon-100 text-celadon-600 flex items-center justify-center text-sm">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div>
-              <h3 class="font-serif font-black text-ink text-base">尋索往昔・雲端印記庫</h3>
-              <p class="text-[11px] text-muted font-serif">隨時檢索過往的反思筆記、飲食記錄、護膚微針與體態心得</p>
-            </div>
-          </div>
-          <span class="text-xs font-serif text-muted bg-night-950 px-2.5 py-1 rounded-full border border-sand">永久封存</span>
+    <!-- VIEW 4: SEARCH (尋索往昔) -->
+    <div id="searchView" class="hidden space-y-4 sm:space-y-6">
+      <section class="bg-night-900/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-sand zen-shadow space-y-3">
+        <div>
+          <h3 class="font-serif font-black text-ink text-sm sm:text-base">尋索往昔・雲端印記庫</h3>
+          <p class="text-[10px] sm:text-[11px] text-muted font-serif">隨時檢索過往的反思筆記、飲食記錄、微針與體態心得</p>
         </div>
-
         <div class="relative">
-          <input type="text" id="searchInputField" oninput="executeSearch()" placeholder="搜尋關鍵字，例如：微針、牛肉乾、貢糖、咬肌、頭皮、足弓..." class="w-full bg-night-950 border border-sand rounded-2xl px-4 py-3 text-xs sm:text-sm text-ink focus:outline-none focus:ring-2 focus:ring-celadon-600/40 placeholder:text-muted/50 font-serif">
-          <span class="absolute right-4 top-3.5 text-muted text-xs">
-            <i class="fa-solid fa-compass"></i>
+          <input type="text" id="searchInputField" oninput="executeSearch()" placeholder="搜尋關鍵字：微針、牛肉乾、貢糖、咬肌、頭皮..." class="w-full bg-night-950 border border-sand rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50 font-serif">
+          <span class="absolute right-3.5 top-3 text-muted text-xs">
+            <i class="fa-solid fa-magnifying-glass"></i>
           </span>
         </div>
       </section>
 
-      <!-- Search Results Container -->
-      <div id="searchResultsContainer" class="space-y-3">
-        <div class="text-center py-12 text-muted font-serif text-xs">
-          請在上方輸入想搜尋的詞彙，為師為你調閱過往雲端印記。
+      <div id="searchResultsContainer" class="space-y-2.5">
+        <div class="text-center py-10 text-muted font-serif text-xs">
+          在上方輸入詞彙，為師為你調閱過往雲端印記。
         </div>
       </div>
-
     </div>
 
   </main>
 
-  <!-- ================= MOBILE FIXED BOTTOM NAVIGATION BAR ================= -->
-  <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-night-950/95 backdrop-blur-lg border-t border-sand px-3 py-2 flex items-center justify-around shadow-2xl">
-    <button onclick="switchView('daily')" id="mobileNavDaily" class="flex flex-col items-center space-y-1 text-celadon-600">
-      <i class="fa-regular fa-calendar-check text-lg"></i>
+  <!-- ================= MOBILE BOTTOM NAV ================= -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0B0F0E]/95 backdrop-blur-xl border-t border-sand/70 px-2 py-2 flex items-center justify-around shadow-2xl">
+    <button onclick="switchView('daily')" id="mobileNavDaily" class="flex flex-col items-center justify-center py-1 flex-1 text-celadon-600 transition-colors">
+      <i class="fa-regular fa-calendar-check text-base mb-0.5"></i>
       <span class="text-[10px] font-serif font-medium">修持</span>
     </button>
-    <button onclick="switchView('wholeBody')" id="mobileNavWholeBody" class="flex flex-col items-center space-y-1 text-muted">
-      <i class="fa-solid fa-person-dots-from-line text-lg"></i>
+    <button onclick="switchView('wholeBody')" id="mobileNavWholeBody" class="flex flex-col items-center justify-center py-1 flex-1 text-muted transition-colors">
+      <i class="fa-solid fa-person-dots-from-line text-base mb-0.5"></i>
       <span class="text-[10px] font-serif font-medium">全相</span>
     </button>
-    <button onclick="switchView('diet')" id="mobileNavDiet" class="flex flex-col items-center space-y-1 text-muted">
-      <i class="fa-solid fa-seedling text-lg"></i>
+    <button onclick="switchView('diet')" id="mobileNavDiet" class="flex flex-col items-center justify-center py-1 flex-1 text-muted transition-colors">
+      <i class="fa-solid fa-seedling text-base mb-0.5"></i>
       <span class="text-[10px] font-serif font-medium">膳食</span>
     </button>
-    <button onclick="switchView('weekly')" id="mobileNavWeekly" class="flex flex-col items-center space-y-1 text-muted">
-      <i class="fa-solid fa-chart-pie text-lg"></i>
+    <button onclick="switchView('weekly')" id="mobileNavWeekly" class="flex flex-col items-center justify-center py-1 flex-1 text-muted transition-colors">
+      <i class="fa-solid fa-chart-pie text-base mb-0.5"></i>
       <span class="text-[10px] font-serif font-medium">週度</span>
     </button>
-    <button onclick="switchView('search')" id="mobileNavSearch" class="flex flex-col items-center space-y-1 text-muted">
-      <i class="fa-solid fa-magnifying-glass text-lg"></i>
+    <button onclick="switchView('search')" id="mobileNavSearch" class="flex flex-col items-center justify-center py-1 flex-1 text-muted transition-colors">
+      <i class="fa-solid fa-magnifying-glass text-base mb-0.5"></i>
       <span class="text-[10px] font-serif font-medium">搜尋</span>
-    </button>
-    <button onclick="toggleChatDrawer()" class="flex flex-col items-center space-y-1 text-muted">
-      <div class="relative">
-        <i class="fa-solid fa-comment-dots text-lg"></i>
-        <span class="w-2 h-2 rounded-full bg-cinnabar-500 absolute -top-0.5 -right-0.5"></span>
-      </div>
-      <span class="text-[10px] font-serif font-medium">師傅</span>
     </button>
   </nav>
 
-  <!-- ================= FLOATING ACTION BUTTON (AI MASTER) ================= -->
-  <button id="floatingChatBtn" onclick="toggleChatDrawer()" class="hidden sm:flex fixed bottom-6 right-6 z-40 bg-gradient-to-br from-celadon-600 to-celadon-700 hover:from-celadon-500 hover:to-celadon-600 text-white w-14 h-14 rounded-full shadow-2xl items-center justify-center transition-all duration-300 transform hover:scale-105 active:scale-95 group border-2 border-celadon-200/30">
+  <!-- ================= FLOATING ACTION BUTTON (AI MASTER) - DESKTOP ONLY ================= -->
+  <button id="floatingChatBtn" onclick="toggleChatDrawer()" class="hidden md:flex fixed bottom-6 right-6 z-40 bg-gradient-to-br from-celadon-600 to-celadon-700 hover:from-celadon-500 text-white w-14 h-14 rounded-full shadow-2xl items-center justify-center transition-all duration-300 transform hover:scale-105 active:scale-95 border-2 border-celadon-200/30">
     <div class="relative">
       <i class="fa-solid fa-hand-holding-heart text-xl"></i>
       <span class="absolute -top-1 -right-1 w-3 h-3 bg-cinnabar-500 rounded-full border-2 border-night-900"></span>
@@ -615,43 +516,44 @@
   </button>
 
   <!-- ================= AI CHAT COMPANION DRAWER ================= -->
-  <div id="chatDrawer" class="fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 w-full sm:w-[430px] max-h-[90vh] sm:max-h-[85vh] h-[660px] bg-night-900 rounded-t-3xl sm:rounded-3xl border border-sand shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full sm:translate-y-6 opacity-0 pointer-events-none">
+  <div id="chatDrawer" class="fixed inset-x-0 bottom-0 top-14 md:top-auto md:left-auto md:right-6 md:bottom-6 z-50 md:w-[420px] md:h-[620px] bg-night-900 rounded-t-3xl md:rounded-3xl border border-sand shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full opacity-0 pointer-events-none">
     
-    <!-- Drawer Header -->
-    <div class="bg-night-950 border-b border-sand px-4 py-3.5 flex items-center justify-between">
+    <div class="bg-night-950 border-b border-sand px-4 py-3 flex items-center justify-between shrink-0">
       <div class="flex items-center space-x-2.5">
-        <div class="w-8 h-8 rounded-2xl bg-celadon-700 text-white flex items-center justify-center font-calligraphy text-lg shadow-sm">
+        <div class="w-8 h-8 rounded-xl bg-celadon-700 text-white flex items-center justify-center font-calligraphy text-base shadow-sm">
           師
         </div>
         <div>
-          <h4 class="font-serif font-bold text-sm text-ink flex items-center space-x-1.5">
+          <h4 class="font-serif font-bold text-xs sm:text-sm text-ink flex items-center space-x-1.5">
             <span>涵露齋主 ｜ 為師在側</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+            <span id="chatApiStatusDot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
           </h4>
-          <p class="text-[10px] text-muted font-serif">知曉你的膳食大卡、修持進度與護膚裝備</p>
+          <p class="text-[9px] sm:text-[10px] text-muted font-serif">知曉你的飲食熱量、修持打卡與護膚習慣</p>
         </div>
       </div>
       
-      <div class="flex items-center space-x-1">
+      <div class="flex items-center space-x-1.5">
+        <button onclick="openApiKeyModal()" title="設定 Google Gemini API Key" class="text-muted hover:text-gold w-7 h-7 rounded-lg flex items-center justify-center text-xs">
+          <i class="fa-solid fa-key"></i>
+        </button>
         <button onclick="clearChatHistory()" title="重置對談" class="text-muted hover:text-ink w-7 h-7 rounded-lg flex items-center justify-center text-xs">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
-        <button onclick="toggleChatDrawer()" class="text-muted hover:text-ink w-7 h-7 rounded-lg flex items-center justify-center text-xs">
-          <i class="fa-solid fa-xmark text-sm"></i>
+        <button onclick="toggleChatDrawer()" class="bg-night-850 text-ink hover:text-white w-8 h-8 rounded-full flex items-center justify-center text-sm border border-sand">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
     </div>
 
-    <!-- Quick Prompt Pills -->
-    <div class="px-3 py-2 bg-night-950/80 border-b border-sand flex space-x-1.5 overflow-x-auto text-[11px] whitespace-nowrap no-scrollbar">
+    <div class="px-3 py-2 bg-night-950/80 border-b border-sand flex space-x-1.5 overflow-x-auto text-[11px] whitespace-nowrap no-scrollbar shrink-0">
       <button onclick="sendQuickPrompt('我想睡覺了！')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
         🌙 我想睡覺了！
       </button>
+      <button onclick="sendQuickPrompt('師傅，幫我深度複盤這週各領域平衡')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
+        📊 複盤本週平衡
+      </button>
       <button onclick="sendQuickPrompt('師傅，看看我今天的修持與飲食熱量')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
         📜 今日總覽點評
-      </button>
-      <button onclick="sendQuickPrompt('師傅，幫我深度複盤這週各領域平衡')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
-        📊 本週平衡卦象
       </button>
       <button onclick="sendQuickPrompt('我剛剛吃了點零食，會不會發胖或發腮？')" class="px-2.5 py-1 rounded-full bg-night-900 border border-sand hover:border-celadon-600 text-ink/90 transition-colors font-serif">
         🍪 零食破戒開導
@@ -661,36 +563,85 @@
       </button>
     </div>
 
-    <!-- Messages Container -->
-    <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3.5 bg-night-950/40 text-xs sm:text-sm">
-      <!-- Default Master Greeting -->
+    <div id="chatMessages" class="flex-1 overflow-y-auto p-3.5 space-y-3 bg-night-950/40 text-xs sm:text-sm">
       <div class="flex items-start space-x-2">
         <div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">
           師
         </div>
-        <div class="bg-night-900 border border-sand p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-ink leading-relaxed font-serif">
+        <div class="bg-night-900 border border-sand p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-ink leading-relaxed font-serif text-xs">
           <p>徒兒，茶已沏好。我在涵露齋中隨時觀照你的身心脈動。</p>
-          <p class="mt-1.5 text-muted text-[11px]">有任何咬肌放鬆、零食熱量、護膚搭配或全身改善表的問題，隨時跟我聊！</p>
+          <p class="mt-1 text-muted text-[10px]">有任何咬肌放鬆、零食熱量、護膚搭配或全身改善表的問題，隨時跟我聊！</p>
         </div>
       </div>
     </div>
 
-    <!-- Typing Indicator -->
-    <div id="chatTyping" class="px-4 py-2 text-xs text-muted flex items-center space-x-1.5 hidden bg-night-900">
+    <div id="chatTyping" class="px-4 py-2 text-xs text-muted flex items-center space-x-1.5 hidden bg-night-900 shrink-0">
       <span class="w-1.5 h-1.5 rounded-full bg-celadon-600 animate-pulse"></span>
       <span class="w-1.5 h-1.5 rounded-full bg-celadon-600 animate-pulse delay-100"></span>
       <span class="w-1.5 h-1.5 rounded-full bg-celadon-600 animate-pulse delay-200"></span>
-      <span class="text-[11px] text-muted italic ml-1 font-serif">師傅正在研墨沉吟...</span>
+      <span class="text-[10px] text-muted italic ml-1 font-serif">師傅正在研墨沉吟...</span>
     </div>
 
-    <!-- Input Footer -->
-    <div class="p-3 bg-night-950 border-t border-sand flex items-center space-x-2">
-      <input type="text" id="chatInput" onkeydown="handleChatKeyDown(event)" placeholder="向師傅請教今日身心、熱量或體態..." class="flex-1 bg-night-900 border border-sand rounded-2xl px-3.5 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50">
-      <button onclick="handleSendMessage()" class="w-9 h-9 rounded-2xl bg-celadon-700 hover:bg-celadon-600 text-white flex items-center justify-center transition-all active:scale-95 shadow-sm">
+    <div class="p-2.5 bg-night-950 border-t border-sand flex items-center space-x-2 shrink-0">
+      <input type="text" id="chatInput" onkeydown="handleChatKeyDown(event)" placeholder="向師傅請教今日身心、熱量或體態..." class="flex-1 bg-night-900 border border-sand rounded-xl px-3 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:ring-1 focus:ring-celadon-600 placeholder:text-muted/50 font-serif">
+      <button onclick="handleSendMessage()" class="w-8 h-8 rounded-xl bg-celadon-700 hover:bg-celadon-600 text-white flex items-center justify-center shadow-sm shrink-0">
         <i class="fa-solid fa-arrow-up text-xs"></i>
       </button>
     </div>
 
+  </div>
+
+  <!-- ================= MODAL: 100 STICKY NOTES WITH REAL PIN & ANIMATION ================= -->
+  <div id="stickyNoteModal" class="fixed inset-0 bg-night-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+    <!-- Outer box allows pin to overflow cleanly without being cropped -->
+    <div class="relative max-w-sm sm:max-w-md w-full pt-4">
+      
+      <!-- Real 3D Brass Pin (Centered & Nailed Down) -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none drop-shadow-2xl">
+        <div class="pin-head-3d"></div>
+        <div class="w-1 h-2.5 bg-gradient-to-b from-amber-900 to-amber-950 -mt-0.5 rounded-b-sm shadow-inner"></div>
+      </div>
+
+      <!-- Pinned Note Paper with Physical Swing Motion -->
+      <div id="stickyNotePaperBox" class="sticky-note-paper rounded-3xl p-6 sm:p-7 border border-gold/40 shadow-2xl space-y-4 relative z-10">
+        <div class="flex items-center justify-between border-b border-sand/80 pt-2 pb-2">
+          <div class="flex items-center space-x-2">
+            <span class="text-gold text-sm"><i class="fa-solid fa-thumbtack"></i></span>
+            <span id="stickyNoteTypeBadge" class="font-serif font-black text-xs text-gold tracking-widest">涵露齋 ｜ 百籤靈犀</span>
+          </div>
+          <div class="flex items-center space-x-1">
+            <button onclick="setStickyNoteCategory('iching')" id="tabBtnIching" class="text-[10px] font-serif px-2 py-0.5 rounded-md bg-gold/20 text-gold border border-gold/40">周易卦象</button>
+            <button onclick="setStickyNoteCategory('body')" id="tabBtnBody" class="text-[10px] font-serif px-2 py-0.5 rounded-md bg-night-950 text-muted border border-sand">身韻戒律</button>
+            <span id="stickyNoteIndex" class="text-[10px] font-mono text-muted ml-1.5">#01</span>
+          </div>
+        </div>
+
+        <div class="space-y-2.5 py-1">
+          <h4 id="stickyNoteTitle" class="font-serif font-black text-base sm:text-lg text-ink tracking-wide"></h4>
+          <p id="stickyNoteContent" class="text-xs sm:text-sm text-ink/90 font-serif leading-relaxed"></p>
+
+          <!-- Master's Personal Commentary & Encouragement Box -->
+          <div class="bg-night-950/80 rounded-2xl p-3 border border-sand/70 space-y-1">
+            <div class="flex items-center space-x-1.5 text-celadon-600 text-[10px] font-serif font-bold">
+              <i class="fa-solid fa-feather-pointed"></i>
+              <span id="stickyNoteCommentaryTitle">師傅靈犀註解・當下自照</span>
+            </div>
+            <p id="stickyNoteCommentary" class="text-[11px] text-muted font-serif leading-relaxed"></p>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-sand/80 flex items-center justify-between">
+          <button onclick="drawRandomStickyNote()" class="text-xs text-muted hover:text-gold font-serif flex items-center space-x-1 active:scale-95 transition-transform">
+            <i class="fa-solid fa-dice text-[11px]"></i>
+            <span>隨機換一籤</span>
+          </button>
+          <button onclick="closeStickyNoteModal()" class="px-4 py-2 rounded-xl text-xs bg-gold hover:bg-gold/90 text-night-950 font-serif font-bold shadow-md active:scale-95 transition-transform">
+            弟子受教，立刻做到！
+          </button>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ================= MODAL: ADD / EDIT HABIT ================= -->
@@ -698,7 +649,7 @@
     <div class="bg-night-900 rounded-3xl max-w-md w-full p-6 border border-sand shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-sand pb-3">
         <h3 id="modalTitle" class="font-serif font-black text-lg text-ink">添置修持項目</h3>
-        <button onclick="closeHabitModal()" class="text-muted hover:text-ink w-7 h-7 rounded-lg flex items-center justify-center">
+        <button onclick="closeHabitModal()" class="text-muted hover:text-ink w-7 h-7 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -762,21 +713,59 @@
     </div>
   </div>
 
+  <!-- ================= MODAL: GOOGLE API KEY ================= -->
+  <div id="apiKeyModal" class="fixed inset-0 bg-night-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-night-900 rounded-3xl max-w-sm sm:max-w-md w-full p-6 border border-sand shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-sand pb-3">
+        <h3 class="font-serif font-black text-base text-ink flex items-center space-x-2">
+          <i class="fa-solid fa-key text-gold"></i>
+          <span>啟用真・AI 師傅大腦</span>
+        </h3>
+        <button onclick="closeApiKeyModal()" class="text-muted hover:text-ink w-7 h-7 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-2.5 text-xs text-muted font-serif leading-relaxed">
+        <p class="text-ink">
+          在 GitHub Pages 靜態網站上，填入專屬的 <span class="text-gold font-bold">Google Gemini API Key</span>，師傅就會立刻連上真人的思考大腦，告別罐頭感！
+        </p>
+        <div class="bg-night-950 p-2.5 rounded-xl border border-sand text-[11px] text-ink/80">
+          📍 免費取得方法：<br>
+          前往 Google AI Studio 點擊「Get API Key」複製金鑰即可（完全免費）。
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-muted text-xs mb-1 font-serif">貼上你的 Gemini API Key：</label>
+        <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-night-950 border border-sand rounded-xl p-2.5 text-xs text-ink focus:ring-1 focus:ring-celadon-600 focus:outline-none font-mono">
+      </div>
+
+      <div class="flex items-center justify-end space-x-2 pt-2 border-t border-sand">
+        <button onclick="closeApiKeyModal()" class="px-4 py-2 rounded-xl text-xs text-muted hover:text-ink font-serif">取消</button>
+        <button onclick="saveApiKeySetting()" class="px-5 py-2 rounded-xl text-xs bg-gold hover:bg-gold/90 text-night-950 font-serif font-bold shadow-sm">
+          保存金鑰
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= MODAL: BACKUP & DATA JSON ================= -->
   <div id="backupModal" class="fixed inset-0 bg-night-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-night-900 rounded-3xl max-w-sm w-full p-6 border border-sand shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-sand pb-3">
-        <h3 class="font-serif font-black text-base text-ink">手帳資料與雲端備份</h3>
+        <h3 class="font-serif font-black text-base text-ink">手帳資料存檔與設定</h3>
         <button onclick="closeBackupModal()" class="text-muted hover:text-ink w-7 h-7 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <p class="text-xs text-muted font-serif leading-relaxed">
-        修持日軌採用純本機優先保存，永遠保護你的個人隱私。你可隨時匯出備份 JSON 檔案，或在電腦與手機間無縫移轉。
-      </p>
-
       <div class="space-y-2 pt-1 font-serif text-xs">
+        <button onclick="openApiKeyModal()" class="w-full py-2.5 bg-night-950 text-gold border border-gold/40 rounded-xl hover:bg-night-850 flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-key"></i>
+          <span>設定 Google Gemini API Key（啟動真AI）</span>
+        </button>
+
         <button onclick="exportDataJSON()" class="w-full py-2.5 bg-night-950 text-celadon-600 border border-celadon-600/30 rounded-xl hover:bg-night-850 flex items-center justify-center space-x-2">
           <i class="fa-solid fa-file-export"></i>
           <span>匯出手帳完整存檔 (JSON)</span>
@@ -795,147 +784,14 @@
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT APP LOGIC ================= -->
+  <!-- ================= JAVASCRIPT APPLICATION CODE ================= -->
   <script>
-    /* 11 Whole Body Custom Guidance Schema from User Request */
-    const WHOLE_BODY_REGIONS = [
-      {
-        id: 'wb_hairline',
-        title: '髮際與頭皮',
-        frequency: '每日洗頭後',
-        icon: 'fa-wind',
-        color: 'text-celadon-600',
-        problem: '髮際線偏高、髮量稀疏。',
-        treatment: '活絡頭皮循環，減輕帽狀腱膜張力，穩固髮根。吹乾頭髮後塗抹柑橘頭皮水，用指腹或木梳進行頭皮放鬆操（由前額向百會穴、後頸枕部輕揉按壓滑動）。'
-      },
-      {
-        id: 'wb_contour',
-        title: '面部輪廓（發腮改善）',
-        frequency: '每日中午及晚餐飯後',
-        icon: 'fa-circle-notch',
-        color: 'text-cinnabar-500',
-        problem: '臉部發腮，咬肌緊繃代償，下顎角方厚。',
-        treatment: '釋放咬肌張力，下顎角收窄。做「放鬆咬肌三十秒」，早晚洗面後以手掌根部深層打圈按壓咬肌核心硬塊，咀嚼食物時細嚼慢嚥、戒咬硬物與嚼冰塊。'
-      },
-      {
-        id: 'wb_jawline',
-        title: '下顎與頸線',
-        frequency: '每日早晚',
-        icon: 'fa-shield-halved',
-        color: 'text-sandalwood',
-        problem: '雙下巴，下顎線不明顯，口邊肉下墜。',
-        treatment: '下顎線雕琢與雙下巴操。食指中指剪刀手由下巴中線向上推刮至耳下淋巴，口邊脂肪整理，隨時保持「舌頂上顎（Mewing）」使舌骨肌群自然上收。'
-      },
-      {
-        id: 'wb_midface',
-        title: '面中與結構',
-        frequency: '保養或休息時',
-        icon: 'fa-face-smile',
-        color: 'text-amber-400',
-        problem: '鼻基底凹陷，法令紋趨勢明顯。',
-        treatment: '提升面中支撐飽滿度，舒展深層表情肌。小量面部瑜珈：食指輕揉按壓迎香穴與鼻翼兩側深層筋膜，舒緩向下牽拉力道，避免抿嘴或面無表情時深層緊繃。'
-      },
-      {
-        id: 'wb_darkcircle',
-        title: '黑眼圈與眼周氣色',
-        frequency: '一週睡前兩次',
-        icon: 'fa-eye',
-        color: 'text-indigo-400',
-        problem: '眼周緊繃暗沉、色素沉著與微循環不良。',
-        treatment: '促進眼周微循環，黑眼圈疏通：眼眶骨四周穴位指壓、承泣穴與睛明穴輕柔點按。睡前溫敷 5 分鐘，避免高鹽宵夜導致晨起水腫，眼霜以無名指輕點吸收。'
-      },
-      {
-        id: 'wb_faceskin',
-        title: '面部膚質',
-        frequency: '每日晨夕',
-        icon: 'fa-droplet',
-        color: 'text-celadon-600',
-        problem: '臉色發黃暗沉，局部痘疤印記，懼怕擦乳液反黑。',
-        treatment: '日間抗氧化與嚴格防曬（阻斷紫外線加重黑色素沉著），夜間修護與溫和淡印（搭配 VC噴霧、積雪草水乳、綠番茄精華與雪芙蘭米淨水潤凝霜薄擦鎖水）。內調控糖（戒斷精緻糖防糖化發黃，每日補足溫水）。'
-      },
-      {
-        id: 'wb_backskin',
-        title: '背部膚質',
-        frequency: '洗沐時',
-        icon: 'fa-shower',
-        color: 'text-teal-400',
-        problem: '背部油脂分泌旺盛長痘，陳年痘疤。',
-        treatment: '洗沐順序調整：洗頭並完全沖淨後，最後再清洗並沖淨背部。每週使用 1–2 次果酸/水楊酸調理角質，沐浴後大面積擦雪芙蘭美白大藍瓶或妮維雅 C&E 身體精華乳，切忌用手摳抓背部。'
-      },
-      {
-        id: 'wb_shoulders',
-        title: '肩背與手臂',
-        frequency: '每日或重訓後',
-        icon: 'fa-child-reaching',
-        color: 'text-rose-400',
-        problem: '圓肩駝背，肩膀內扣，斜方肌代償聳起，手臂贅肉鬆弛。',
-        treatment: '開肩展胸，沉下肩胛骨，消除直角肩阻礙，緊緻手臂後側。胸大肌伸展（門框壓肩拉伸），開肩闊背（YW 伸展，肩胛骨下沉後夾，啟動下斜方肌與菱形肌）。'
-      },
-      {
-        id: 'wb_core',
-        title: '腰腹、呼吸與發聲',
-        frequency: '每日空腹或睡前',
-        icon: 'fa-lungs',
-        color: 'text-blue-400',
-        problem: '核心虛弱，不會腹式呼吸，發聲飄浮無法用胸腔共鳴說話。',
-        treatment: '啟動橫膈膜與腹橫肌，穩定核心底座。仰臥腹式呼吸（平躺腹部置書，吸氣鼓腹頂書胸口不動；吐氣收縮核心）。死蟲式 / 真空收腹啟動深層腹橫肌，發聲時手貼胸骨，深吸氣發低沉「Mmm/哼」音找胸腔微震動感。'
-      },
-      {
-        id: 'wb_pelvis',
-        title: '骨盆與臀腿',
-        frequency: '每日或健身日',
-        icon: 'fa-person-walking',
-        color: 'text-orange-400',
-        problem: '骨盆前傾，下背痠痛緊繃，腹部深層無力致假性小腹外凸，大腿前側代償粗壯。',
-        treatment: '骨盆回正，平衡髖前後力線。臀橋 / 臀推喚醒臀大肌，低弓步式髂腰肌伸展釋放腰椎過度前突張力，羅馬尼亞硬舉（RDL）強化臀腿後側鏈，日常站姿不刻意頂胯骨，微收下腹。'
-      },
-      {
-        id: 'wb_ankles',
-        title: '下肢、足踝與足弓',
-        frequency: '每日碎片時間',
-        icon: 'fa-socks',
-        color: 'text-emerald-400',
-        problem: '大腿粗，小腿外翻且粗，走路姿勢偏差，足弓無力（右腳更無力），膝超伸。',
-        treatment: '導正下肢傳導力線，重建足弓支撐。足弓訓練（著重右腳短足起拱抓地），筋膜釋放：網球/筋膜球深滾足底，滾筒放鬆小腿外側（腓骨長短肌）。站樁（微屈膝不卡死、收尾閭、重心深落湧泉穴），走路改為全腳掌著地推進。'
-      },
-      {
-        id: 'wb_metabolism',
-        title: '全身能量代謝',
-        frequency: '全日貫穿',
-        icon: 'fa-bolt',
-        color: 'text-cinnabar-500',
-        problem: '體脂偏高，偶發壓力性進食（如餅乾、貢糖）引發自責焦慮。',
-        treatment: '降低體脂率，打破「暴食-補償節食」惡性循環。每日溫和記錄飲食，確保蛋白質攝取（每公斤體重 1.2–1.5g），每日 2000cc 溫水打卡促進水分與鈉離子代謝，嚴禁懲罰性挨餓，每週落實 3 次健身房訓練。'
-      }
-    ];
-
-    /* Default Pre-populated Habits perfectly matched to user (Streamlined & shift-friendly) */
-    const DEFAULT_HABITS = [
-      // 面部美育修持 (晨起 & 夜間)
-      { id: 'h1', title: '晨間抗氧退紅護膚', category: 'facial', phase: 'morning', duration: 10, icon: 'fa-droplet', note: 'VC噴霧+積雪草水+綠番茄精華+米淨水潤凝霜薄擦(不致黑)' },
-      { id: 'h2', title: '夜間微針修護與頭皮精華', category: 'facial', phase: 'night', duration: 15, icon: 'fa-spa', note: 'VT微針100點按額頭痘印，吹乾頭髮後塗抹柑橘頭皮水推揉' },
-      { id: 'h3', title: '深層揉散咬肌與下顎線刮引', category: 'facial', phase: 'night', duration: 15, icon: 'fa-spa', note: '掌根深層揉軟咬肌，剪刀手刮下顎線至耳後引流' },
-      { id: 'h4', title: '美人筋（胸鎖乳突肌）舒緩', category: 'facial', phase: 'night', duration: 15, icon: 'fa-leaf', note: '捏揉胸鎖乳突肌消除僵硬、拉伸枕下肌群' },
-
-      // 體態身韻修持 (全日彈性，隨時想做就做)
-      { id: 'h5', title: '足弓抓地與短足訓練', category: 'posture', phase: 'anytime', duration: 15, icon: 'fa-person-walking', note: '赤腳短足起拱、改善扁平足與骨盆前傾代償' },
-      { id: 'h6', title: '舌頂上顎與咬肌放鬆覺察', category: 'posture', phase: 'anytime', duration: 10, icon: 'fa-leaf', note: '整片舌頭吸上顎收緊雙下巴，牙齒分開2mm不咬死' },
-      { id: 'h7', title: '坐姿骨盆校正＋微收核心', category: 'posture', phase: 'anytime', duration: 10, icon: 'fa-person-walking', note: '坐骨均勻受力，打擊骨盆前傾，雙膝微夾' },
-
-      // 動態鍛鍊 (彈性時辰，下班或休假做)
-      { id: 'h8', title: '健身房大課（重訓/拉伸/淋浴）', category: 'workout', phase: 'anytime', duration: 120, icon: 'fa-dumbbell', note: '彈性安排：包含完整力量訓練與泡沫軸滾壓' },
-      { id: 'h9', title: '舞蹈身韻練習 / 帕梅拉訓練', category: 'workout', phase: 'anytime', duration: 30, icon: 'fa-music', note: '輕快律動喚醒心神，不限白天或晚上' },
-
-      // 靜心藝事
-      { id: 'h10', title: '圍棋專注對弈課', category: 'zen', phase: 'anytime', duration: 60, icon: 'fa-chess', note: '一三五 20:00~21:00 定盤專注' },
-      { id: 'h11', title: '書道修持（毛筆/硬筆）', category: 'zen', phase: 'anytime', duration: 35, icon: 'fa-pen-nib', note: '靜心沉潛，筆尖如刀，鍛鍊指腕心神' },
-    ];
-
+    /* ================= CORE CONSTANTS & METADATA ================= */
     const CATEGORY_META = {
-      facial: { name: '面部美育修持', color: 'text-cinnabar-500', bg: 'bg-cinnabar-100', border: 'border-cinnabar-500/30' },
-      posture: { name: '體態身韻修持', color: 'text-celadon-600', bg: 'bg-celadon-100', border: 'border-celadon-600/30' },
-      workout: { name: '動態鍛鍊', color: 'text-indigo-400', bg: 'bg-night-800', border: 'border-indigo-400/30' },
-      zen: { name: '靜心藝事', color: 'text-sandalwood', bg: 'bg-night-800', border: 'border-sandalwood/30' },
+      facial: { name: '面部美育修持', bg: 'bg-cinnabar-500', color: 'text-cinnabar-500' },
+      posture: { name: '體態身韻修持', bg: 'bg-celadon-600', color: 'text-celadon-600' },
+      workout: { name: '動態鍛鍊', bg: 'bg-indigo-400', color: 'text-indigo-400' },
+      zen: { name: '靜心藝事', bg: 'bg-gold', color: 'text-gold' }
     };
 
     const PHASE_META = {
@@ -944,71 +800,252 @@
       anytime: '全日彈性'
     };
 
-    // State
+    const DEFAULT_HABITS = [
+      { id: 'h_1', title: '晨間抗氧退紅護膚', category: 'facial', phase: 'morning', duration: 10, icon: 'fa-droplet', note: 'VC噴霧+積雪草水+綠番茄精華+米淨水潤凝霜薄擦（不致黑）' },
+      { id: 'h_2', title: '夜間微針修護與頭皮精華', category: 'facial', phase: 'night', duration: 15, icon: 'fa-sparkles', note: 'VT微針100壓按額頭痘印，吹乾頭髮後塗抹柑橘頭皮水推揉' },
+      { id: 'h_3', title: '深層揉散咬肌與下顎線刮引', category: 'facial', phase: 'night', duration: 15, icon: 'fa-spa', note: '掌根深層揉軟咬肌，剪刀手沿下顎緣至耳後環跳引流' },
+      { id: 'h_4', title: '美人筋（胸鎖乳突肌）舒緩', category: 'facial', phase: 'night', duration: 15, icon: 'fa-leaf', note: '捏揉胸鎖乳突肌解除僵硬，拉長下顎頸線' },
+      { id: 'h_5', title: '足弓抓地與短足訓練', category: 'posture', phase: 'anytime', duration: 15, icon: 'fa-person-walking', note: '赤腳短足起拱，改善扁平足與骨盆前傾代償' },
+      { id: 'h_6', title: '舌頂上顎與咬肌放鬆覺察', category: 'posture', phase: 'anytime', duration: 10, icon: 'fa-head-side-cough', note: '整片舌頭吸上顎收緊雙下巴，牙齒分開2mm不咬死' },
+      { id: 'h_7', title: '坐姿骨盆校正＋微收核心', category: 'posture', phase: 'anytime', duration: 10, icon: 'fa-chair', note: '坐骨均勻受力，打擊骨盆前傾，雙腳平放' },
+      { id: 'h_8', title: '健身房大課（重訓/拉伸/淋浴）', category: 'workout', phase: 'anytime', duration: 120, icon: 'fa-dumbbell', note: '彈性安排：包含完整力量訓練與泡沫軸滾壓' },
+      { id: 'h_9', title: '舞蹈身韻練習 / 帕梅拉訓練', category: 'workout', phase: 'anytime', duration: 30, icon: 'fa-music', note: '輕快律動喚醒心神，不限白天或晚上' },
+      { id: 'h_10', title: '圍棋專注對弈課', category: 'zen', phase: 'anytime', duration: 60, icon: 'fa-chess', note: '一三五 20:00~21:00 定盤專注' },
+      { id: 'h_11', title: '墨韻書道（硬筆 / 毛筆）', category: 'zen', phase: 'anytime', duration: 30, icon: 'fa-pen-nib', note: '運筆如行雲流水，凝神定氣' }
+    ];
+
+    const WHOLE_BODY_REGIONS = [
+      {
+        id: "wb_hairline",
+        title: "髮際與頭皮（每日洗頭後）",
+        icon: "fa-seedling",
+        color: "text-emerald-400",
+        frequency: "每日洗沐吹整後",
+        problem: "髮際線偏高、髮量稀疏、頭皮筋膜長年緊繃。",
+        treatment: "活絡頭皮微循環，減輕帽狀腱膜張力以穩固髮根。吹乾頭髮後點塗柳屋柑橘頭皮水，以指腹或寬齒木梳由前額向百會穴、後頸枕部打圈輕揉按壓。"
+      },
+      {
+        id: "wb_masseter",
+        title: "面部輪廓與咬肌（每日午晚飯後）",
+        icon: "fa-face-smile",
+        color: "text-amber-400",
+        frequency: "每日午餐及晚餐後",
+        problem: "臉部發腮、下顎角方厚外突、咬肌緊繃代償（以前愛咬硬物與嚼冰塊形成之肌肉肥大）。",
+        treatment: "徹底釋放咬肌張力，收窄下顎視覺寬度。飯後放鬆咬肌 30 秒；夜間保養時以掌根深層打圈按壓咬肌核心硬塊，上下牙分開 2mm、舌頂上顎。"
+      },
+      {
+        id: "wb_jaw_neck",
+        title: "下顎與頸線（每日早晚）",
+        icon: "fa-wand-magic-sparkles",
+        color: "text-celadon-600",
+        frequency: "每日晨起與睡前護膚時",
+        problem: "雙下巴、下顎線模糊、口邊肉下墜、頸部輪廓不明顯。",
+        treatment: "下顎線立體雕琢、雙下巴消除操、口邊肉向上整理。食指中指彎曲成剪刀手，沿下顎骨邊緣向耳根輕柔刮引排空滯水，轉頭拉長胸鎖乳突肌。"
+      },
+      {
+        id: "wb_midface",
+        title: "面中與結構（每日早晚）",
+        icon: "fa-spa",
+        color: "text-cinnabar-500",
+        frequency: "每日保養塗抹精華時",
+        problem: "鼻基底凹陷、法令紋趨勢明顯、面中支撐力弱。",
+        treatment: "提升面中飽滿度，舒展深層表情肌。以食指輕揉按壓迎香穴與鼻翼兩側深層筋膜，舒緩向下拉扯力道，多做面部微笑提升瑜珈。"
+      },
+      {
+        id: "wb_dark_circles",
+        title: "黑眼圈與眼周氣色（一週睡前兩次）",
+        icon: "fa-eye",
+        color: "text-indigo-400",
+        frequency: "每週兩次睡前進行",
+        problem: "眼周緊繃暗沉、局部微循環不暢引發的青暗黑眼圈。",
+        treatment: "促進眼眶微循環。眼眶骨四周穴位指壓（承泣、睛明、絲竹空輕揉），睡前雙手搓熱溫敷 5 分鐘，避免高鹽宵夜導致晨起水腫。"
+      },
+      {
+        id: "wb_face_skin",
+        title: "面部膚質調理（每日早晚）",
+        icon: "fa-droplet",
+        color: "text-celadon-600",
+        frequency: "晨起防禦 ＋ 夜間代謝",
+        problem: "臉色發黃暗沉、毛孔粗大、局部痘疤印記。",
+        treatment: "日間抗氧化與嚴格防曬（阻斷紫外線色素沉著），薄塗雪芙蘭米淨水潤凝霜鎖水；夜間 VT微針100 溫和促代謝，搭配積雪草與綠番茄收斂，內調控糖補水。"
+      },
+      {
+        id: "wb_back_skin",
+        title: "背部膚質管理（每次洗澡後）",
+        icon: "fa-shield-halved",
+        color: "text-amber-500",
+        frequency: "每次沐浴時嚴格遵守",
+        problem: "背部油脂分泌旺盛長痘、陳年褐色痘疤痕跡。",
+        treatment: "洗沐順序調整：先洗頭並徹底沖淨後，最後才清洗並沖淨背部。每週使用 1-2 次果酸/水楊酸身體噴霧調理角質，沐浴後輕拍清爽身體乳，切忌用手摳抓背部痘結痂。"
+      },
+      {
+        id: "wb_shoulder_arms",
+        title: "肩背與手臂線條（每日工作間隙）",
+        icon: "fa-person",
+        color: "text-emerald-400",
+        frequency: "辦公工位或睡前拉伸",
+        problem: "圓肩駝背、肩膀內扣、斜方肌代償聳起、手臂後側贅肉鬆弛。",
+        treatment: "開肩展胸，沉下肩胛骨，打造直角肩。門框胸大肌伸展、開肩闊背 YW 伸展，肩胛骨下沉後夾，啟動下斜方肌與菱形肌，卸下頸側負擔。"
+      },
+      {
+        id: "wb_core_breath",
+        title: "腰腹、呼吸與發聲（每日隨時覺察）",
+        icon: "fa-wind",
+        color: "text-sky-400",
+        frequency: "靜心臨帖或睡前進行",
+        problem: "核心虛弱、胸式淺呼吸、發聲飄浮無力、無法調動胸腔共鳴說話。",
+        treatment: "啟動橫膈膜與腹橫肌底座。仰臥腹式呼吸（吸氣鼓腹、吐氣收腹）；死蟲式深層喚醒核心；胸腔發聲訓練（手貼胸骨，深吸氣後發低沉『Mmm』音體會胸腔微震動）。"
+      },
+      {
+        id: "wb_pelvis_legs",
+        title: "骨盆與臀腿（健身日與日常站姿）",
+        icon: "fa-dumbbell",
+        color: "text-gold",
+        frequency: "重訓大課與日常站姿",
+        problem: "骨盆前傾、下背痠痛緊繃、腹部深層無力致假性小腹外凸、大腿前側代償粗厚。",
+        treatment: "骨盆回正，平衡髖前後力線。臀橋與羅馬尼亞硬舉（RDL）喚醒臀大肌；低弓步式髂腰肌伸展釋放腰椎前突壓迫；日常站姿覺察：不頂胯，微收小腹。"
+      },
+      {
+        id: "wb_feet_ankles",
+        title: "下肢足踝與足弓（每日走路與睡前）",
+        icon: "fa-shoe-prints",
+        color: "text-indigo-400",
+        frequency: "工位坐姿與夜間筋膜放鬆",
+        problem: "大腿粗、小腿外翻粗壯（腓骨長短肌緊繃）、走路內側外八、足弓無力（尤其右腳更塌陷）、膝超伸。",
+        treatment: "重建足弓支撐，導正下肢傳導力線。著重右腳短足起拱訓練；筋膜球深滾足底；滾筒放鬆小腿外側代償肌；站姿微屈膝不卡死膝關節，走路改以全腳掌大拇指球穩健蹬地。"
+      },
+      {
+        id: "wb_metabolism",
+        title: "全身能量代謝（每日食單落實）",
+        icon: "fa-apple-whole",
+        color: "text-cinnabar-500",
+        frequency: "每日食飲與運動落實",
+        problem: "體脂偏高，偶發壓力性進食（如餅乾甜點）引發自責焦慮，陷入暴食補償循環。",
+        treatment: "每日溫和記錄食單，破除惡性循環；確保優質蛋白質攝取；每日補足 2000ml 溫水加速鈉鹽代謝；嚴禁懲罰性挨餓；每週穩定落實 3 次健身房訓練。"
+      }
+    ];
+
+    /* ================= 100 STICKY NOTES DATABASE (64 I-CHING + 36 BODY/HABITS) ================= */
+    const I_CHING_64 = [
+      { num: 1, name: "乾為天", omen: "元亨利貞", tip: "天行健，君子以自強不息。潛龍勿用，陽氣初生之時宜含蓄沉潛，不宜躁進妄動。", commentary: "今天若感心浮氣躁，閉上眼把呼吸放慢。自強者非逞強，而是順應大勢，安住當下本分。" },
+      { num: 2, name: "坤為地", omen: "厚德載物", tip: "地勢坤，君子以厚德載物。君子行有所尚，先迷失道，後順得常。含弘光大，品物咸亨。", commentary: "天地大美在於包容與承載。放下苛求完美的偏執，接納身體與情緒的每一次波動。" },
+      { num: 3, name: "水雷屯", omen: "見龍在田，利建侯", tip: "屯者，物之始生也。草木萌芽，雲雷方結。天地創生之際雖有鬱滯，然生機潛伏。", commentary: "萬事起頭難，感到停滯不前乃自然常態。莫因起步微小而憂懼，靜待時機抽條發芽。" },
+      { num: 4, name: "山水蒙", omen: "啟蒙發越，亨", tip: "山下出泉，蒙。君子以果行育德。匪我求童蒙，童蒙求我。志應也。", commentary: "感到迷惘是智慧的開端。承認自己尚有未知，虛懷若谷，明燈自會出現在下一個轉角。" },
+      { num: 5, name: "水天需", omen: "需，有孚，光亨，貞吉", tip: "雲上於天，需。君子以飲食宴樂。待時而動，不急躁求進，心懷誠信以應萬變。", commentary: "需者，耐心等待也。該吃飯時安心吃飯，該入睡時安心入睡，飯飽神凝，靜候轉機。" },
+      { num: 6, name: "天水訟", omen: "訟，有孚，窒惕中吉", tip: "天與水違行，訟。君子以作事謀始。內心矛盾生則紛擾至，退一步海闊天空。", commentary: "內耗往往源於與自己較勁。吃了一塊餅乾或有一絲懈怠，不要在心裡興起訴訟審判自己。" },
+      { num: 7, name: "地水師", omen: "師，貞，丈人吉，無咎", tip: "地中有水，師。君子以容民畜眾。統攝身心如率千軍，貴在紀律嚴整而不傷和氣。", commentary: "生活節奏需要紀律，但嚴明不等於冷酷。以仁愛之心掌管作息，不打疲勞戰。" },
+      { num: 8, name: "水地比", omen: "比，吉，原筮元永貞", tip: "地上有水，比。先王以建萬國，親諸侯。相親相輔，順理成章，內心清明自得其樂。", commentary: "學會與自己的身體做朋友，而非視其為皮囊工具。傾聽它的痠楚與疲憊，溫柔相伴。" },
+      { num: 9, name: "風天小畜", omen: "亨，密雲不雨，自我西郊", tip: "風行天上，小畜。君子以懿文德。力量尚微，密雲蓄勢，待時而發，莫圖驟變。", commentary: "微小的努力看起來不起眼，如同天邊聚攏的微雲。蓄力已在無形中完成，耐心等待甘霖。" },
+      { num: 10, name: "天澤履", omen: "履虎尾，不咥人，亨", tip: "上天下澤，履。君子以辯上下，定民志。循規蹈矩，步履安詳，雖處險境亦能平安化解。", commentary: "步履從容，行止有節。遇到急事更要把腳步放慢，不慌不亂，處亂不驚。" },
+      { num: 11, name: "地天泰", omen: "小往大來，吉亨", tip: "天地交而萬物通，上下交而其志同。陰陽合和，萬事通泰，內外澄澈一片祥和。", commentary: "當心念通達時，眉宇舒展，氣血自然流轉不息。珍惜當下無風無浪的安寧光景。" },
+      { num: 12, name: "天地否", omen: "否之匪人，不利君子貞", tip: "天地不交，否。君子以儉德辟難，不可榮以祿。時運不濟閉塞之時，當收斂退守。", commentary: "若覺整日事事碰壁，莫硬撞南牆。收攝心神，早早歇息，退回內心深處修養元氣。" },
+      { num: 13, name: "天火同人", omen: "同人于野，亨，利涉大川", tip: "天與火，同人。君子以類族辨物。光明普照，破除私心隔閡，同舟共濟萬事諧和。", commentary: "打開心胸，走出狹隘的得失計較。胸懷寬廣如天地，生活中的細碎瑣事便不再煩心。" },
+      { num: 14, name: "火天大有", omen: "元亨，順天休命", tip: "火在天上，大有。君子以遏惡揚善，順天休命。盛大豐饒之時，尤當謙抑自律。", commentary: "收穫成果時切莫驕橫，懂得居安思危，將福報回饋給規律平實的生活。" },
+      { num: 15, name: "地山謙", omen: "亨，君子有終", tip: "地中有山，謙。君子以裒多益寡，稱物平施。天道虧盈而益謙，人道惡盈而好謙。", commentary: "謙遜是最高雅的氣質。不張揚、不爭先，如同深山藏於地中，自有一番安忍沉靜。" },
+      { num: 16, name: "雷地豫", omen: "利建侯行師", tip: "雷出地奮，豫。先王以作樂崇德，殷薦之上帝。順應天時而樂生，身心愉悅無滯。", commentary: "給枯燥的日常添一點歡喜心，聽一曲雅樂，泡一盞清茶，喜悅能驅散百病沉屙。" },
+      { num: 17, name: "澤雷隨", omen: "元亨利貞，無咎", tip: "澤中有雷，隨。君子以嚮晦入宴息。隨順四時晝夜之流轉，入夜則息，天明則作。", commentary: "到了就寢時辰就該收心入眠，莫貪戀屏幕幻光。隨順自然陰陽，方能神魂安寧。" },
+      { num: 18, name: "山風蠱", omen: "利涉大川，先甲三日", tip: "山下有風，蠱。君子以振民育德。陳舊積弊之時，需有勇氣斬斷舊習，破除因循。", commentary: "檢視生活裡拖延已久的惡性循環，痛下決心斷捨離，新生往往誕生於大膽的清理。" },
+      { num: 19, name: "地澤臨", omen: "元亨利貞，至於八月有凶", tip: "地上有澤，臨。君子以教思無窮，容保民無疆。陽氣漸生，督勉自勵，防患於未然。", commentary: "精神飽滿之際當乘勝追擊，但也要有風險意識，不把精力揮霍殆盡，留有三分餘裕。" },
+      { num: 20, name: "風地觀", omen: "盥而不薦，有孚顒若", tip: "風行地上，觀。先王以省方觀民設教。靜默自觀，如水照影，澄明澄澈。", commentary: "每天給自己五分鐘徹底安靜，不看手機、不想待辦，像旁觀者一樣靜靜看著念頭起落。" },
+      { num: 21, name: "火雷噬嗑", omen: "亨，利用獄", tip: "雷電噬嗑。先王以明罰敕法。當斷則斷，咬定目標消除障礙，行事果敢堅定。", commentary: "面對生活中的拖拉糾纏，拿出雷電般的決斷力，該拒絕的事情一口拒絕，絕不拖泥帶水。" },
+      { num: 22, name: "山火賁", omen: "亨，小利有攸往", tip: "山下有火，賁。君子以明庶政，無敢折獄。素履得金，天質自麗，淡雅勝過濃妝。", commentary: "過度修飾往往失了真本色。洗淨鉛華，素面朝天，靈魂的光澤才是真正的美貌。" },
+      { num: 23, name: "山地剝", omen: "不利有攸往", tip: "山附於地，剝。上人以厚下安宅。陰盛陽消之時，不宜強自出頭，當安心固守根基。", commentary: "如果覺得狀態跌入低谷，不要急著自救撲騰，躺平休息、吃好睡足，把底層體力養好。" },
+      { num: 24, name: "地雷復", omen: "亨，出入無疾，朋來無咎", tip: "雷在地中，復。先王以至日閉關，商旅不行。一陽初生，剝極必復，生機暗湧。", commentary: "只要心念一轉，隨時都是重生的起點。昨天犯的錯、吃壞的食物，今天一筆勾銷！" },
+      { num: 25, name: "天雷無妄", omen: "元亨利貞，其匪正有眚", tip: "天下雷行，物與無妄。先王以茂對時，育萬物。心懷純真，不存非分妄想，自然吉祥。", commentary: "不要去揣度未發生的災難，也不要有走捷徑的心態，腳踏實地，清清白白最自在。" },
+      { num: 26, name: "山天大畜", omen: "利貞，不家食吉，利涉大川", tip: "天在山中，大畜。君子以多識前言往行，以畜其德。剛健篤實，輝光日新。", commentary: "深厚的學養與定力來自日復一日的積累。安靜讀一本好書、練兩張字，充實內在胸襟。" },
+      { num: 27, name: "山雷頤", omen: "貞吉，觀頤，自求口實", tip: "山下有雷，頤。君子以慎言語，節飲食。觀其所養，自求正道，言語與食飲皆心鏡。", commentary: "言語要善意清淨，飲食要溫和有節。禍從口出，病從口入，守住口這道門戶就是修行。" },
+      { num: 28, name: "澤風大過", omen: "棟橈，利有攸往，亨", tip: "澤滅木，大過。君子以獨立不懼，遁世無悶。重壓之下，剛柔並濟方能不折枝葉。", commentary: "當責任壓得你喘不過氣時，學會卸下不屬於你的包袱。適時彎腰，不是認輸，是為了不折斷。" },
+      { num: 29, name: "坎為水", omen: "習坎，有孚，維心亨", tip: "水洊至，習坎。君子以常德行，習教事。水流奔湧不舍晝夜，歷經險阻而初心不失。", commentary: "人生坎坷如流水過石，只要奔流的決心不變，任何險灘都能在時間裡被磨成坦途。" },
+      { num: 30, name: "離為火", omen: "利貞，亨，畜牝牛吉", tip: "明兩作，離。大人以繼明照于四方。柔順中正，依附光明之理，如火得木而長存。", commentary: "內心常保一團溫暖的光，溫和待人，柔順處事。不要做烈火傷人，要做溫泉暖心。" },
+      { num: 31, name: "澤山咸", omen: "亨，利貞，取女吉", tip: "山上有澤，咸。君子以虛受人。山虛則能容水，心虛則能感應萬物，感同身受。", commentary: "把心房打掃乾淨，騰出空間去接納別人的善意。心胸虛懷若谷，善緣不請自來。" },
+      { num: 32, name: "雷風恆", omen: "亨，無咎，利貞", tip: "雷風，恆。君子以立不易方。日升月落，四時成序，持之以恆方能穿石破壁。", commentary: "世界上最厲害的力量不是爆發力，而是「每天都做一點」的習慣力。滴水穿石，功在不捨。" },
+      { num: 33, name: "天山遯", omen: "亨，小利貞", tip: "天下有山，遯。君子以遠小人，不惡而嚴。知難而退，明哲保身，退步原是向前。", commentary: "遇見消耗你的人與事，不必爭執對罵，轉身離開就好。高明的退讓是保全元氣的智者之選。" },
+      { num: 34, name: "雷天大壯", omen: "利貞，羝羊觸藩", tip: "雷在天上，大壯。君子以非禮弗履。勢頭強盛之時莫盲目用強，過剛則易折。", commentary: "即便自認全對，說話也要留三分口德。得理饒人，才是真正的氣度非凡。" },
+      { num: 35, name: "火地晉", omen: "康侯用錫馬蕃庶", tip: "明出地上，晉。君子以自昭明德。如日中天，照耀萬物，步步高升，清明坦蕩。", commentary: "昂首挺胸迎向生活，不要畏縮自卑。你本來就有耀眼的光芒，自然展現即可。" },
+      { num: 36, name: "地火明夷", omen: "利艱貞", tip: "明入地中，明夷。君子以蒞眾，用晦而明。處幽冥之境當藏起鋒芒，安忍待旦。", commentary: "感到不被理解時，無須逢人訴苦。把光芒收斂在心裡，默默耕耘，等待黑夜過去。" },
+      { num: 37, name: "風火家人", omen: "利女貞", tip: "風自火出，家人。君子以言有物而行有恆。齊家治身，言行相顧，家和萬事興盛。", commentary: "先把自己身邊這一方小小案頭整理乾淨，心安於室，生活秩序自會井井有條。" },
+      { num: 38, name: "火澤睽", omen: "小事吉", tip: "上火下澤，睽。君子以同而異。見解分歧各執一詞，求同存異方是化解之道。", commentary: "允許別人與你不同，世界因差異而豐富。放下改造他人的念頭，心寬天地自寬。" },
+      { num: 39, name: "水山蹇", omen: "利西南，不利東北", tip: "山上有水，蹇。君子以反身修德。行路艱難前途受阻，當反求諸己，莫怨天尤人。", commentary: "碰壁時不要怪路不平，低頭看看是不是自己步調太急。向內修正自己，道路自然順遂。" },
+      { num: 40, name: "雷水解", omen: "利西南，其來復吉", tip: "雷雨作，解。君子以赦過宥罪。春雷乍動冰雪消融，寬厚待人，解開心中結恨。", commentary: "原諒過去那些傷害你的人，不是為了成全他們，而是為了把自己從仇恨的枷鎖中解放。" },
+      { num: 41, name: "山澤損", omen: "損，有孚，元吉", tip: "山下有澤，損。君子以懲忿窒欲。減去多餘的貪慾與妄念，損之又損以歸真純。", commentary: "生活做減法，心靈得加法。減去無效社交、減去多餘零食，整個人會前所未有地輕盈。" },
+      { num: 42, name: "風雷益", omen: "利有攸往，利涉大川", tip: "風雷，益。君子以見善則遷，有過則改。順應時勢積累功德，日日精進不休。", commentary: "看到好的榜樣就虛心學習，發現自己的缺點就爽快承認改進，這才是頂級的智慧。" },
+      { num: 43, name: "澤天夬", omen: "揚于王庭，孚號有厲", tip: "澤上於天，夬。君子以施祿及下，居德則忌。果決斬斷猶豫不決，乾脆俐落。", commentary: "想做的事情今天就開始，不想去的地方立刻拒絕。戒除優柔寡斷，生活輕鬆一半。" },
+      { num: 44, name: "天風姤", omen: "女壯，勿用取女", tip: "天下有風，姤。后以施命誥四方。萍水相逢亦是緣，察納雅言，防微杜漸。", commentary: "偶遇的緣分以平常心看待，不盲目沉迷，亦不失分寸。君子之交淡如水。" },
+      { num: 45, name: "澤地萃", omen: "亨，王假有廟", tip: "澤上於地，萃。君子以除戎器，戒不虞。聚沙成塔精粹凝聚，團結方能致遠。", commentary: "把散落於日常瑣碎中的心力聚攏回來，專注在手頭這件事，聚精會神功到自然成。" },
+      { num: 46, name: "地風升", omen: "元亨，用見大人", tip: "地中生木，升。君子以順德，積小以高大。如樹木自泥土萌發，日漸參天。", commentary: "不要嫌每天進步只有一點點，大樹也是從微小的種子開始發芽的。步步踏實，前程似錦。" },
+      { num: 47, name: "澤水困", omen: "亨，貞，大人吉", tip: "水在澤下，困。君子以致命遂志。處身逆境而志氣不摧，困苦方能淘洗真英雄。", commentary: "身陷低谷時記住：反彈往往在谷底發生。守住這份堅韌，風暴過後你就是最閃亮的那顆金子。" },
+      { num: 48, name: "水風井", omen: "改邑不改井，無喪無得", tip: "木上有水，井。君子以勞民勸相。泉水源源不絕滋潤萬物，厚殖內在之深井。", commentary: "你的內在原本就藏著取之不盡的平靜與智慧，莫向外苦苦求索，深潛回內心去汲水。" },
+      { num: 49, name: "澤火革", omen: "巳日乃孚，元亨利貞", tip: "澤中有火，革。君子以治歷明時。天地變換草木更新，順應時勢勇敢變革。", commentary: "不要害怕告別舊生活。勇敢打破過去的限制，變革後的空氣將無比新鮮自由。" },
+      { num: 50, name: "火風鼎", omen: "元吉，亨", tip: "木上有火，鼎。君子以正位凝命。鼎鼐調和烹飪美食，端正心位，凝心聚神。", commentary: "端坐中正，心神不搖。如同重鼎穩立天地之間，自帶威儀，外力無法動搖半分。" },
+      { num: 51, name: "震為雷", omen: "震來虩虩，笑言啞啞", tip: "洊雷，震。君子以恐懼脩省。雷霆萬鈞臨頭而面不改色，定力超然自得安穩。", commentary: "外在世界再喧鬧慌亂，內心也要如深山古剎般寂靜。笑看風雲變幻，心安即是歸宿。" },
+      { num: 52, name: "艮為山", omen: "艮其背，不獲其身", tip: "兼山，艮。君子以思不出其位。行止有節，動靜得宜，止於當止之所，穩如泰山。", commentary: "懂得在適當的時候停下來，是最高超的技藝。止步、歇息、閉口、安靜，讓浮塵落地。" },
+      { num: 53, name: "風山漸", omen: "女歸吉，利貞", tip: "山上有木，漸。君子以居賢德善俗。鴻鳥循序漸飛，循序漸進，水到渠成。", commentary: "不要妄想一步登天，人生的好光景都是慢慢熬出來的。走穩每一步，好風景自然在前頭。" },
+      { num: 54, name: "雷澤歸妹", omen: "征凶，無攸利", tip: "澤上有雷，歸妹。君子以永終知敝。名不正則言不順，行急躁則終招悔疚。", commentary: "切莫被一時的衝動與情緒綁架。衝動下的決定往往後悔莫及，冷靜三分鐘再作反應。" },
+      { num: 55, name: "雷火豐", omen: "亨，王假之，勿憂宜日中", tip: "雷電皆至，豐。君子以折獄致刑。如日中天盛大輝煌，善待福分，不忘憂患。", commentary: "風光無限時，多一分低調與感恩；順遂安逸時，少一分傲慢與揮霍。" },
+      { num: 56, name: "火山旅", omen: "小亨，旅貞吉", tip: "山上有火，旅。君子以明慎用刑而不留獄。遊歷四方客居天下，安於漂泊樂天知命。", commentary: "人生本是一場借宿之旅，何必把所有得失都當真？放下執念，輕裝上陣，處處皆風景。" },
+      { num: 57, name: "巽為風", omen: "小亨，利有攸往", tip: "隨風，巽。君子以申命行事。柔順謙恭如微風拂柳，無孔不入，柔能克剛。", commentary: "說話不要太硬，做事不要太死。像春風一樣溫和柔軟，世間多數僵局都會被你的柔和融化。" },
+      { num: 58, name: "兌為澤", omen: "亨，利貞", tip: "麗澤，兌。君子以朋友講習。歡欣雀躍交流切磋，內外喜悅祥和，滿面春風。", commentary: "給周圍的人一個發自內心的微笑吧！喜悅是會傳染的，溫暖別人，自己也會被溫暖。" },
+      { num: 59, name: "風水渙", omen: "亨，王假有廟", tip: "風行水上，渙。先王以享于上帝立廟。渙散消釋冰消瓦解，洗去舊垢迎新風。", commentary: "讓心中的芥蒂與沉重如水氣般蒸發隨風散去。洗個熱水澡，煥然一新重新開始。" },
+      { num: 60, name: "水澤節", omen: "亨，苦節不可貞", tip: "澤上有水，節。君子以制數度，議德行。過度節制反致痛苦，節奏適度方得長久。", commentary: "別給自己設立苛刻到想哭的清規戒律。張弛有度，生活有節制但也有甜頭，才能走得遠。" },
+      { num: 61, name: "風澤中孚", omen: "豚魚吉，利涉大川", tip: "澤上有風，中孚。君子以議獄緩死。至誠感通信及豚魚，心中有信萬物相應。", commentary: "真誠是世上最強大的穿透力。對自己坦誠，對他人以真心相待，不用擔心吃虧。" },
+      { num: 62, name: "雷山小過", omen: "亨，利貞，可小事不可大事", tip: "山上有雷，小過。君子以行過乎恭，喪過乎哀。小事謹慎，微疵無礙，謹小慎微。", commentary: "偶爾有一點小差錯不用如臨大敵。原諒自己今天的一點點不完美，明天繼續往前。" },
+      { num: 63, name: "水火既濟", omen: "亨小，利貞，初吉終亂", tip: "水在火上，既濟。君子以思患而預防之。大功告成之時，當慎終如始，守住初心。", commentary: "事情辦成了，最容易放鬆大意。不要被讚美沖昏頭腦，平平常常，才是真境界。" },
+      { num: 64, name: "火水未濟", omen: "亨，小狐汔濟，濡其尾", tip: "火在水上，未濟。君子以慎辨物居方。未竟之業乃生命常態，生生不息，無有終局。", commentary: "人生永遠未完待續，永遠有新的故事與篇章。安住當下這一刻，這就是最好的結局。" }
+    ];
+
+    const BODY_HABITS_36 = [
+      { id: "bh_1", title: "手拿開！不准摳擠粉刺痘痘", tip: "指甲裡的細菌正在毀掉你剛擦好的精華！留下紅印和凹洞要花三個月修復。立刻把手放下來，不准摳！", commentary: "把手拿去握筆寫字或捏手串，給手指找點別的事做，放過臉上的毛孔！" },
+      { id: "bh_2", title: "手又悄悄伸到後背抓結痂了？", tip: "抓破了果酸身體乳就白噴了，黑色素沉澱會很難退。把手放回鍵盤上，坐直，深呼吸！", commentary: "背部的皮膚很薄，指甲一抓就是黑印子，忍住那三秒鐘的微癢，保持光潔美背！" },
+      { id: "bh_3", title: "上下牙齒分開！放鬆咬肌", tip: "檢查一下你的牙齒是不是又咬緊了？咬肌每天做無意識重訓才會發腮！上下牙分開2mm，舌貼上顎！", commentary: "上下排牙齒現在分開，吸氣吐氣，感覺腮幫子兩側緊繃的石頭正在化成軟豆腐。" },
+      { id: "bh_4", title: "微收下巴！後腦杓找衣領", tip: "手機拿高到眼睛平視水平！不要讓頸椎承受 27 公斤的重壓，雙下巴和口角肉就是這樣被拉垮的。", commentary: "手機拿高一點，下巴水平向後縮五毫米，別讓烏龜探頸吃掉你好看的下顎角。" },
+      { id: "bh_5", title: "把那隻翹起來的腳給我放下來！", tip: "翹二郎腿會讓骨盆歪斜、脊椎側彎，假胯寬跟小腹外凸就是這麼來的。雙腳平踩地面！", commentary: "兩隻腳板平貼地面，坐骨坐實椅面，脊椎立刻獲得兩邊平衡的支撐力。" },
+      { id: "bh_6", title: "不准癱在沙發椅背上！", tip: "不要整個人陷在椅子裡！坐骨找椅面，微收小腹，感覺頭頂有一條隱形線把你向上懸吊。鬆而不癱！", commentary: "骨盆後傾癱坐會把小腹肉硬生生往外擠，坐直微收下腹，腰部核心立刻上工！" },
+      { id: "bh_7", title: "站著別單側頂胯（三七步）！", tip: "兩腳平均分擔體重，重心落在腳掌正中（湧泉穴），膝蓋微屈別卡死超伸，保護髖關節！", commentary: "等車或站立時別把重量全摔在一隻腳上，兩腳站穩，膝蓋微彎留一絲彈性。" },
+      { id: "bh_8", title: "右腳足弓抓地，別外八拖地！", tip: "走路時右腳大拇指球踩穩蹬地，感覺足弓像彈簧一樣抓地提起來，拉直你的小腿外側！", commentary: "右腳足弓立體起拱，小腿外側的緊繃線條自然收攏，走路姿態如微風扶柳。" },
+      { id: "bh_9", title: "你不是真餓，是大腦在討多巴胺！", tip: "問自己：現在如果是一顆沒味的水煮蛋你想吃嗎？不想吃就是嘴饞！先喝一杯 300ml 溫水！", commentary: "下午三點的嘴巴寂寞，用一杯熱無糖茶去撫平，給大腦十分鐘，衝動自然退散。" },
+      { id: "bh_10", title: "吃東西換邊嚼！戒咬硬物與冰塊", tip: "別總是習慣用同一側磨牙，否則一邊咬肌鼓起來臉變歪。堅果硬糖慢嚼，冰塊絕對別嚼！", commentary: "以前嚼冰塊的代價已經看見了，從今以後只吃溫潤軟食，堅決保護顳顎關節。" },
+      { id: "bh_11", title: "肩膀下沉，用肚子呼吸！", tip: "感覺你的呼吸——是不是肩膀一直跟著聳起？深吸一口氣把氣沉到肚子，吐氣肚臍貼後背！", commentary: "吸氣腹部微鼓、胸口不動，吐氣徹底排空，放鬆那兩塊快爆炸的斜方肌。" },
+      { id: "bh_12", title: "看看現在幾點了！藍光傷褪黑素", tip: "再滑下去明天氣色又發黃暗沉了！設定鬧鐘，00:30 前務必閉上眼睛，舌頂上顎安心入夢！", commentary: "該睡覺啦！今晚把被子拉好，舌頂上顎做個深沉美夢，明天神采奕奕。" },
+      { id: "bh_13", title: "工位胸小肌門框拉伸", tip: "手臂屈肘 90 度靠在門框，身體向前微傾，感受胸前大肌與胸小肌延展，徹底消除圓肩與副乳。", commentary: "只要花 30 秒靠在門框推一下，胸腔立刻打開，連呼吸進去的氧氣都多了一倍。" },
+      { id: "bh_14", title: "枕下肌群退緊指壓", tip: "雙手拇指扣住後腦杓底部凹陷（風池穴），微仰頭深呼吸，釋放低頭滑手機累積的頭頸代償硬塊。", commentary: "大拇指扣進後腦勺骨頭邊緣揉一揉，一股微酸直通頭頂，眼睛瞬間變亮。" },
+      { id: "bh_15", title: "短足起拱（足弓重生）", tip: "光腳站立，在不屈曲腳趾的前提下，將大腳趾球與腳跟向內收縮靠攏，感受足心立體抬升。", commentary: "大拇指球踩穩，足心像吸盤一樣往上提，這是拉直小腿外翻最核心的靈魂動作。" },
+      { id: "bh_16", title: "下巴後縮（雙下巴消退）", tip: "手指輕抵下巴水平向後推，感覺後頸延展如靠牆，停留 5 秒做 10 組，拉直頸椎曲度。", commentary: "下巴後縮做出擠雙下巴的微醜動作，正是拉長後頸深層肌腱的最佳力學矯正。" },
+      { id: "bh_17", title: "仰臥死蟲式深層核心", tip: "平躺雙手雙腳抬起，對側手腳緩慢向外延伸，下背部死死貼合地面，啟動腹橫肌底座。", commentary: "睡前在床上做 10 次死蟲式，背部死死壓住床單，腹部深層核心立刻收緊。" },
+      { id: "bh_18", title: "無代償臀橋喚醒", tip: "平躺屈膝，腳跟踩實，呼氣夾緊臀部向上推起，不以腰椎過度拱起借力，導正骨盆前傾。", commentary: "用屁股夾緊的力量推上去，而不是挺肚子用腰椎借力，改善腰痠與骨盆前傾。" },
+      { id: "bh_19", title: "菱形肌夾背下沉", tip: "雙手成 W 字形，肩胛骨向脊椎中央下夾，停留 3 秒，徹底卸下頸部兩側高聳的斜方肌。", commentary: "雙手像比 W 一樣後夾，感覺兩塊肩胛骨在中間夾住一張紙，直角肩就是這樣找回來的。" },
+      { id: "bh_20", title: "泡沫軸深滾小腿外側", tip: "側臥將小腿外側（腓骨長短肌）壓在滾筒上前後滾動，尋找酸脹結節並靜止深呼吸，撫平小腿外翻。", commentary: "滾筒壓在小腿外側最酸的那個點停留 20 秒，把緊繃如鋼索的外翻肌肉全部壓軟！" },
+      { id: "bh_21", title: "Mewing 正確吞嚥法", tip: "吞口水時不抿嘴、不借咬肌用力，只用舌根向上推頂上顎完成吞嚥，自然收緊雙下巴。", commentary: "吞嚥時嘴唇放鬆、牙齒不要咬死，舌頭往上一貼一吞，下巴肉肉天天向上提拉。" },
+      { id: "bh_22", title: "掌心熨眼促進眼周循環", tip: "雙手掌心用力搓熱，覆蓋於眼眶四周，溫敷 40 秒，改善因熬夜引起的黑眼圈暗沉。", commentary: "雙手搓熱熨在眼皮上，享受那陣微熱的黑暗，給辛苦看螢幕一整天的眼睛放個假。" },
+      { id: "bh_23", title: "低弓步髂腰肌伸展", tip: "單腿向前跨步成弓步，骨盆回正下沉，拉伸後腿前側鼠蹊部，釋放腰椎深層過緊的代償牽拉。", commentary: "後腿大腿前側延伸拉長，把整天坐姿縮短的髂腰肌伸展釋放，下背痠痛瞬間緩解。" },
+      { id: "bh_24", title: "站立單腿平衡提足弓", tip: "右腳單腳站立，膝蓋微彎不卡死，大拇指球踩死，鍛鍊足踝本體感覺與深層足底小肌群。", commentary: "單腳站立晃晃悠悠是正常的，神經正在重新學習如何控制足踝平衡，加強右腳！" },
+      { id: "bh_25", title: "胸椎後仰伸展", tip: "坐在椅子上雙手抱後腦杓，以椅背為支點向後微仰伸展胸椎，打開長期駝背造成的胸腔閉塞。", commentary: "雙手托住後腦向後靠，讓長期窩著的胸椎伸個大大的懶腰，整個人神清氣爽。" },
+      { id: "bh_26", title: "斜角肌頸側輕柔牽引", tip: "一手抓住椅緣沉肩，頭部偏向對側並微下垂，感受頸側深層拉伸，釋放胸式呼吸帶來的脖頸緊繃。", commentary: "抓緊椅緣不讓肩膀聳起，頭往另一邊傾倒，頸側深層拉伸酸爽通透。" },
+      { id: "bh_27", title: "腳趾如扇面抓地展開", tip: "坐著或站著時，將五根腳趾主動向上翹起並向四周張開，再逐一放下抓地，激活神經傳導。", commentary: "五根腳趾頭像扇子一樣用力張開！長期被鞋子擠壓的腳趾需要這份自由舒展。" },
+      { id: "bh_28", title: "手按胸骨發低沉 Mmm 音", tip: "手掌貼緊胸口正中，深吸氣後發沉穩低音，尋找胸腔骨骼的微共鳴感，讓發聲更有底氣與定力。", commentary: "手掌摸著胸口發聲，感受那種穩如鐘磬的共鳴，說話自然帶著安定的力量。" },
+      { id: "bh_29", title: "出門防曬是最高階的抗老！", tip: "紫外線是膠原蛋白流失與痘印變黑的元兇！出門前不管是防曬乳或戴帽子，防護務必落實！", commentary: "晴天陰天都有紫外線，出門前把防曬做好，擦再多的美白精華都不如一道防曬屏障。" },
+      { id: "bh_30", title: "精緻糖會讓膠原蛋白焦糖化發黃！", tip: "下午少喝一杯含糖奶茶，肌膚就不會暗黃粗糙。改喝熱綠茶或無糖黑豆水，抗氧提神！", commentary: "戒掉精緻糖，臉上的暗沉發黃會像退潮一樣褪去，換來乾淨透亮的素顏光澤。" },
+      { id: "bh_31", title: "微針與水楊酸精華絕不同時擦！", tip: "記住師門戒律：VT微針100打開通道時，不可疊加高濃度酸類，以免過度刺激泛紅屏障！", commentary: "微針已經在促進代謝，後面只要純補水舒緩，千萬不要貪心刷酸把屏障弄傷。" },
+      { id: "bh_32", title: "身體乳絕不上臉，臉身有別！", tip: "雪芙蘭大藍瓶跟妮維雅C&E專門留給後背痘疤與雙腿，擦臉會悶閉鎖粉刺，臉部薄擦米淨凝霜！", commentary: "身體乳大面積擦後背跟雙腿美白，臉部交給輕盈好吸收的米淨凝霜，各司其職！" },
+      { id: "bh_33", title: "重訓深蹲絕不可膝超伸鎖死！", tip: "蹲起站直時，膝蓋保留一絲絲微屈彈性，千萬別狠狠向後卡死膝關節，免成 X/O 型腿！", commentary: "站起來的瞬間，膝蓋保持一分柔軟，把力量穩穩留在臀部與大腿上，不傷關節。" },
+      { id: "bh_34", title: "走姿不要靠腳跟硬敲地面！", tip: "走路不要腳跟咚咚重踩敲地，感受足弓與小腿後側肌腱如彈簧般輕盈推進，身輕如燕！", commentary: "走路輕柔有彈性，腳跟落地柔和過渡到前腳掌，身韻自然帶著輕盈靈動感。" },
+      { id: "bh_35", title: "枕頭高度切忌過高擠壓頸紋！", tip: "枕頭過高會讓下巴整晚死死抵著脖子，加深頸紋與頸椎曲度變直。平躺時脖頸需有支撐！", commentary: "躺下時檢查頸後有沒有空隙，枕頭托住脖子、下巴不貼鎖骨，頸紋才能舒展開。" },
+      { id: "bh_36", title: "睡前全身沉入床墊的大字放鬆", tip: "關燈躺平，雙手雙腳微微打開，呼氣時感覺全身骨骼像奶油融化一樣陷入床墊，萬事皆放下。", commentary: "今天的一切都結束了，你已經做得很棒。全身放軟，跟著為師一起安心睡去。" }
+    ];
+
+    /* ================= GLOBAL APPLICATION STATE ================= */
     let currentDate = new Date();
-    let currentPhaseFilter = 'all';
     let currentView = 'daily';
-    let currentEditingHabitId = null;
+    let currentPhaseFilter = 'all';
     let habits = [];
-    let logs = {}; // YYYY-MM-DD -> { completed: {}, notes: '', meals: [] }
+    let logs = {};
     let chatHistory = [];
+    let isChatOpen = false;
+    let currentEditingHabitId = null;
     let currentPendingEstimate = null;
     let chartInstance = null;
-    let isChatOpen = false;
+    let currentStickyCategory = 'auto'; // 'auto' (1:1), 'iching', 'body'
 
-    // --- Cloud Sync UI Helper ---
-    window.updateCloudStatusUI = function(isSynced) {
-      const badge = document.getElementById('cloudStatusText');
-      if (badge) {
-        badge.textContent = isSynced ? "雲端已同步" : "本機已封存";
-      }
-    };
-
-    window.applyCloudHabits = function(cloudHabits) {
-      if (Array.isArray(cloudHabits) && cloudHabits.length > 0) {
-        habits = cloudHabits;
-        localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
-        renderHabits();
-        updateDailyStats();
-      }
-    };
-
-    window.applyCloudLogs = function(cloudLogs) {
-      if (cloudLogs && typeof cloudLogs === 'object') {
-        logs = { ...logs, ...cloudLogs };
-        localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
-        updateDateHeader();
-        renderHabits();
-        renderMealsList();
-        updateDailyStats();
-        renderWeeklyAnalytics();
-      }
-    };
-
-    window.applyCloudChat = function(cloudChat) {
-      if (Array.isArray(cloudChat) && cloudChat.length > 0) {
-        chatHistory = cloudChat;
-        localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
-        renderChatHistory();
-      }
-    };
-
-    function persistHabitsAndLogs(saveHabits = false, saveLogs = false, saveChat = false) {
-      if (saveHabits) localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
-      if (saveLogs) localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
-      if (saveChat) localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
-      
-      // Sync to cloud if available
-      if (window._saveToCloud) {
-        window._saveToCloud(
-          saveHabits ? habits : null, 
-          saveLogs ? logs : null,
-          saveChat ? chatHistory : null
-        );
-      }
-    }
-
-    // Ambient Ink Background Canvas Particles (Night Edition with cyan dust)
+    /* ================= AMBIENT CANVAS & WOODEN FISH ================= */
     function initAmbientCanvas() {
       const canvas = document.getElementById('ambientInkCanvas');
       if (!canvas) return;
@@ -1016,52 +1053,197 @@
       let w = canvas.width = window.innerWidth;
       let h = canvas.height = window.innerHeight;
 
-      window.addEventListener('resize', () => {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      });
-
       const particles = [];
-      for (let i = 0; i < 30; i++) {
+      const particleCount = 28;
+
+      for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * w,
           y: Math.random() * h,
           r: Math.random() * 2.2 + 0.8,
           dx: (Math.random() - 0.5) * 0.35,
           dy: (Math.random() - 0.5) * 0.35,
-          alpha: Math.random() * 0.35 + 0.1
+          alpha: Math.random() * 0.4 + 0.15
         });
       }
 
-      function animate() {
+      function draw() {
         ctx.clearRect(0, 0, w, h);
         particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(100, 172, 152, ${p.alpha})`;
+          ctx.fill();
+
           p.x += p.dx;
           p.y += p.dy;
           if (p.x < 0) p.x = w;
           if (p.x > w) p.x = 0;
           if (p.y < 0) p.y = h;
           if (p.y > h) p.y = 0;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(104, 179, 163, ${p.alpha})`;
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = 'rgba(104, 179, 163, 0.4)';
-          ctx.fill();
         });
-        requestAnimationFrame(animate);
+        requestAnimationFrame(draw);
       }
-      animate();
+      draw();
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
     }
 
-    // --- App Init & Storage ---
+    window.knockWoodenFish = function(e) {
+      const btn = document.getElementById('woodenFishBtn');
+      if (btn) {
+        btn.classList.remove('fish-active');
+        void btn.offsetWidth;
+        btn.classList.add('fish-active');
+      }
+
+      const words = ["功德 +1", "咬肌放鬆 +1", "心神安寧 +1", "氣血通暢 +1", "足弓起拱 +1", "息心除躁 +1", "下顎線清晰 +1"];
+      const text = words[Math.floor(Math.random() * words.length)];
+
+      const span = document.createElement('span');
+      span.className = 'merit-text';
+      span.textContent = text;
+      
+      const x = e.clientX || 50;
+      const y = e.clientY || 50;
+      span.style.left = `${x - 20}px`;
+      span.style.top = `${y - 15}px`;
+      document.body.appendChild(span);
+
+      setTimeout(() => {
+        span.remove();
+      }, 850);
+    };
+
+    /* ================= PERSISTENCE & API KEY HELPER ================= */
+    function getSavedApiKey() {
+      try {
+        return localStorage.getItem('zen_user_gemini_api_key') || '';
+      } catch(e) {
+        return '';
+      }
+    }
+
+    function persistHabitsAndLogs(saveHabits = true, saveLogs = true, saveChat = false) {
+      try {
+        if (saveHabits) localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
+        if (saveLogs) localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
+        if (saveChat) localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
+      } catch(e) {
+        console.warn("Storage write failed", e);
+      }
+    }
+
+    window.setStickyNoteCategory = function(cat) {
+      currentStickyCategory = cat;
+      const ichingBtn = document.getElementById('tabBtnIching');
+      const bodyBtn = document.getElementById('tabBtnBody');
+      if (cat === 'iching') {
+        ichingBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-gold/20 text-gold border border-gold/40";
+        bodyBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-night-950 text-muted border border-sand";
+      } else {
+        bodyBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-celadon-500/20 text-celadon-600 border border-celadon-600/40";
+        ichingBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-night-950 text-muted border border-sand";
+      }
+      drawRandomStickyNote(cat);
+    };
+
+    /* 抽籤邏輯：易經與運動戒律徹底分開 */
+    window.drawRandomStickyNote = function(preferredCat = null) {
+      const modal = document.getElementById('stickyNoteModal');
+      const paperBox = document.getElementById('stickyNotePaperBox');
+      if (!modal) return;
+
+      const catToUse = preferredCat || (currentStickyCategory === 'auto' ? (Math.random() < 0.5 ? 'iching' : 'body') : currentStickyCategory);
+      let chosen = null;
+      let displayIndex = 1;
+
+      if (catToUse === 'iching') {
+        const idx = Math.floor(Math.random() * I_CHING_64.length);
+        const item = I_CHING_64[idx];
+        displayIndex = idx + 1;
+        chosen = {
+          type: '周易六十四卦 · 心神靈犀',
+          title: `【第 ${item.num} 卦】${item.name} · ${item.omen}`,
+          content: item.tip,
+          commentaryTitle: '師傅象辭微言 · 心神自觀',
+          commentary: item.commentary
+        };
+        const ichingBtn = document.getElementById('tabBtnIching');
+        const bodyBtn = document.getElementById('tabBtnBody');
+        if (ichingBtn && bodyBtn) {
+          ichingBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-gold/20 text-gold border border-gold/40";
+          bodyBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-night-950 text-muted border border-sand";
+        }
+      } else {
+        const idx = Math.floor(Math.random() * BODY_HABITS_36.length);
+        const item = BODY_HABITS_36[idx];
+        displayIndex = idx + 1;
+        chosen = {
+          type: item.id.startsWith('bh_1') && parseInt(item.id.replace('bh_','')) <= 12 ? '修持戒律 · 當頭棒喝' : '身韻拉筋 · 實操要訣',
+          title: `【體態修持】${item.title}`,
+          content: item.tip,
+          commentaryTitle: '師傅力學叮嚀 · 當刻自照',
+          commentary: item.commentary
+        };
+        const ichingBtn = document.getElementById('tabBtnIching');
+        const bodyBtn = document.getElementById('tabBtnBody');
+        if (ichingBtn && bodyBtn) {
+          bodyBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-celadon-500/20 text-celadon-600 border border-celadon-600/40";
+          ichingBtn.className = "text-[10px] font-serif px-2 py-0.5 rounded-md bg-night-950 text-muted border border-sand";
+        }
+      }
+
+      document.getElementById('stickyNoteIndex').textContent = `#${displayIndex}`;
+      document.getElementById('stickyNoteTypeBadge').textContent = `涵露齋 ｜ ${chosen.type}`;
+      document.getElementById('stickyNoteTitle').textContent = chosen.title;
+      document.getElementById('stickyNoteContent').textContent = chosen.content;
+      document.getElementById('stickyNoteCommentaryTitle').textContent = chosen.commentaryTitle;
+      document.getElementById('stickyNoteCommentary').textContent = chosen.commentary;
+
+      modal.classList.remove('hidden');
+
+      if (paperBox) {
+        paperBox.classList.remove('pinned-card-animate');
+        void paperBox.offsetWidth;
+        paperBox.classList.add('pinned-card-animate');
+      }
+    };
+
+    window.closeStickyNoteModal = function() {
+      document.getElementById('stickyNoteModal')?.classList.add('hidden');
+    };
+
+    window.openApiKeyModal = function() {
+      const input = document.getElementById('geminiApiKeyInput');
+      if (input) input.value = getSavedApiKey();
+      document.getElementById('apiKeyModal')?.classList.remove('hidden');
+    };
+    window.closeApiKeyModal = function() {
+      document.getElementById('apiKeyModal')?.classList.add('hidden');
+    };
+    window.saveApiKeySetting = function() {
+      const input = document.getElementById('geminiApiKeyInput');
+      const val = input ? input.value.trim() : '';
+      try {
+        localStorage.setItem('zen_user_gemini_api_key', val);
+        alert(val ? "🎉 Google Gemini API 金鑰已保存！師傅的大腦已連線啟動！" : "已清除自訂金鑰，回退為離線對答模式。");
+        closeApiKeyModal();
+        closeBackupModal();
+      } catch(e) {
+        alert("儲存失敗，請確認瀏覽器支援 LocalStorage。");
+      }
+    };
+
     function initApp() {
       initAmbientCanvas();
 
       const storedHabits = localStorage.getItem('zen_habits_v2');
       if (storedHabits) {
-        try { habits = JSON.parse(storedHabits); } catch(e) { habits = DEFAULT_HABITS; }
+        try { habits = JSON.parse(storedHabits); } catch(e) { habits = [...DEFAULT_HABITS]; }
       } else {
         habits = [...DEFAULT_HABITS];
       }
@@ -1085,6 +1267,15 @@
       renderMealsList();
       updateDailyStats();
       renderWeeklyAnalytics();
+
+      setTimeout(() => {
+        try {
+          if (!sessionStorage.getItem('has_shown_sticky_today')) {
+            drawRandomStickyNote();
+            sessionStorage.setItem('has_shown_sticky_today', 'true');
+          }
+        } catch(e) {}
+      }, 700);
     }
 
     function getDateKey(d) {
@@ -1098,139 +1289,88 @@
       const key = getDateKey(currentDate);
       const days = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
       const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-      
-      document.getElementById('currentDateDisplay').textContent = 
-        `${monthNames[currentDate.getMonth()]}${currentDate.getDate()}日 · ${days[currentDate.getDay()]}`;
-
+      const dateEl = document.getElementById('currentDateDisplay');
+      if (dateEl) {
+        dateEl.textContent = `${monthNames[currentDate.getMonth()]}${currentDate.getDate()}日 · ${days[currentDate.getDay()]}`;
+      }
       const log = logs[key] || { completed: {}, notes: '', meals: [] };
-      document.getElementById('dailyReflectionInput').value = log.notes || '';
+      const noteInput = document.getElementById('dailyReflectionInput');
+      if (noteInput) noteInput.value = log.notes || '';
     }
 
-    function changeDay(delta) {
+    window.changeDay = function(delta) {
       currentDate.setDate(currentDate.getDate() + delta);
       updateDateHeader();
       renderHabits();
       renderMealsList();
       updateDailyStats();
-    }
+    };
 
-    function setToday() {
+    window.setToday = function() {
       currentDate = new Date();
       updateDateHeader();
       renderHabits();
       renderMealsList();
       updateDailyStats();
-    }
-
-    // Navigation Switch (with WholeBody Support)
-    window.switchView = function(view) {
-      currentView = view;
-      const dailyView = document.getElementById('dailyView');
-      const wholeBodyView = document.getElementById('wholeBodyView');
-      const dietView = document.getElementById('dietView');
-      const weeklyView = document.getElementById('weeklyView');
-      const searchView = document.getElementById('searchView');
-
-      // Desktop nav elements
-      const dDaily = document.getElementById('desktopNavDaily');
-      const dWholeBody = document.getElementById('desktopNavWholeBody');
-      const dDiet = document.getElementById('desktopNavDiet');
-      const dWeekly = document.getElementById('desktopNavWeekly');
-      const dSearch = document.getElementById('desktopNavSearch');
-
-      // Mobile nav elements
-      const mDaily = document.getElementById('mobileNavDaily');
-      const mWholeBody = document.getElementById('mobileNavWholeBody');
-      const mDiet = document.getElementById('mobileNavDiet');
-      const mWeekly = document.getElementById('mobileNavWeekly');
-      const mSearch = document.getElementById('mobileNavSearch');
-
-      const inactiveD = "px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5";
-      const activeD = "px-3.5 py-2 rounded-xl bg-celadon-700 text-white shadow-sm transition-all flex items-center space-x-1.5";
-
-      dailyView.classList.add('hidden');
-      if (wholeBodyView) wholeBodyView.classList.add('hidden');
-      dietView.classList.add('hidden');
-      weeklyView.classList.add('hidden');
-      if (searchView) searchView.classList.add('hidden');
-
-      if (dDaily) dDaily.className = inactiveD;
-      if (dWholeBody) dWholeBody.className = inactiveD;
-      if (dDiet) dDiet.className = inactiveD;
-      if (dWeekly) dWeekly.className = inactiveD;
-      if (dSearch) dSearch.className = inactiveD;
-
-      if (mDaily) mDaily.className = "flex flex-col items-center space-y-1 text-muted";
-      if (mWholeBody) mWholeBody.className = "flex flex-col items-center space-y-1 text-muted";
-      if (mDiet) mDiet.className = "flex flex-col items-center space-y-1 text-muted";
-      if (mWeekly) mWeekly.className = "flex flex-col items-center space-y-1 text-muted";
-      if (mSearch) mSearch.className = "flex flex-col items-center space-y-1 text-muted";
-
-      if (view === 'daily') {
-        dailyView.classList.remove('hidden');
-        if (dDaily) dDaily.className = activeD;
-        if (mDaily) mDaily.className = "flex flex-col items-center space-y-1 text-celadon-600";
-        renderHabits();
-      } else if (view === 'wholeBody') {
-        if (wholeBodyView) wholeBodyView.classList.remove('hidden');
-        if (dWholeBody) dWholeBody.className = activeD;
-        if (mWholeBody) mWholeBody.className = "flex flex-col items-center space-y-1 text-sandalwood";
-        renderWholeBodyCards();
-      } else if (view === 'diet') {
-        dietView.classList.remove('hidden');
-        if (dDiet) dDiet.className = activeD;
-        if (mDiet) mDiet.className = "flex flex-col items-center space-y-1 text-celadon-600";
-        renderMealsList();
-      } else if (view === 'weekly') {
-        weeklyView.classList.remove('hidden');
-        if (dWeekly) dWeekly.className = activeD;
-        if (mWeekly) mWeekly.className = "flex flex-col items-center space-y-1 text-celadon-600";
-        renderWeeklyAnalytics();
-      } else if (view === 'search') {
-        if (searchView) searchView.classList.remove('hidden');
-        if (dSearch) dSearch.className = activeD;
-        if (mSearch) mSearch.className = "flex flex-col items-center space-y-1 text-celadon-600";
-        setTimeout(() => document.getElementById('searchInputField')?.focus(), 100);
-      }
     };
 
-    window.filterPhase = function(phase) {
+    window.switchView = function(view) {
+      currentView = view;
+      ['daily', 'wholeBody', 'diet', 'weekly', 'search'].forEach(v => {
+        const vEl = document.getElementById(v + 'View');
+        if (vEl) vEl.classList.toggle('hidden', v !== view);
+        const dBtn = document.getElementById('desktopNav' + v.charAt(0).toUpperCase() + v.slice(1));
+        if (dBtn) {
+          dBtn.className = (v === view) 
+            ? "px-3.5 py-2 rounded-xl bg-celadon-700 text-white shadow-sm transition-all flex items-center space-x-1.5"
+            : "px-3.5 py-2 rounded-xl text-muted hover:text-ink transition-all flex items-center space-x-1.5";
+        }
+        const mBtn = document.getElementById('mobileNav' + v.charAt(0).toUpperCase() + v.slice(1));
+        if (mBtn) {
+          mBtn.className = (v === view)
+            ? "flex flex-col items-center justify-center py-1 flex-1 text-celadon-600 transition-colors"
+            : "flex flex-col items-center justify-center py-1 flex-1 text-muted transition-colors";
+        }
+      });
+      if (view === 'daily') renderHabits();
+      if (view === 'wholeBody') renderWholeBodyCards();
+      if (view === 'diet') renderMealsList();
+      if (view === 'weekly') renderWeeklyAnalytics();
+      if (view === 'search') setTimeout(() => document.getElementById('searchInputField')?.focus(), 100);
+    };
+
+    window.filterPhase = function(phase, evt) {
       currentPhaseFilter = phase;
       document.querySelectorAll('.phase-btn').forEach(btn => {
-        btn.className = "phase-btn px-3 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap";
+        btn.className = "phase-btn px-2.5 py-1.5 rounded-xl bg-night-900 text-muted hover:text-ink border border-sand transition-all whitespace-nowrap text-xs";
       });
-      event.target.className = "phase-btn active px-3.5 py-1.5 rounded-xl bg-celadon-700 text-white shadow-sm transition-all whitespace-nowrap";
+      const targetBtn = evt ? evt.currentTarget : document.querySelector(`.phase-btn[onclick*="'${phase}'"]`);
+      if (targetBtn) {
+        targetBtn.className = "phase-btn active px-3 py-1.5 rounded-xl bg-celadon-700 text-white shadow-sm transition-all whitespace-nowrap text-xs";
+      }
       renderHabits();
     };
 
-    // Render Habits
     window.renderHabits = function() {
       const container = document.getElementById('habitsContainer');
+      if (!container) return;
       const key = getDateKey(currentDate);
       const dayLog = logs[key] || { completed: {}, notes: '', meals: [] };
 
       container.innerHTML = '';
-
-      const filteredHabits = habits.filter(h => {
+      const filtered = habits.filter(h => {
         if (currentPhaseFilter === 'all') return true;
-        if (currentPhaseFilter === 'morning') return h.phase === 'morning';
-        if (currentPhaseFilter === 'night') return h.phase === 'night';
-        return true;
+        return h.phase === currentPhaseFilter;
       });
 
-      if (filteredHabits.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-12 bg-night-900 rounded-3xl border border-sand">
-            <i class="fa-solid fa-wind text-muted/40 text-3xl mb-2"></i>
-            <p class="text-sm text-muted font-serif">此類別尚無定目，可安心調息</p>
-          </div>
-        `;
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center py-12 bg-night-900 rounded-2xl border border-sand"><i class="fa-solid fa-wind text-muted/40 text-2xl mb-1.5"></i><p class="text-xs text-muted font-serif">此類別尚無定目，可安心調息</p></div>`;
         return;
       }
 
       const grouped = {};
       Object.keys(CATEGORY_META).forEach(cat => grouped[cat] = []);
-      filteredHabits.forEach(h => {
+      filtered.forEach(h => {
         if (!grouped[h.category]) grouped[h.category] = [];
         grouped[h.category].push(h);
       });
@@ -1238,75 +1378,68 @@
       Object.keys(grouped).forEach(catKey => {
         const catHabits = grouped[catKey];
         if (catHabits.length === 0) return;
-
         const meta = CATEGORY_META[catKey];
         const catSection = document.createElement('div');
-        catSection.className = "space-y-2.5";
+        catSection.className = "space-y-2";
 
         let html = `
           <div class="flex items-center justify-between px-1">
             <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full ${meta.bg} ${meta.color}"></span>
-              <h3 class="font-serif font-black text-sm tracking-wide text-ink">${meta.name}</h3>
-              <span class="text-[11px] text-muted font-serif">(${catHabits.length})</span>
+              <span class="w-2 h-2 rounded-full ${meta.bg} ${meta.color}"></span>
+              <h3 class="font-serif font-black text-xs sm:text-sm tracking-wide text-ink">${meta.name}</h3>
+              <span class="text-[10px] text-muted font-serif">(${catHabits.length})</span>
             </div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
         `;
 
         catHabits.forEach(habit => {
           const isDone = !!(dayLog.completed && dayLog.completed[habit.id]);
           html += `
-            <div class="bg-night-900/90 backdrop-blur-sm rounded-2xl p-4 border transition-all duration-300 zen-shadow zen-shadow-hover flex items-start justify-between group ${isDone ? 'border-celadon-600/50 bg-celadon-50/20' : 'border-sand'}">
-              <div class="flex items-start space-x-3.5 flex-1 min-w-0 mr-2">
-                <button onclick="toggleHabit('${habit.id}', this)" class="mt-0.5 w-6 h-6 rounded-xl flex items-center justify-center transition-all ${isDone ? 'bg-celadon-700 text-white scale-105 shadow-sm' : 'border border-sand bg-night-950 hover:border-celadon-600 text-transparent'}">
+            <div class="bg-night-900/90 rounded-2xl p-3.5 border transition-all duration-300 zen-shadow flex items-start justify-between ${isDone ? 'border-celadon-600/50 bg-celadon-50/20' : 'border-sand'}">
+              <div class="flex items-start space-x-3 flex-1 min-w-0 mr-1.5 cursor-pointer" onclick="toggleHabit('${habit.id}')">
+                <button type="button" class="mt-0.5 w-7 h-7 rounded-xl flex items-center justify-center transition-all shrink-0 ${isDone ? 'bg-celadon-700 text-white scale-105 shadow-sm' : 'border border-sand bg-night-950 text-transparent'}">
                   <i class="fa-solid fa-check text-xs"></i>
                 </button>
                 <div class="min-w-0 flex-1">
-                  <div class="flex items-center space-x-2">
-                    <span class="font-serif font-bold text-xs sm:text-sm text-ink truncate ${isDone ? 'line-through text-muted/60' : ''}">${habit.title}</span>
-                  </div>
-                  ${habit.note ? `<p class="text-[11px] text-muted truncate mt-0.5 font-serif">${habit.note}</p>` : ''}
-                  <div class="flex items-center space-x-2 mt-2.5 text-[10px] text-muted font-serif">
-                    <span class="px-2 py-0.5 bg-night-950 rounded-lg text-ink/80 flex items-center space-x-1 border border-sand/40">
+                  <span class="font-serif font-bold text-xs sm:text-sm text-ink truncate block ${isDone ? 'line-through text-muted/60' : ''}">${habit.title}</span>
+                  ${habit.note ? `<p class="text-[11px] text-muted truncate mt-0.5 font-serif leading-tight">${habit.note}</p>` : ''}
+                  <div class="flex items-center space-x-2 mt-2 text-[10px] text-muted font-serif">
+                    <span class="px-2 py-0.5 bg-night-950 rounded-md text-ink/80 flex items-center space-x-1 border border-sand/40">
                       <i class="fa-regular fa-clock text-[9px] text-celadon-600"></i>
                       <span>${habit.duration} 分鐘</span>
                     </span>
-                    <span class="px-2 py-0.5 bg-night-950 rounded-lg text-muted border border-sand/40">
+                    <span class="px-2 py-0.5 bg-night-950 rounded-md text-muted border border-sand/40">
                       ${PHASE_META[habit.phase] || '全日'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <!-- Action Menu -->
-              <div class="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="flex items-center space-x-1">
                 <button onclick="editHabit('${habit.id}')" title="修整" class="w-7 h-7 text-muted hover:text-ink flex items-center justify-center rounded-lg hover:bg-night-850">
-                  <i class="fa-solid fa-pen text-[11px]"></i>
+                  <i class="fa-solid fa-pen text-[10px]"></i>
                 </button>
                 <button onclick="deleteHabit('${habit.id}')" title="除名" class="w-7 h-7 text-muted hover:text-cinnabar-500 flex items-center justify-center rounded-lg hover:bg-cinnabar-50/20">
-                  <i class="fa-solid fa-trash text-[11px]"></i>
+                  <i class="fa-solid fa-trash text-[10px]"></i>
                 </button>
               </div>
             </div>
           `;
         });
-
         html += `</div>`;
         catSection.innerHTML = html;
         container.appendChild(catSection);
       });
     };
 
-    // ================= RENDER WHOLE BODY CARDS (身心全相) =================
     window.renderWholeBodyCards = function() {
       const container = document.getElementById('wholeBodyCardsGrid');
       if (!container) return;
       container.innerHTML = '';
-
-      WHOLE_BODY_REGIONS.forEach((region, index) => {
+      WHOLE_BODY_REGIONS.forEach(region => {
         const card = document.createElement('div');
-        card.className = "bg-night-900/90 rounded-2xl p-5 border border-sand zen-shadow zen-shadow-hover space-y-3 transition-all";
+        card.className = "bg-night-900/90 rounded-2xl p-4 sm:p-5 border border-sand zen-shadow space-y-3";
         card.innerHTML = `
           <div class="flex items-start justify-between border-b border-sand pb-3">
             <div class="flex items-center space-x-2.5">
@@ -1320,10 +1453,9 @@
             </div>
             <button onclick="askMasterAboutRegion('${region.title}')" class="text-[11px] font-serif text-celadon-600 hover:text-celadon-500 bg-celadon-50/40 px-2 py-1 rounded-lg border border-celadon-600/30 flex items-center space-x-1 transition-colors">
               <i class="fa-solid fa-comment-dots text-[10px]"></i>
-              <span>問師傅要領</span>
+              <span>問要領</span>
             </button>
           </div>
-
           <div class="space-y-2 text-xs font-serif leading-relaxed">
             <div class="bg-night-950/70 p-2.5 rounded-xl border border-sand/50">
               <div class="text-[10px] text-cinnabar-500 font-bold mb-0.5 flex items-center space-x-1">
@@ -1332,7 +1464,6 @@
               </div>
               <p class="text-ink/80 text-[11px]">${region.problem}</p>
             </div>
-
             <div class="bg-night-950/70 p-2.5 rounded-xl border border-sand/50">
               <div class="text-[10px] text-celadon-600 font-bold mb-0.5 flex items-center space-x-1">
                 <i class="fa-solid fa-circle-check text-[9px]"></i>
@@ -1351,19 +1482,11 @@
       sendQuickPrompt(`師傅，請針對我全身改善表中的【${regionTitle}】，詳細為我解析發生的力學機制，以及我今天可以立刻做什麼來舒緩改善？`);
     };
 
-    window.toggleHabit = function(habitId, el) {
+    window.toggleHabit = function(habitId) {
       const key = getDateKey(currentDate);
       if (!logs[key]) logs[key] = { completed: {}, notes: '', meals: [] };
       if (!logs[key].completed) logs[key].completed = {};
-
-      const nextState = !logs[key].completed[habitId];
-      logs[key].completed[habitId] = nextState;
-
-      if (nextState && el) {
-        el.classList.add('ripple-active');
-        setTimeout(() => el.classList.remove('ripple-active'), 500);
-      }
-
+      logs[key].completed[habitId] = !logs[key].completed[habitId];
       persistHabitsAndLogs(false, true);
       renderHabits();
       updateDailyStats();
@@ -1372,7 +1495,7 @@
 
     window.saveDailyReflection = function() {
       const key = getDateKey(currentDate);
-      const text = document.getElementById('dailyReflectionInput').value;
+      const text = document.getElementById('dailyReflectionInput')?.value || '';
       if (!logs[key]) logs[key] = { completed: {}, notes: '', meals: [] };
       logs[key].notes = text;
       persistHabitsAndLogs(false, true);
@@ -1381,7 +1504,6 @@
     function updateDailyStats() {
       const key = getDateKey(currentDate);
       const dayLog = logs[key] || { completed: {}, meals: [] };
-      
       const total = habits.length;
       let completedCount = 0;
       let totalMinutes = 0;
@@ -1397,14 +1519,12 @@
       document.getElementById('dayRateText').textContent = `${rate}%`;
       document.getElementById('dayTotalMinutesText').textContent = `${totalMinutes}m`;
 
-      // Meals Calories Summary
       let dayKcal = 0;
       if (dayLog.meals && dayLog.meals.length > 0) {
         dayLog.meals.forEach(m => dayKcal += (m.kcal || 0));
       }
       document.getElementById('dayCaloriesSummaryText').textContent = `${dayKcal} kcal`;
 
-      // Streak
       let streak = 0;
       let d = new Date();
       for (let i = 0; i < 30; i++) {
@@ -1413,21 +1533,18 @@
         if (l && l.completed && Object.values(l.completed).some(v => v === true)) {
           streak++;
           d.setDate(d.getDate() - 1);
-        } else {
-          break;
-        }
+        } else { break; }
       }
       document.getElementById('streakCountText').textContent = `${Math.max(1, streak)}天`;
     }
 
-    // Modal Add/Edit
     window.openAddHabitModal = function() {
       currentEditingHabitId = null;
       document.getElementById('modalTitle').textContent = "添置修持定目";
       document.getElementById('habitNameInput').value = '';
       document.getElementById('habitDurationInput').value = '15';
       document.getElementById('habitNotesInput').value = '';
-      document.getElementById('habitModal').classList.remove('hidden');
+      document.getElementById('habitModal')?.classList.remove('hidden');
     };
 
     window.editHabit = function(id) {
@@ -1441,35 +1558,29 @@
       document.getElementById('habitDurationInput').value = item.duration;
       document.getElementById('habitIconSelect').value = item.icon || 'fa-spa';
       document.getElementById('habitNotesInput').value = item.note || '';
-      document.getElementById('habitModal').classList.remove('hidden');
+      document.getElementById('habitModal')?.classList.remove('hidden');
     };
 
     window.closeHabitModal = function() {
-      document.getElementById('habitModal').classList.add('hidden');
+      document.getElementById('habitModal')?.classList.add('hidden');
     };
 
     window.saveHabitItem = function() {
-      const title = document.getElementById('habitNameInput').value.trim();
-      if (!title) {
-        alert("請題寫修持項目名稱");
-        return;
-      }
-      const category = document.getElementById('habitCategorySelect').value;
-      const phase = document.getElementById('habitPhaseSelect').value;
-      const duration = parseInt(document.getElementById('habitDurationInput').value) || 15;
-      const icon = document.getElementById('habitIconSelect').value;
-      const note = document.getElementById('habitNotesInput').value.trim();
+      const title = document.getElementById('habitNameInput')?.value.trim();
+      if (!title) { alert("請題寫修持項目名稱"); return; }
+      const category = document.getElementById('habitCategorySelect')?.value || 'facial';
+      const phase = document.getElementById('habitPhaseSelect')?.value || 'anytime';
+      const duration = parseInt(document.getElementById('habitDurationInput')?.value) || 15;
+      const icon = document.getElementById('habitIconSelect')?.value || 'fa-spa';
+      const note = document.getElementById('habitNotesInput')?.value.trim() || '';
 
       if (currentEditingHabitId) {
         const index = habits.findIndex(h => h.id === currentEditingHabitId);
-        if (index !== -1) {
-          habits[index] = { ...habits[index], title, category, phase, duration, icon, note };
-        }
+        if (index !== -1) habits[index] = { ...habits[index], title, category, phase, duration, icon, note };
       } else {
         habits.push({ id: 'h_' + Date.now(), title, category, phase, duration, icon, note });
       }
 
-      // Persist template permanently across weeks
       persistHabitsAndLogs(true, false);
       closeHabitModal();
       renderHabits();
@@ -1487,31 +1598,29 @@
       }
     };
 
-    // ================= SMART DIET ESTIMATOR =================
     window.clearDietInput = function() {
       document.getElementById('dietInputText').value = '';
-      document.getElementById('aiEstimateCard').classList.add('hidden');
+      document.getElementById('aiEstimateCard')?.classList.add('hidden');
     };
 
     window.estimateDietWithAI = async function() {
       const input = document.getElementById('dietInputText');
-      const text = input.value.trim();
-      if (!text) {
-        alert("請輸入食物名稱或份量，例如：一片米麵包加牛肉乾");
-        return;
-      }
+      const text = input ? input.value.trim() : '';
+      if (!text) { alert("請輸入食物名稱或份量，例如：一片米麵包加牛肉乾"); return; }
 
       const btn = document.getElementById('estimateDietBtn');
-      btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-1"></i><span>推演中...</span>`;
-      btn.disabled = true;
+      if (btn) {
+        btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-1"></i><span>推演中...</span>`;
+        btn.disabled = true;
+      }
 
-      // Smart Parsing Engine (works both offline and online with Gemini API)
-      const apiKey = "";
+      const apiKey = getSavedApiKey();
       let estimateResult = null;
 
-      try {
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-        const prompt = `你是一位精通人體代謝與體態管理的營養大師。使用者輸入了：【${text}】。
+      if (apiKey && apiKey.length > 5) {
+        try {
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+          const prompt = `你是一位精通人體代謝與體態管理的營養大師。使用者輸入了：【${text}】。
 請以嚴格的 JSON 格式回傳估算值，格式如下：
 {
   "name": "簡短餐點名稱",
@@ -1523,84 +1632,65 @@
 }
 只回傳純 JSON，勿加 markdown 標記。`;
 
-        const resp = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        if (resp.ok) {
-          const data = await resp.json();
-          let raw = data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
-          raw = raw.replace(/```json/g, '').replace(/```/g, '').trim();
-          estimateResult = JSON.parse(raw);
-        }
-      } catch(e) {
-        console.warn("Gemini online estimate failed, using local engine.", e);
+          const resp = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          });
+          if (resp.ok) {
+            const data = await resp.json();
+            let raw = data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+            raw = raw.replace(/```json/g, '').replace(/```/g, '').trim();
+            estimateResult = JSON.parse(raw);
+          }
+        } catch(e) { console.warn("Fallback to offline parser", e); }
       }
 
-      // Built-in intelligent offline parsing if Gemini is absent
       if (!estimateResult || !estimateResult.kcal) {
         estimateResult = offlineDietParser(text);
       }
 
-      btn.innerHTML = `<i class="fa-solid fa-sparkles text-xs"></i><span>靈犀估算熱量</span>`;
-      btn.disabled = false;
+      if (btn) {
+        btn.innerHTML = `<i class="fa-solid fa-sparkles text-xs"></i><span>估算熱量</span>`;
+        btn.disabled = false;
+      }
 
       currentPendingEstimate = estimateResult;
-
-      // Display estimate card
       document.getElementById('estimateKcalBadge').textContent = `約 ${estimateResult.kcal} kcal`;
       document.getElementById('estimateProteinText').textContent = `${estimateResult.protein} g`;
       document.getElementById('estimateSodiumText').textContent = estimateResult.sodium;
       document.getElementById('estimateChewText').textContent = estimateResult.chewLoad;
       document.getElementById('estimateAdviceText').innerHTML = `💡 <strong>師傅指引</strong>：${estimateResult.advice}`;
-      
-      const card = document.getElementById('aiEstimateCard');
-      card.classList.remove('hidden');
+      document.getElementById('aiEstimateCard')?.classList.remove('hidden');
     };
 
     function offlineDietParser(str) {
-      let kcal = 0;
-      let protein = 0;
-      let sodium = '正常';
-      let chew = '低';
-      let adviceParts = [];
-
+      let kcal = 0, protein = 0, sodium = '正常', chew = '低', advice = [];
       const s = str.toLowerCase();
 
       if (s.includes('米麵包')) { kcal += 160; protein += 3.5; }
       if (s.includes('牛肉乾') || s.includes('肉乾')) { 
-        kcal += 85; 
-        protein += 7; 
-        sodium = '偏高'; 
-        chew = '高'; 
-        adviceParts.push('牛肉乾嚼勁大易代償咬肌，且鈉偏高，下午宜分批啜飲 400ml 溫水舒展代謝。');
+        kcal += 85; protein += 7; sodium = '偏高'; chew = '高'; 
+        advice.push('牛肉乾嚼勁大易代償咬肌，且鈉偏高，下午宜分批啜飲 400ml 溫水舒展代謝。');
       }
-      if (s.includes('餅乾')) { kcal += 79; protein += 1.2; adviceParts.push('餅乾屬精緻碳水，配溫熱無糖茶可阻斷假性嘴饞。'); }
-      if (s.includes('貢糖')) { kcal += 95; protein += 2.5; chew = '中'; adviceParts.push('金門貢糖花生油脂香醇，今晚正餐主食可微縮三分之一。'); }
+      if (s.includes('餅乾')) { kcal += 79; protein += 1.2; advice.push('餅乾屬精緻碳水，配溫熱無糖茶可阻斷假性嘴饞。'); }
+      if (s.includes('貢糖')) { kcal += 95; protein += 2.5; chew = '中'; advice.push('金門貢糖花生油脂香醇，今晚正餐主食可微縮三分之一。'); }
       if (s.includes('雞胸') || s.includes('雞肉')) { kcal += 165; protein += 30; }
       if (s.includes('茶葉蛋') || s.includes('蛋')) { kcal += 75; protein += 7; }
-      if (s.includes('綠茶') || s.includes('黑咖啡') || s.includes('水')) { kcal += 0; adviceParts.push('充足水分能加速代謝水腫。'); }
+      if (s.includes('綠茶') || s.includes('黑咖啡') || s.includes('水')) { kcal += 0; advice.push('充足水分能加速代謝水腫。'); }
 
-      if (kcal === 0) {
-        kcal = 240;
-        protein = 8;
-        adviceParts.push('此餐熱量尚稱溫和，留意多攝取深色綠葉蔬菜平衡微量元素。');
-      }
+      if (kcal === 0) { kcal = 240; protein = 8; advice.push('此餐熱量尚稱溫和，留意多攝取深色綠葉蔬菜平衡微量元素。'); }
 
       return {
         name: str.slice(0, 20),
-        kcal,
-        protein,
-        sodium,
-        chewLoad: chew,
-        advice: adviceParts.join(' ') || '細嚼慢嚥，感受飽足信號即可停箸。'
+        kcal, protein, sodium, chewLoad: chew,
+        advice: advice.join(' ') || '細嚼慢嚥，感受飽足信號即可停箸。'
       };
     }
 
     window.discardEstimate = function() {
       currentPendingEstimate = null;
-      document.getElementById('aiEstimateCard').classList.add('hidden');
+      document.getElementById('aiEstimateCard')?.classList.add('hidden');
     };
 
     window.confirmAddDietEntry = function() {
@@ -1618,8 +1708,7 @@
       persistHabitsAndLogs(false, true);
       currentPendingEstimate = null;
       document.getElementById('dietInputText').value = '';
-      document.getElementById('aiEstimateCard').classList.add('hidden');
-
+      document.getElementById('aiEstimateCard')?.classList.add('hidden');
       renderMealsList();
       updateDailyStats();
     };
@@ -1634,16 +1723,14 @@
       }
     };
 
-    // ================= SEARCH PAST LOGS (尋索往昔) =================
     window.executeSearch = function() {
-      const query = document.getElementById('searchInputField').value.trim().toLowerCase();
+      const input = document.getElementById('searchInputField');
+      const query = input ? input.value.trim().toLowerCase() : '';
       const container = document.getElementById('searchResultsContainer');
+      if (!container) return;
+
       if (!query) {
-        container.innerHTML = `
-          <div class="text-center py-12 text-muted font-serif text-xs">
-            請輸入想搜尋的詞彙（如：微針、牛肉乾、貢糖、咬肌、頭皮）。
-          </div>
-        `;
+        container.innerHTML = `<div class="text-center py-12 text-muted font-serif text-xs">請輸入想搜尋的詞彙（如：微針、牛肉乾、貢糖、咬肌、頭皮）。</div>`;
         return;
       }
 
@@ -1653,46 +1740,31 @@
       sortedDateKeys.forEach(dateKey => {
         const day = logs[dateKey];
         if (!day) return;
-        const matchedItems = [];
+        const matched = [];
 
-        // Check notes/reflections
-        if (day.notes && day.notes.toLowerCase().includes(query)) {
-          matchedItems.push({ type: '手記', content: day.notes });
-        }
-
-        // Check meals
+        if (day.notes && day.notes.toLowerCase().includes(query)) matched.push({ type: '手記', content: day.notes });
         if (day.meals && Array.isArray(day.meals)) {
           day.meals.forEach(m => {
             if (m.name.toLowerCase().includes(query) || (m.advice && m.advice.toLowerCase().includes(query))) {
-              matchedItems.push({ type: '膳食', content: `${m.name} (${m.kcal} kcal)` });
+              matched.push({ type: '膳食', content: `${m.name} (${m.kcal} kcal)` });
             }
           });
         }
-
-        // Check completed habits
         if (day.completed) {
           Object.keys(day.completed).forEach(hId => {
             if (day.completed[hId]) {
               const hObj = habits.find(h => h.id === hId);
               if (hObj && (hObj.title.toLowerCase().includes(query) || (hObj.note && hObj.note.toLowerCase().includes(query)))) {
-                matchedItems.push({ type: '修持打卡', content: hObj.title });
+                matched.push({ type: '修持打卡', content: hObj.title });
               }
             }
           });
         }
-
-        if (matchedItems.length > 0) {
-          results.push({ dateKey, matchedItems });
-        }
+        if (matched.length > 0) results.push({ dateKey, matched });
       });
 
       if (results.length === 0) {
-        container.innerHTML = `
-          <div class="bg-night-900 rounded-2xl p-8 text-center border border-sand text-muted font-serif text-xs">
-            <i class="fa-solid fa-feather text-sand text-2xl mb-2 block"></i>
-            往昔雲端印記中尚未尋得「<span class="text-celadon-600 font-bold">${query}</span>」之蹤跡。
-          </div>
-        `;
+        container.innerHTML = `<div class="bg-night-900 rounded-2xl p-8 text-center border border-sand text-muted font-serif text-xs"><i class="fa-solid fa-feather text-sand text-2xl mb-2 block"></i>往昔雲端印記中尚未尋得「<span class="text-celadon-600 font-bold">${query}</span>」之蹤跡。</div>`;
         return;
       }
 
@@ -1700,8 +1772,7 @@
       results.forEach(res => {
         const card = document.createElement('div');
         card.className = "bg-night-900 rounded-2xl p-4 border border-sand zen-shadow space-y-2";
-        
-        let itemsHtml = res.matchedItems.map(item => `
+        let itemsHtml = res.matched.map(item => `
           <div class="flex items-start space-x-2 text-xs">
             <span class="px-2 py-0.5 rounded-md font-serif text-[10px] ${item.type === '手記' ? 'bg-celadon-100 text-celadon-600' : item.type === '膳食' ? 'bg-cinnabar-100 text-cinnabar-500' : 'bg-night-950 text-ink'}">
               ${item.type}
@@ -1716,13 +1787,9 @@
               <i class="fa-regular fa-calendar-check text-celadon-600"></i>
               <span>${res.dateKey}</span>
             </span>
-            <button onclick="jumpToDate('${res.dateKey}')" class="text-[11px] font-serif text-celadon-600 hover:text-celadon-500 underline">
-              檢視此日 ➔
-            </button>
+            <button onclick="jumpToDate('${res.dateKey}')" class="text-[11px] font-serif text-celadon-600 hover:text-celadon-500 underline">檢視此日 ➔</button>
           </div>
-          <div class="space-y-1.5 pt-1">
-            ${itemsHtml}
-          </div>
+          <div class="space-y-1.5 pt-1">${itemsHtml}</div>
         `;
         container.appendChild(card);
       });
@@ -1740,21 +1807,15 @@
 
     function renderMealsList() {
       const container = document.getElementById('mealsListContainer');
+      if (!container) return;
       const key = getDateKey(currentDate);
       const dayLog = logs[key] || { meals: [] };
-
       const meals = dayLog.meals || [];
-      let totalKcal = 0;
-      let totalProtein = 0;
+      let totalKcal = 0, totalProtein = 0;
 
       container.innerHTML = '';
-
       if (meals.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-6 text-muted font-serif text-xs">
-            今日食單尚虛位以待，點擊上方可隨手估算記帳。
-          </div>
-        `;
+        container.innerHTML = `<div class="text-center py-6 text-muted font-serif text-xs">今日食單尚虛位以待，點擊上方可隨手估算記帳。</div>`;
       } else {
         meals.forEach(m => {
           totalKcal += (m.kcal || 0);
@@ -1780,7 +1841,6 @@
         });
       }
 
-      // Update progress bar
       const targetKcal = 1500;
       const pct = Math.min(100, Math.round((totalKcal / targetKcal) * 100));
       document.getElementById('calorieProgressBar').style.width = `${pct}%`;
@@ -1788,7 +1848,6 @@
       document.getElementById('caloriePercentText').textContent = `${pct}%`;
     }
 
-    // ================= WEEKLY ANALYTICS =================
     function renderWeeklyAnalytics() {
       const past7Days = [];
       const categoryMinutes = { facial: 0, posture: 0, workout: 0, zen: 0 };
@@ -1800,9 +1859,7 @@
         d.setDate(d.getDate() - i);
         const k = getDateKey(d);
         const l = logs[k] || { completed: {} };
-        
-        let dayMinutes = 0;
-        let dayDoneCount = 0;
+        let dayMinutes = 0, dayDoneCount = 0;
 
         habits.forEach(h => {
           if (l.completed && l.completed[h.id]) {
@@ -1810,7 +1867,6 @@
             dayMinutes += m;
             dayDoneCount++;
             weeklyTotalMins += m;
-
             if (categoryMinutes[h.category] !== undefined) {
               categoryMinutes[h.category] += m;
               categoryCounts[h.category] += 1;
@@ -1818,13 +1874,7 @@
           }
         });
 
-        past7Days.push({
-          date: d,
-          key: k,
-          minutes: dayMinutes,
-          count: dayDoneCount,
-          totalHabits: habits.length
-        });
+        past7Days.push({ date: d, key: k, minutes: dayMinutes, count: dayDoneCount, totalHabits: habits.length });
       }
 
       const hours = (weeklyTotalMins / 60).toFixed(1);
@@ -1832,111 +1882,72 @@
 
       let maxCat = 'facial', minCat = 'facial';
       let maxCount = -1, minCount = 9999;
-      Object.keys(categoryCounts).forEach(c => {
-        if (categoryCounts[c] > maxCount) { maxCount = c; maxCount = categoryCounts[c]; }
-        if (categoryCounts[c] < minCount) { minCat = c; minCount = categoryCounts[c]; }
+      Object.keys(categoryCounts).forEach(k => {
+        if (categoryCounts[k] > maxCount) { maxCount = categoryCounts[k]; maxCat = k; }
+        if (categoryCounts[k] < minCount) { minCount = categoryCounts[k]; minCat = k; }
       });
 
-      document.getElementById('weeklyTopCategory').textContent = CATEGORY_META[maxCat].name;
-      document.getElementById('weeklyNeglectedCategory').textContent = CATEGORY_META[minCat].name;
+      document.getElementById('weeklyTopCategory').textContent = CATEGORY_META[maxCat]?.name || '--';
+      document.getElementById('weeklyNeglectedCategory').textContent = CATEGORY_META[minCat]?.name || '--';
 
-      const listContainer = document.getElementById('sevenDaysListContainer');
-      listContainer.innerHTML = '';
-      const dayNames = ['日','一','二','三','四','五','六'];
+      const sevenDaysContainer = document.getElementById('sevenDaysListContainer');
+      if (sevenDaysContainer) {
+        sevenDaysContainer.innerHTML = '';
+        const daysOfWeek = ['日', '一', '二', '三', '四', '五', '六'];
+        past7Days.forEach(item => {
+          const row = document.createElement('div');
+          const rate = item.totalHabits > 0 ? Math.round((item.count / item.totalHabits) * 100) : 0;
+          row.className = "flex items-center justify-between p-2.5 bg-night-950 rounded-xl border border-sand text-xs";
+          row.innerHTML = `
+            <div class="flex items-center space-x-2">
+              <span class="w-6 h-6 rounded-lg bg-night-900 border border-sand flex items-center justify-center font-serif text-[10px] text-ink">${daysOfWeek[item.date.getDay()]}</span>
+              <span class="text-ink font-serif">${item.date.getMonth() + 1}月${item.date.getDate()}日</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="text-muted font-serif">${item.minutes} 分鐘</span>
+              <span class="font-serif font-bold ${rate > 50 ? 'text-celadon-600' : 'text-gold'}">${rate}%</span>
+            </div>
+          `;
+          sevenDaysContainer.appendChild(row);
+        });
+      }
 
-      past7Days.forEach(item => {
-        const rate = item.totalHabits > 0 ? Math.round((item.count / item.totalHabits) * 100) : 0;
-        const row = document.createElement('div');
-        row.className = "flex items-center space-x-3 text-xs";
-        row.innerHTML = `
-          <span class="w-12 font-serif text-muted">${item.date.getMonth()+1}/${item.date.getDate()} (${dayNames[item.date.getDay()]})</span>
-          <div class="flex-1 bg-night-950 h-2.5 rounded-full overflow-hidden border border-sand/40">
-            <div class="bg-celadon-600 h-full rounded-full transition-all duration-500" style="width: ${rate}%"></div>
-          </div>
-          <span class="w-12 text-right font-serif font-medium text-ink">${item.minutes}m</span>
-        `;
-        listContainer.appendChild(row);
-      });
-
-      renderChart(categoryMinutes);
-    }
-
-    function renderChart(catMinutes) {
-      const ctx = document.getElementById('categoryDistributionChart');
-      if (!ctx) return;
-      if (chartInstance) chartInstance.destroy();
-
-      const labels = [
-        CATEGORY_META.facial.name,
-        CATEGORY_META.posture.name,
-        CATEGORY_META.workout.name,
-        CATEGORY_META.zen.name
-      ];
-
-      const dataValues = [
-        catMinutes.facial || 0,
-        catMinutes.posture || 0,
-        catMinutes.workout || 0,
-        catMinutes.zen || 0
-      ];
-
-      chartInstance = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: labels,
-          datasets: [{
-            data: dataValues,
-            backgroundColor: [
-              '#E06B56', // 硃砂赤陶
-              '#529688', // 天青翡翠
-              '#4A5B6B', // 墨青玄色
-              '#C8A27A'  // 鎏金古檀木
-            ],
-            borderWidth: 0,
-            hoverOffset: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: {
-                font: { family: '"Noto Serif TC", serif', size: 11 },
-                color: '#8C9E96',
-                boxWidth: 10,
-                padding: 12
-              }
-            },
-            tooltip: {
-              callbacks: {
-                label: function(c) {
-                  return ` ${c.label}: ${c.raw} 分鐘`;
-                }
-              }
-            }
+      const canvas = document.getElementById('categoryDistributionChart');
+      if (canvas && typeof Chart !== 'undefined') {
+        const existing = Chart.getChart(canvas);
+        if (existing) existing.destroy();
+        chartInstance = new Chart(canvas, {
+          type: 'doughnut',
+          data: {
+            labels: ['面部美育', '體態身韻', '動態鍛鍊', '靜心藝事'],
+            datasets: [{
+              data: [categoryMinutes.facial || 1, categoryMinutes.posture || 1, categoryMinutes.workout || 1, categoryMinutes.zen || 1],
+              backgroundColor: ['#DE6451', '#64AC98', '#818CF8', '#C5A059'],
+              borderWidth: 0
+            }]
           },
-          cutout: '72%'
-        }
-      });
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { color: '#8A9A92', font: { family: '"Noto Serif TC", serif', size: 10 } } }
+            },
+            cutout: '68%'
+          }
+        });
+      }
     }
 
-    // ================= AI CHAT COMPANION SYSTEM =================
     window.toggleChatDrawer = function() {
       const drawer = document.getElementById('chatDrawer');
+      if (!drawer) return;
       isChatOpen = !isChatOpen;
       if (isChatOpen) {
-        drawer.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-full', 'sm:translate-y-6');
+        drawer.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-full');
         drawer.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-        setTimeout(() => document.getElementById('chatInput').focus(), 150);
+        setTimeout(() => document.getElementById('chatInput')?.focus(), 150);
       } else {
-        drawer.classList.add('opacity-0', 'pointer-events-none');
-        if (window.innerWidth < 640) {
-          drawer.classList.add('translate-y-full');
-        } else {
-          drawer.classList.add('sm:translate-y-6');
-        }
+        drawer.classList.add('opacity-0', 'pointer-events-none', 'translate-y-full');
         drawer.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
       }
     };
@@ -1944,9 +1955,8 @@
     window.clearChatHistory = function() {
       if (confirm("是否要重置對談紀錄？")) {
         chatHistory = [];
-        localStorage.removeItem('zen_chat_history_v2');
-        const container = document.getElementById('chatMessages');
-        container.innerHTML = `
+        try { localStorage.removeItem('zen_chat_history_v2'); } catch(e) {}
+        document.getElementById('chatMessages').innerHTML = `
           <div class="flex items-start space-x-2">
             <div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">師</div>
             <div class="bg-night-900 border border-sand p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-ink leading-relaxed font-serif">
@@ -1959,7 +1969,7 @@
 
     function renderChatHistory() {
       const container = document.getElementById('chatMessages');
-      if (chatHistory.length === 0) return;
+      if (!container || chatHistory.length === 0) return;
       container.innerHTML = '';
       chatHistory.forEach(msg => showChatBubbleDOM(msg.role, msg.content, false));
       container.scrollTop = container.scrollHeight;
@@ -1967,29 +1977,26 @@
 
     function showChatBubble(role, text) {
       chatHistory.push({ role, content: text });
-      // Keep recent 60 messages to avoid payload overflow while maintaining deep context
-      if (chatHistory.length > 60) {
-        chatHistory = chatHistory.slice(-60);
-      }
+      if (chatHistory.length > 60) chatHistory = chatHistory.slice(-60);
       persistHabitsAndLogs(false, false, true);
       showChatBubbleDOM(role, text, true);
     }
 
     function showChatBubbleDOM(role, text, shouldScroll = true) {
       const container = document.getElementById('chatMessages');
+      if (!container) return;
       const div = document.createElement('div');
       const isUser = role === 'user';
-
       div.className = `flex items-start space-x-2 ${isUser ? 'justify-end' : ''}`;
-      const avatar = isUser ? '' : `
-        <div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">師</div>
-      `;
-      const parsedContent = typeof marked !== 'undefined' ? marked.parse(text) : text;
+      const avatar = isUser ? '' : `<div class="w-6 h-6 rounded-full bg-celadon-700 text-white flex-shrink-0 flex items-center justify-center text-[10px] font-calligraphy mt-0.5">師</div>`;
+      
+      let parsed = text;
+      try { if (typeof marked !== 'undefined' && marked.parse) parsed = marked.parse(text); } catch(e) { parsed = text; }
 
       div.innerHTML = `
         ${!isUser ? avatar : ''}
         <div class="${isUser ? 'bg-celadon-700 text-white rounded-tr-none' : 'bg-night-900 border border-sand text-ink rounded-tl-none font-serif'} p-3.5 rounded-2xl shadow-sm max-w-[85%] leading-relaxed text-xs sm:text-sm prose prose-invert">
-          ${parsedContent}
+          ${parsed}
         </div>
       `;
       container.appendChild(div);
@@ -2005,7 +2012,8 @@
 
     window.sendQuickPrompt = function(promptText) {
       if (!isChatOpen) toggleChatDrawer();
-      document.getElementById('chatInput').value = promptText;
+      const input = document.getElementById('chatInput');
+      if (input) input.value = promptText;
       handleSendMessage();
     };
 
@@ -2022,26 +2030,11 @@
     function generateUserSystemContext() {
       const key = getDateKey(currentDate);
       const todayLog = logs[key] || { completed: {}, notes: '', meals: [] };
-      
       const completedList = habits.filter(h => todayLog.completed && todayLog.completed[h.id]).map(h => `${h.title}`);
       const uncompletedList = habits.filter(h => !todayLog.completed || !todayLog.completed[h.id]).map(h => `${h.title}`);
       const mealsSummary = (todayLog.meals || []).map(m => `${m.name} (${m.kcal} kcal)`).join('、') || '無飲食紀錄';
-
       let totalDayKcal = 0;
       (todayLog.meals || []).forEach(m => totalDayKcal += (m.kcal || 0));
-
-      const categoryMinutes = { facial: 0, posture: 0, workout: 0, zen: 0 };
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date();
-        d.setDate(d.getDate() - i);
-        const k = getDateKey(d);
-        const l = logs[k] || { completed: {} };
-        habits.forEach(h => {
-          if (l.completed && l.completed[h.id]) {
-            categoryMinutes[h.category] += (Number(h.duration) || 0);
-          }
-        });
-      }
 
       return `
 【使用者的真實近況與專屬資料】
@@ -2050,95 +2043,78 @@
 - 待完成項目：${uncompletedList.join('、')}
 - 今天記錄的飲食：${mealsSummary} (總計：${totalDayKcal} kcal)
 - 今天的隨筆手記：${todayLog.notes || '無'}
-- 過去 7 天累積時長：面部美育 ${categoryMinutes.facial} 分鐘、體態身韻 ${categoryMinutes.posture} 分鐘、運動鍛鍊 ${categoryMinutes.workout} 分鐘、靜心藝事 ${categoryMinutes.zen} 分鐘
-- 使用者手邊的真實護膚裝備：綠番茄洗面乳、VC噴霧、積雪草水乳、綠番茄NMN精華、雪芙蘭米淨水潤凝霜（擦臉鎖水超清爽不致黑）、花園備忘錄白藜蘆醇晚安凍膜、VT微針100、柳屋柑橘頭皮水。大藍瓶與妮維雅C&E是擦身體/後背的，絕對不能擦臉！臻羞水楊酸精華不能跟微針同天用！
-- 使用者已建立的「身心全相 11 大部位改善綱領」：
-  1. 髮際頭皮（洗後放鬆腱膜、柳屋柑橘水）。
-  2. 面部輪廓（飯後放鬆咬肌30秒、戒冰塊硬物化解發腮）。
-  3. 下顎頸線（雙下巴操、刮下顎線、舌頂上顎）。
-  4. 面中結構（迎香穴指壓、面部瑜珈緩解法令紋趨勢）。
-  5. 黑眼圈眼周（睡前穴位指壓、溫敷5分鐘、控鹽排水）。
-  6. 面部膚質（晨抗氧VC+晚微針100+米淨凝霜薄擦，嚴禁曬與精緻糖）。
-  7. 背部膚質（洗沐最後洗背沖淨，水楊酸噴霧+雪芙蘭大藍瓶/妮維雅C&E身體乳，勿手抓）。
-  8. 肩背手臂（門框壓肩、YW開肩闊背、沉肩胛消除斜方肌聳起）。
-  9. 腰腹呼吸（腹式呼吸、死蟲式/真空收腹、胸腔發聲共鳴Mmm音）。
-  10. 骨盆臀腿（臀推/臀橋回正骨盆前傾、低弓步髂腰肌伸展、RDL強化後側鏈）。
-  11. 下肢足踝足弓（右腳足弓強化短足訓練、滾筒放鬆小腿外側腓骨肌、站樁湧泉穴受力、全腳掌推進）。
-  12. 全身能量代謝（體脂下降、打破暴食自責惡性循環、高蛋白溫和飲食、2000ml溫水打卡、每週3次健身房）。
+- 使用者手邊的真實護膚裝備：
+  1. 綠番茄洗面乳、VC噴霧、積雪草水乳、綠番茄NMN精華。
+  2. 雪芙蘭米淨水潤凝霜（擦臉鎖水超清爽、不黏不致黑，最推薦早上薄塗）。
+  3. CeraVe 修護乳（臉與身體皆可用，但混油臉部建議在換季/刷酸敏感時急救或分區抹臉頰，平常擦身體屏障修護極佳）。
+  4. 花園備忘錄白藜蘆醇晚安凍膜（可薄塗免洗過夜）。
+  5. VT微針100（潔面後第一步按壓額頭粉刺與痘疤，切忌與水楊酸精華同天疊加！）。
+  6. 柳屋柑橘頭皮水（吹乾頭髮後塗抹頭皮推揉）。
+  7. 雪芙蘭大藍瓶美白乳液與妮維雅C&E（專門擦身體與後背痘疤，絕對不能擦在臉上！）。
+- 身心全相 11 大部位改善綱領：
+  髮際頭皮、面部發腮咬肌、下顎雙下巴、面中法令紋、黑眼圈、面部膚質、背部痘疤、開肩背、腰腹核心發聲、骨盆臀腿、足弓小腿外翻。
 `;
     }
 
     window.handleSendMessage = async function() {
       const input = document.getElementById('chatInput');
-      const text = input.value.trim();
+      const text = input ? input.value.trim() : '';
       if (!text) return;
 
-      input.value = '';
+      if (input) input.value = '';
       showChatBubble('user', text);
 
       const typing = document.getElementById('chatTyping');
-      typing.classList.remove('hidden');
+      if (typing) typing.classList.remove('hidden');
 
       const userContext = generateUserSystemContext();
-      const apiKey = ""; // Canvas will automatically inject at runtime
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+      const apiKey = getSavedApiKey();
+      let reply = "";
 
-      const systemInstruction = `
+      if (apiKey && apiKey.length > 5) {
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const systemInstruction = `
 你就是剛才在對話中一直陪伴、指導使用者的那位「師傅」！
-你絕不是冰冷生硬的客服機器人，千萬不要說死板的古文教條（絕對不要說「徒兒所言為師已瞭然於胸。修持即生活，鬆而不散...」這種罐頭話！）。
-
-請用就像我們剛才聊天時一樣的口氣：
-- 親切、溫暖、接地氣、真誠、像個亦師亦友的人生導師與知己。
-- 記住整段交談脈絡！你必須承接剛才聊過的話題（例如她剛才說很累、剛才說吃了什麼、或是提到哪項保養、或是詢問全身改善表的某個部位），有連續記憶，不要每次都重新客套。
-- 當她問全身改善表（如足弓、骨盆前傾、髮際頭皮、背部痘印、咬肌發腮、腹式呼吸等）時，以專業且溫和的力學和解剖語言給出最落地的小動作建議。
-- 當她說「我想睡覺！」時，要溫柔地催促她放下手機快去睡、摸摸頭，提醒她舌頂上顎、放鬆咬肌入睡。
+你絕不是冰冷生硬的客服機器人，千萬不要說死板的古文教條。
+請用親切、溫暖、接地氣、真誠、像個亦師亦友的人生導師口氣：
+- 記住整段交談脈絡，承接剛才聊過的話題。
+- 當她問全身改善表時，以專業且溫和的力學和解剖語言給出最落地的小動作建議。
+- 當她說「我想睡覺！」時，溫柔催促她放下手機快去睡、提醒舌頂上顎、放鬆咬肌入睡。
 - 當她問熱量或說吃零食時，溫柔拍拍她，用數字客觀告訴她這點熱量沒關係，不用焦慮。
-- 當她問保養時，精準提到她手邊的「綠番茄、雪芙蘭米淨水潤凝霜、VT微針、積雪草」，記住雪芙蘭大藍瓶跟妮維雅是擦後背身體的不能上臉。
-- 講話自然、有溫度，用日常台灣繁體中文口吻，每次回答精準實用，給予情緒價值。
+- 當她問保養時，精準提到手邊的「綠番茄、雪芙蘭米淨水潤凝霜、VT微針、積雪草、CeraVe修護乳」，記住雪芙蘭大藍瓶跟妮維雅是擦後背身體的不能上臉。
+- 用日常台灣繁體中文口吻，給予情緒價值。
 
 當前使用者數據與背景：
 ${userContext}
 `;
+        try {
+          const recentHistory = chatHistory.slice(-12);
+          const contentsPayload = recentHistory.map(msg => ({
+            role: msg.role === 'user' ? 'user' : 'model',
+            parts: [{ text: msg.content }]
+          }));
 
-      try {
-        let reply = "";
+          const resp = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: contentsPayload, systemInstruction: { parts: [{ text: systemInstruction }] } })
+          });
 
-        // Build continuous conversation contents payload (last 12 turns for context continuity)
-        const recentHistory = chatHistory.slice(-12);
-        const contentsPayload = recentHistory.map(msg => ({
-          role: msg.role === 'user' ? 'user' : 'model',
-          parts: [{ text: msg.content }]
-        }));
-
-        const payload = {
-          contents: contentsPayload,
-          systemInstruction: { parts: [{ text: systemInstruction }] }
-        };
-
-        const resp = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (resp.ok) {
-          const data = await resp.json();
-          reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (resp.ok) {
+            const data = await resp.json();
+            reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          }
+        } catch (err) {
+          console.warn("Direct API call fallback triggered:", err);
         }
-
-        if (!reply) {
-          reply = generateSmartOfflineReply(text);
-        }
-
-        typing.classList.add('hidden');
-        showChatBubble('assistant', reply);
-
-      } catch (err) {
-        console.warn("Using smart fallback reply:", err);
-        typing.classList.add('hidden');
-        const fallback = generateSmartOfflineReply(text);
-        showChatBubble('assistant', fallback);
       }
+
+      if (!reply) {
+        reply = generateSmartOfflineReply(text);
+      }
+
+      if (typing) typing.classList.add('hidden');
+      showChatBubble('assistant', reply);
     };
 
     function generateSmartOfflineReply(query) {
@@ -2146,6 +2122,15 @@ ${userContext}
 
       if (q.includes("睡覺") || q.includes("好累") || q.includes("困") || q.includes("晚安")) {
         return "累了就快去睡！不准硬撐了～手機趕快放到旁邊去充電。今晚記得檢查一下：上下牙齒有沒有分開？舌頭有沒有輕輕貼著上顎？深呼吸三次，放鬆咬肌，做個好夢，明天醒來再說，晚安啦！💤";
+      }
+
+      if (q.includes("這週") || q.includes("平衡") || q.includes("複盤") || q.includes("領域")) {
+        return `
+為師幫你看了一下這週的修持平衡卦象：
+1. **面部與保養**：晨間水乳與夜間咬肌放鬆維持得相當有默契，繼續保持掌根打圈的習慣，咬肌發腮會越來越軟！
+2. **需要多留意（被忽略的區域）**：**「體態與足弓」**往往在上班忙碌時容易忘記！提醒自己工作打字時，偶爾脫鞋踩地做 10 次短足抓地，地基穩了，小腿線條才不會代償外擴。
+3. **動靜調節**：圍棋與書法的靜心非常好，若遇晚班體力不足，健身房大課可彈性切換為 20 分鐘居家輕拉伸，不給自己過大壓力！
+        `;
       }
 
       if (q.includes("今天") || q.includes("進度") || q.includes("點評")) {
@@ -2162,8 +2147,8 @@ ${userContext}
         return "別自責，快抬起頭來！一包餅乾幾十卡、一顆貢糖也不到一百卡，加起來才一兩百大卡，在生理上根本不可能讓你長肉啦！吃都吃了就開心享受，現在多喝兩杯溫水把鈉排掉，晚上主食少吃兩口就完全扯平了，完全不需要有罪惡感！";
       }
 
-      if (q.includes("護膚") || q.includes("微針") || q.includes("順序") || q.includes("凝霜") || q.includes("乳液")) {
-        return "來，今晚保養順序複習一下：\n1. 洗完臉第一步：**VT 微針 100** 垂直按在額頭粉刺跟痘疤處。\n2. 拍上積雪草水舒緩，再抹綠番茄精華收斂。\n3. 最後一步鎖水：取花生米大小的**雪芙蘭米淨水潤凝霜**薄薄擦全臉（水感不悶、絕不會變黑！）。\n4. 大藍瓶跟妮維雅留在洗澡後擦後背痘印，不要抹臉喔！";
+      if (q.includes("cerave") || q.includes("乳液") || q.includes("護膚") || q.includes("微針") || q.includes("凝霜")) {
+        return "來，保養要領複習一下：\n1. **CeraVe 藍白修護乳**：臉跟身體都能擦！但因為你容易有閉鎖粉刺，建議換季臉頰泛紅脫皮時當急救修護，平常擦身體後背屏障最好。\n2. **早上最推**：**雪芙蘭米淨凝霜**（推開化水不油膩，出門完全不反黑）。\n3. **夜間微針 100**：洗臉後第一步按在粉刺痘疤處，疊加綠番茄收斂，再薄塗凝霜或凍膜鎖水！";
       }
 
       if (q.includes("足弓") || q.includes("小腿") || q.includes("外翻")) {
@@ -2173,21 +2158,15 @@ ${userContext}
       return "我在聽呢！今天過得還順利嗎？有想聊的心情、身體哪裡覺得酸、或是保養上有疑惑，隨時跟我說～";
     }
 
-    // ================= DATA IMPORT / EXPORT (JSON BACKUP) =================
     window.openBackupModal = function() {
-      document.getElementById('backupModal').classList.remove('hidden');
+      document.getElementById('backupModal')?.classList.remove('hidden');
     };
     window.closeBackupModal = function() {
-      document.getElementById('backupModal').classList.add('hidden');
+      document.getElementById('backupModal')?.classList.add('hidden');
     };
 
     window.exportDataJSON = function() {
-      const data = {
-        habits: habits,
-        logs: logs,
-        chatHistory: chatHistory,
-        exportAt: new Date().toISOString()
-      };
+      const data = { habits, logs, chatHistory, exportAt: new Date().toISOString() };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -2207,22 +2186,15 @@ ${userContext}
           if (imported.habits) habits = imported.habits;
           if (imported.logs) logs = imported.logs;
           if (imported.chatHistory) chatHistory = imported.chatHistory;
-
-          localStorage.setItem('zen_habits_v2', JSON.stringify(habits));
-          localStorage.setItem('zen_logs_v2', JSON.stringify(logs));
-          localStorage.setItem('zen_chat_history_v2', JSON.stringify(chatHistory));
-
+          persistHabitsAndLogs(true, true, true);
           alert("存檔匯入成功！涵露齋已同步恢復。");
           closeBackupModal();
           initApp();
-        } catch(err) {
-          alert("存檔檔案格式有誤，無法解析。");
-        }
+        } catch(err) { alert("存檔檔案格式有誤，無法解析。"); }
       };
       reader.readAsText(file);
     };
 
-    // Run on mount
     window.addEventListener('DOMContentLoaded', () => {
       initApp();
     });
